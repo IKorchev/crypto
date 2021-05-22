@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="175.214" height="226.35" viewBox="0 0 175.214 226.35">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="175.214" height="189.754" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Group_16" data-name="Group 16" transform="translate(-1744.786 -890.246)">
+    <g id="Group_12" data-name="Group 12" transform="translate(-10.505)" opacity="1">
+      <g id="Group_11" data-name="Group 11" transform="translate(1755.291 890.246)">
+        <g id="Group_10" data-name="Group 10">
+          <g id="Repeat_Grid_1" data-name="Repeat Grid 1" clip-path="url(#clip-path)">
+            <g id="Group_7" data-name="Group 7" transform="translate(-785 -224.5)">
+              <g id="Group_2" data-name="Group 2" transform="translate(830.333 224.5)">
+                <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(-0.333 18.5)" fill="none" stroke="#fff" stroke-width="1">
+                  <rect width="39" height="94" stroke="none"/>
+                  <rect x="0.5" y="0.5" width="38" height="93" fill="none"/>
+                </g>
+                <line id="Line_1" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+              </g>
+              <g id="Group_3" data-name="Group 3" transform="translate(875.667 280.75)">
+                <g id="Rectangle_3-2" data-name="Rectangle 3" transform="translate(0 18.5)" fill="none" stroke="#fff" stroke-width="1">
+                  <rect width="39" height="58.754" stroke="none"/>
+                  <rect x="0.5" y="0.5" width="38" height="57.754" fill="none"/>
+                </g>
+                <line id="Line_1-2" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+              </g>
+              <g id="Group_6" data-name="Group 6" transform="translate(921 301.754)">
+                <g id="Group_4" data-name="Group 4">
+                  <g id="Rectangle_3-3" data-name="Rectangle 3" transform="translate(0 18.5)" fill="none" stroke="#fff" stroke-width="1">
+                    <rect width="39" height="94" stroke="none"/>
+                    <rect x="0.5" y="0.5" width="38" height="93" fill="none"/>
+                  </g>
+                  <line id="Line_1-3" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+                </g>
+              </g>
+              <g id="Group_5" data-name="Group 5" transform="translate(785 245.504)">
+                <g id="Rectangle_3-4" data-name="Rectangle 3" transform="translate(0 18.496)" fill="none" stroke="#fff" stroke-width="1">
+                  <rect width="39" height="94" stroke="none"/>
+                  <rect x="0.5" y="0.5" width="38" height="93" fill="none"/>
+                </g>
+                <line id="Line_1-4" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Group_7-2" data-name="Group 7" transform="translate(-610 -224.5)">
+              <g id="Group_2-2" data-name="Group 2" transform="translate(830.333 224.5)">
+                <g id="Rectangle_3-5" data-name="Rectangle 3" transform="translate(-0.333 18.5)" fill="none" stroke="#fff" stroke-width="1">
+                  <rect width="39" height="94" stroke="none"/>
+                  <rect x="0.5" y="0.5" width="38" height="93" fill="none"/>
+                </g>
+                <line id="Line_1-5" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+              </g>
+              <g id="Group_3-2" data-name="Group 3" transform="translate(875.667 280.75)">
+                <g id="Rectangle_3-6" data-name="Rectangle 3" transform="translate(0 18.5)" fill="none" stroke="#fff" stroke-width="1">
+                  <rect width="39" height="58.754" stroke="none"/>
+                  <rect x="0.5" y="0.5" width="38" height="57.754" fill="none"/>
+                </g>
+                <line id="Line_1-6" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+              </g>
+              <g id="Group_6-2" data-name="Group 6" transform="translate(921 301.754)">
+                <g id="Group_4-2" data-name="Group 4">
+                  <g id="Rectangle_3-7" data-name="Rectangle 3" transform="translate(0 18.5)" fill="none" stroke="#fff" stroke-width="1">
+                    <rect width="39" height="94" stroke="none"/>
+                    <rect x="0.5" y="0.5" width="38" height="93" fill="none"/>
+                  </g>
+                  <line id="Line_1-7" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+                </g>
+              </g>
+              <g id="Group_5-2" data-name="Group 5" transform="translate(785 245.504)">
+                <g id="Rectangle_3-8" data-name="Rectangle 3" transform="translate(0 18.496)" fill="none" stroke="#fff" stroke-width="1">
+                  <rect width="39" height="94" stroke="none"/>
+                  <rect x="0.5" y="0.5" width="38" height="93" fill="none"/>
+                </g>
+                <line id="Line_1-8" data-name="Line 1" y2="19" transform="translate(19.5)" fill="none" stroke="#fff" stroke-width="1"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <line id="Line_3" data-name="Line 3" y2="93" transform="translate(1763.536 1023.596)" fill="none" stroke="#707070" stroke-width="1"/>
+  </g>
+</svg>
