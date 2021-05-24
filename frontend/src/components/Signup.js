@@ -1,7 +1,8 @@
 import React from "react"
+import Cards from "./Cards"
 
-const About = () => {
-  return <div>This is about page</div>
+const Signup = ({ data }) => {
+  return <Cards data={data} />
 }
 
-export default About
+export default Signup
