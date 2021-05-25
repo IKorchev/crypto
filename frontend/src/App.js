@@ -12,6 +12,7 @@ import Form from "./components/Form"
 
 function App() {
   const formRef = useRef()
+  const headerRef = useRef()
   const [data, setData] = useState([])
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +34,7 @@ function App() {
         <Form ref={formRef} />
         <Switch>
           <Route exact path='/'>
-            <Header ref={formRef} />
+            <Header ref={formRef} myRef={headerRef} />
           </Route>
           <Route path='/signup'>
             <Signup data={data} />

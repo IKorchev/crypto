@@ -226,10 +226,16 @@ body {
     border: none;
     font-size: 2rem;
     color: white;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    &:hover {
+      color: rgba(255, 255, 255, 0.2);
+    }
   }
   form {
     position: relative;
     width: 30%;
+    height: 40%;
     padding: 50px 0 50px 0;
     background-color: lighten($dark, 10);
     border-radius: 10px;
@@ -285,6 +291,25 @@ body {
   }
 }
 
+.form-alert {
+  text-align: center;
+  margin: 20px 10% 0 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 5px;
+  color: white;
+
+  &:is(.successful) {
+    background-color: rgba(0, 200, 0, 0.2);
+  }
+  &:is(.unsuccessful) {
+    background-color: rgba(200, 0, 0, 0.4);
+  }
+}
+
 .fade-out {
   animation: fadeOutAnimation 0.2s forwards linear;
 }
@@ -293,6 +318,7 @@ body {
   animation: fadeInAnimation 0.2s forwards linear;
 }
 .display-none {
+  z-index: -99999;
   display: none !important;
 }
 
@@ -302,6 +328,7 @@ body {
   }
   100% {
     opacity: 1;
+    z-index: 99999 !important;
   }
 }
 @keyframes fadeOutAnimation {
@@ -310,5 +337,6 @@ body {
   }
   100% {
     opacity: 0;
+    z-index: -99999 !important;
   }
 }

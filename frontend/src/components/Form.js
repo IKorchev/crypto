@@ -1,33 +1,53 @@
 import React, { useState, useRef } from "react"
-
+import Alert from "./Alert"
 const Form = (props, forwardedRef) => {
+  // eslint-disable-next-line no-unused-vars
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [alertStatus, setAlertStatus] = useState("successful")
   const formRef = useRef()
   const closeBtnRef = useRef()
+  const submitBtnRef = useRef()
 
-  const handleForm = async (e) => {
+  const handleFormSubmit = (e) => {
+    setAlertStatus("successful")
+    formRef.current.reset()
+    setTimeout(() => {
+      handleClick(e)
+    }, 5000)
+  }
+  const addClasses = () => {
+    forwardedRef.current.classList.add("fade-out")
+    forwardedRef.current.classList.remove("fade-in")
+    setTimeout(() => {
+      forwardedRef.current.classList.add("display-none")
+    }, 200)
+  }
+  const handleClick = (e) => {
     e.preventDefault()
-    console.log(forwardedRef.current)
-
-    if (e.target === forwardedRef.current || e.target === closeBtnRef.current) {
-      await forwardedRef.current.classList.remove("fade-in")
-      await forwardedRef.current.classList.add("fade-out")
-      await forwardedRef.current.addEventListener("animationend", (e) => {
-        forwardedRef.current.classList.add("display-none")
-      })
+    if (e.target === closeBtnRef.current || e.target === forwardedRef.current) {
+      addClasses()
+    }
+    if (e.target === submitBtnRef.current) {
+      setTimeout(() => {
+        addClasses()
+      }, 1000)
     }
   }
-
   return (
     <div
       id='form-wrapper'
       className='display-none'
       ref={forwardedRef}
-      onClick={handleForm}>
-      <form ref={formRef}>
-        <button id='close' ref={closeBtnRef} onClick={handleForm}>
+      onClick={handleClick}>
+      <form
+        ref={formRef}
+        onSubmit={(e) => {
+          handleFormSubmit(e)
+          handleClick(e)
+        }}>
+        <span id='close' ref={closeBtnRef} onClick={handleClick}>
           &times;
-        </button>
+        </span>
         <h1 id='form-header'>Type in your number and be notified!</h1>
         <div id='form-content'>
           <div id='input-div'>
@@ -35,14 +55,19 @@ const Form = (props, forwardedRef) => {
             <input
               type='text'
               id='phone-number'
-              onChange={(e) => {
-                setPhoneNumber(e.target.value)
-                console.log(phoneNumber)
-              }}
+              onChange={(e) => setPhoneNumber(e.target.value)}
             />
           </div>
-          <input id='form-button' type='submit' value='Notify me' />
+          <button
+            ref={submitBtnRef}
+            id='form-button'
+            type='submit'
+            onClick={handleFormSubmit}
+            value=''>
+            Notify me
+          </button>
         </div>
+        <Alert status={alertStatus} />
       </form>
     </div>
   )
