@@ -2,7 +2,7 @@ import "./styles/main.scss"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Header from "./components/Header"
-import Signup from "./components/Signup"
+import Crypto from "./components/Crypto"
 // IMAGES
 import Image1 from "./assets/Group 14.svg"
 import Image2 from "./assets/Group 16.svg"
@@ -14,13 +14,17 @@ function App() {
   const formRef = useRef()
   const headerRef = useRef()
   const [data, setData] = useState([])
+  const fetchData = async () => {
+    const res = await fetch("/api")
+    const json = await res.json()
+    setData(json.data)
+  }
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api")
-      const json = await res.json()
-      setData(json.data)
-    }
     fetchData()
+    setInterval(() => {
+      fetchData()
+      console.log("fetching")
+    }, 2000)
   }, [])
 
   return (
@@ -35,9 +39,7 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Header ref={formRef} myRef={headerRef} />
-          </Route>
-          <Route path='/signup'>
-            <Signup data={data} />
+            <Crypto data={data} />
           </Route>
         </Switch>
       </Router>
