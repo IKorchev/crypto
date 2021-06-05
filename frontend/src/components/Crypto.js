@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState } from "react"
 import Cards from "./Cards"
-import gsap from "gsap"
 
 const Crypto = ({ data }) => {
   const [searchInput, setSearchInput] = useState("")

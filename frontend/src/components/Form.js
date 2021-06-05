@@ -18,8 +18,6 @@ const Form = (props, forwardedRef) => {
   const handleFormSubmit = (e) => {
     setAlertStatus("successful")
     e.preventDefault()
-    console.log(e)
-    console.log("form submitted")
   }
   const handleClick = (e) => {
     e.preventDefault()
@@ -33,31 +31,7 @@ const Form = (props, forwardedRef) => {
       className='display-none'
       ref={forwardedRef}
       onClick={handleClick}>
-      <form ref={formRef} onSubmit={(e) => handleFormSubmit(e)}>
-        <span id='close' ref={closeBtnRef} onClick={handleClick}>
-          &times;
-        </span>
-        <h1 id='form-header'>Type in your number and be notified!</h1>
-        <div id='form-content'>
-          <div id='input-div'>
-            <label htmlFor='phone-number'>Phone number</label>
-            <input
-              type='text'
-              id='phone-number'
-              placeholder='Phone number'
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-          </div>
-          <button
-            ref={submitBtnRef}
-            id='form-button'
-            type='submit'
-            onClick={handleFormSubmit}>
-            Notify me
-          </button>
-        </div>
-        <Alert status={alertStatus} />
-      </form>
+      <div id="'#firebaseui-auth-container'"></div>
     </div>
   )
 }

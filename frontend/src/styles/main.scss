@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
 @import "./variables"; //variables
 @import "./cards";
+@import "./firebaseui";
 @import "./form";
 
 body {
@@ -76,6 +78,7 @@ body {
   }
 }
 #landing-page {
+  position: relative;
   z-index: 100;
   padding: 2% 13%;
   height: 300px;
@@ -88,6 +91,14 @@ body {
     height: 100%;
   }
 
+  &::after {
+    content: "";
+    position: absolute;
+    border-bottom: 1px solid $turquoise;
+    width: 100vw;
+    bottom: -100px;
+    transform: rotate(-1.5deg);
+  }
   @media (max-width: 850px) {
     flex-direction: column;
     position: relative;

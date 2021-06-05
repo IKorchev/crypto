@@ -23,7 +23,7 @@ const Cards = ({ name, symbol, price, marketCap, image }) => {
   return (
     //prettier-ignore
     <div className='card'>
-      <img className='card-icon' src={image} />
+      <img className='card-icon' src={image} alt="Coin logo"/>
       <p>
         {name} / <strong>{symbol.toUpperCase()}</strong>
       </p>
