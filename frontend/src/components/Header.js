@@ -3,7 +3,12 @@ import CryptoInfo from "../assets/CryptoInfo.svg"
 import HeaderImage from "../assets/Group 17.svg"
 
 const Header = (props, forwardedRef) => {
-  
+  const handleModal = (ref) => {
+    ref.classList.remove("fade-out")
+    ref.classList.remove("display-none")
+    ref.classList.add("fade-in")
+  }
+
   return (
     <div id='landing-page'>
       <div id='header'>
@@ -14,12 +19,9 @@ const Header = (props, forwardedRef) => {
         <button
           onClick={(e) => {
             e.preventDefault()
-            forwardedRef.current.classList.remove("fade-out")
-            forwardedRef.current.classList.remove("display-none")
-            forwardedRef.current.classList.add("fade-in")
-          }}
-          onAnimationStart={() => console.log("animation started")}>
-          Sign up
+            handleModal(forwardedRef.current)
+          }}>
+          Log in
         </button>
       </div>
       <img src={HeaderImage} alt='Header background' id='header-image'></img>

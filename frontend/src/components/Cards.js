@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react"
 import gsap from "gsap"
-const Cards = ({ name, symbol, price, marketCap, image }) => {
+import firebase from "firebase"
+const Cards = ({ user, name, symbol, price, marketCap, image }) => {
   let pRef = useRef(null)
   useEffect(() => {
     console.log()
@@ -20,10 +21,26 @@ const Cards = ({ name, symbol, price, marketCap, image }) => {
       }
     )
   }, [price])
+  const addToCollection = async (e) => {
+    e.preventDefault()
+    if (user) {
+      const store = firebase.firestore()
+      const db = store.collection("users").doc(user)
+
+      const data = await db.update({
+        name: firebase.firestore.FieldValue.arrayUnion(name),
+      })
+      console.log(data)
+    } else {
+      console.log(name)
+
+      return false
+    }
+  }
   return (
     //prettier-ignore
-    <div className='card'>
-      <img className='card-icon' src={image} alt="Coin logo"/>
+    <div className='card' >
+      <img className='card-icon' src={image} alt="Coin logo" onClick={addToCollection}/>
       <p>
         {name} / <strong>{symbol.toUpperCase()}</strong>
       </p>

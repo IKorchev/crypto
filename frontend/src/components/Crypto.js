@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import Cards from "./Cards"
 
-const Crypto = ({ data }) => {
+const Crypto = ({ user, data }) => {
   const [searchInput, setSearchInput] = useState("")
 
   return (
@@ -30,6 +30,7 @@ const Crypto = ({ data }) => {
           .filter((el) => el.name.toLowerCase().includes(searchInput.toLowerCase()))
           .map((obj) => (
             <Cards
+              user={user}
               key={obj.market_cap}
               name={obj.name}
               symbol={obj.symbol}
