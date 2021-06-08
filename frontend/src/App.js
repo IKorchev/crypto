@@ -10,8 +10,7 @@ import LoggedIn from "./components/LoggedIn"
 import firebase from "firebase"
 import { config } from "./firebase"
 firebase.initializeApp(config)
-const firebaseui = require("firebaseui")
-const ui = new firebaseui.auth.AuthUI(firebase.auth())
+
 
 // APP
 const App = () => {
@@ -53,7 +52,7 @@ const App = () => {
         data={data}
         headerRef={headerRef}
         formFadeOut={formFadeOut}
-        ui={ui}
+  
       />
     )
   }

@@ -1,0 +1,61 @@
+#favourites-page {
+  margin-top: 5%;
+  h1 {
+    padding: 50px 100px;
+    text-align: center;
+    color: $light;
+    font-weight: 100;
+  }
+  .container {
+    background: lighten($dark, 5);
+    padding: 50px;
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+.coin-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+  height: 50px;
+  border: 1px solid $dark;
+  transition: all 1s ease;
+  h3 {
+    display: inline;
+    margin: 0 5px;
+    color: $light;
+    font-weight: 100;
+  }
+  button {
+    font-size: 2rem;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background: none;
+    color: red;
+    div {
+      background: url(../assets/TrashIcon.svg) center center no-repeat;
+      height: 26px;
+      width: 26px;
+    }
+    &:hover,
+    &:focus {
+      opacity: 0.5;
+      box-shadow: 0 0 0 1pt black;
+    }
+  }
+}

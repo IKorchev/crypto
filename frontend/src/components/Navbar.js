@@ -9,8 +9,8 @@ const Navbar = ({ handleSignout }) => {
         <Link className='nav-link' exact='true' to='/'>
           Home
         </Link>
-        <Link className='nav-link' to='/about'>
-          About
+        <Link className='nav-link' to='/favourites'>
+          My favourites
         </Link>
         <Link onClick={handleSignout} className='nav-link' to={() => false}>
           Sign out

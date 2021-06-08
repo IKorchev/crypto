@@ -10,11 +10,6 @@ import Form from "./Form"
 import firebase from "firebase"
 
 const NotLoggedIn = ({ formRef, headerRef, formFadeOut, ui }) => {
-  const handleSignout = () => {
-    console.log("signed out")
-    firebase.auth().signOut()
-    window.location.href = "/"
-  }
   useEffect(() => {
     const uiConfig = {
       signInFlow: "popup",
@@ -37,7 +32,6 @@ const NotLoggedIn = ({ formRef, headerRef, formFadeOut, ui }) => {
   return (
     <>
       <Router>
-        <Navbar handleSignout={handleSignout} />
         <div id='background-images'>
           <img id='image1' alt='Background 1' src={Image1}></img>
           <img id='image2' alt='Background 3' src={Image2}></img>

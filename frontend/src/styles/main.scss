@@ -3,6 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
 @import "./variables"; //variables
 @import "./cards";
+@import "./favourites";
 @import "./spinner";
 @import "./firebaseui";
 @import "./form";
@@ -17,6 +18,8 @@ body {
   position: relative;
   //prettier-ignore
 }
+
+
 #background-images {
   opacity: 0.04;
   position: relative;
@@ -71,9 +74,11 @@ body {
 
     &:last-child {
       border: 1px solid white;
+      background-color: rgba(255, 20, 20, 0.6);
+
       &:hover {
-        background-color: rgba($turquoise, 0.6);
         opacity: 1;
+        background-color: rgba(255, 20, 20, 1);
       }
     }
   }
