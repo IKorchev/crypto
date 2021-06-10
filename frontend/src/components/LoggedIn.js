@@ -19,14 +19,17 @@ const LoggedIn = ({ user, data }) => {
   }
 
   const deleteCoin = (coin) => {
-    ref.update({
+    return ref.update({
       name: firebase.firestore.FieldValue.arrayRemove(coin),
     })
   }
 
   useEffect(() => {
-    return ref.onSnapshot((doc) => setFavourites(doc.data().name))
-  }, [ref])
+    console.log("waiting for changes in firestore")
+    // return ref.onSnapshot((doc) => {
+    //   setFavourites(doc.data().name)
+    // })
+  })
 
   return (
     <>

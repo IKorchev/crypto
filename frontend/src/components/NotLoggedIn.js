@@ -9,7 +9,7 @@ import Image2 from "../assets/Group 16.svg"
 import Form from "./Form"
 import firebase from "firebase"
 
-const NotLoggedIn = ({ formRef, headerRef, formFadeOut, ui }) => {
+const NotLoggedIn = ({ formRef, headerRef, ui }) => {
   useEffect(() => {
     const uiConfig = {
       signInFlow: "popup",
@@ -22,7 +22,6 @@ const NotLoggedIn = ({ formRef, headerRef, formFadeOut, ui }) => {
       ],
       callbacks: {
         signInSuccessWithAuthResult: async (user) => {
-          formFadeOut()
           return false
         },
       },
@@ -36,7 +35,7 @@ const NotLoggedIn = ({ formRef, headerRef, formFadeOut, ui }) => {
           <img id='image1' alt='Background 1' src={Image1}></img>
           <img id='image2' alt='Background 3' src={Image2}></img>
         </div>
-        <Form formFadeOut={formFadeOut} ref={formRef} />
+        <Form ref={formRef} />
         <Switch>
           <Route exact path='/'>
             <Header ref={formRef} myRef={headerRef} />

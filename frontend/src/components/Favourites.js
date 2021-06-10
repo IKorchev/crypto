@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react"
-
 const Favourites = ({ favourites, deleteCoin }) => {
+  const names = [
+    "Bitcoin",
+    "Ethereum",
+    "Bitcoin",
+    "Ethereum",
+    "Bitcoin",
+    "Ethereum",
+    "Bitcoin",
+    "Ethereum",
+    "Bitcoin",
+    "Ethereum",
+  ]
   return (
     <>
-      {favourites.length > 0 ? (
+      {names.length > 0 ? (
         <div id='favourites-page'>
           <h1>Your saved cryptocurrencies</h1>
           <div className='container'>
-            {favourites.map((coin, i) => (
+            {names.map((coin, i) => (
               <div key={i} className='coin-container'>
                 <h3>{coin}</h3>
                 <button
@@ -15,7 +26,7 @@ const Favourites = ({ favourites, deleteCoin }) => {
                     e.preventDefault()
                     deleteCoin(coin)
                   }}>
-                  <div> </div>
+                  Delete
                 </button>
               </div>
             ))}

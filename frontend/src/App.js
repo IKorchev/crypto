@@ -1,6 +1,5 @@
 import "./styles/main.scss"
 import { useEffect, useState, useRef } from "react"
-
 import Spinner from "./components/Spinner"
 import NotLoggedIn from "./components/NotLoggedIn"
 import LoggedIn from "./components/LoggedIn"
@@ -10,7 +9,8 @@ import LoggedIn from "./components/LoggedIn"
 import firebase from "firebase"
 import { config } from "./firebase"
 firebase.initializeApp(config)
-
+const firebaseui = require("firebaseui")
+const ui = new firebaseui.auth.AuthUI(firebase.auth())
 
 // APP
 const App = () => {
@@ -19,14 +19,6 @@ const App = () => {
   const [data, setData] = useState([])
   const [user, setUser] = useState(undefined)
   const auth = firebase.auth()
-
-  const formFadeOut = () => {
-    formRef.current.classList.add("fade-out")
-    formRef.current.classList.remove("fade-in")
-    setTimeout(() => {
-      formRef.current.classList.add("display-none")
-    }, 200)
-  }
 
   //listen for signin or signout
   auth.onAuthStateChanged((u) => setUser(u))
@@ -51,8 +43,7 @@ const App = () => {
         formRef={formRef}
         data={data}
         headerRef={headerRef}
-        formFadeOut={formFadeOut}
-  
+        ui={ui}
       />
     )
   }

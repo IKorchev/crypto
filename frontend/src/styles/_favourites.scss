@@ -5,6 +5,10 @@
     text-align: center;
     color: $light;
     font-weight: 100;
+
+    @media (max-width: 992px) {
+      padding: 0;
+    }
   }
   .container {
     background: lighten($dark, 5);
@@ -12,6 +16,7 @@
     width: 70%;
     margin: 0 auto;
     display: grid;
+    place-items: center;
     grid-template-columns: repeat(5, 1fr);
     justify-content: center;
     align-items: center;
@@ -30,8 +35,9 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 150px;
-  height: 50px;
+  width: 140px;
+  height: 40px;
+  padding: 0 10px;
   border: 1px solid $dark;
   transition: all 1s ease;
   h3 {
@@ -41,21 +47,22 @@
     font-weight: 100;
   }
   button {
-    font-size: 2rem;
+    cursor: pointer;
+    font-size: 0.7em;
+    height: 100%;
+    padding: 0.5em 0.2em;
     outline: none;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     background: none;
-    color: red;
-    div {
-      background: url(../assets/TrashIcon.svg) center center no-repeat;
-      height: 26px;
-      width: 26px;
-    }
+    color: lighten($red, 10);
+
     &:hover,
     &:focus {
-      opacity: 0.5;
-      box-shadow: 0 0 0 1pt black;
+      color: lighten($red, 20) !important;
+    }
+    &:focus {
+      box-shadow: 0 0 0 1px black;
     }
   }
 }

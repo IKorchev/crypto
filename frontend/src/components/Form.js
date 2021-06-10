@@ -2,13 +2,9 @@ import React, { useRef } from "react"
 const Form = ({ formFadeOut }, forwardedRef) => {
   // eslint-disable-next-line no-unused-vars
 
-  const closeBtnRef = useRef()
-
-  
-
   const handleClick = (e) => {
     e.preventDefault()
-    if (e.target === closeBtnRef.current || e.target === forwardedRef.current) {
+    if (e.target === forwardedRef.current) {
       formFadeOut()
     }
   }
