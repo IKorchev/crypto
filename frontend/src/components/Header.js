@@ -4,9 +4,9 @@ import HeaderImage from "../assets/Group 17.svg"
 
 const Header = (props, forwardedRef) => {
   const handleModal = (ref) => {
-    ref.classList.remove("fade-out")
-    ref.classList.remove("display-none")
-    ref.classList.add("fade-in")
+    ref.classList.toggle("fade-out")
+    ref.classList.toggle("display-none")
+    ref.classList.toggle("fade-in")
   }
 
   return (
@@ -19,7 +19,9 @@ const Header = (props, forwardedRef) => {
         <button
           onClick={(e) => {
             e.preventDefault()
-            handleModal(forwardedRef.current)
+            forwardedRef.current.classList.toggle("fade-out")
+            forwardedRef.current.classList.toggle("display-none")
+            forwardedRef.current.classList.toggle("fade-in")
           }}>
           Log in
         </button>

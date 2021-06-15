@@ -1,5 +1,6 @@
 require("dotenv").config()
 const express = require("express")
+const WebSocket = require("ws")
 const twilio = require("twilio")
 const app = express()
 const path = require("path")
@@ -7,7 +8,6 @@ const PORT = process.env.PORT || 5500
 const axios = require("axios")
 const API_KEY = process.env.COIN_API_KEY
 const data = require("./example.json")
-
 const CoinGecko = require("coingecko-api")
 const CoinGeckoClient = new CoinGecko()
 const fetchCoinData = async () => {
@@ -19,6 +19,10 @@ const fetchCoinData = async () => {
   }
 }
 
+socket.onopen = (event) => {
+  console.log("socket opened")
+}
+// socket.onmessage = (e) => console.log(JSON.parse(e.data))
 app.use(express.json())
 
 app.get("/api", async (req, res) => {

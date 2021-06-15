@@ -1,35 +1,40 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Navbar from "./Navbar"
 import Crypto from "./Crypto"
 import Favourites from "./Favourites"
+import { useAuth } from "../contexts/AuthContext"
 // IMAGES
 import Image1 from "../assets/Group 14.svg"
 import Image2 from "../assets/Group 16.svg"
 import firebase from "firebase"
 
-const LoggedIn = ({ user, data }) => {
-  const [favourites, setFavourites] = useState([])
-  const ref = firebase.firestore().collection("users").doc(user.uid)
+const LoggedIn = () => {
+  const { user, firebase, auth, data } = useAuth()
 
+  const [favourites, setFavourites] = useState([])
+  // const ref = firebase.firestore().collection("users").doc(user.uid)
   const handleSignout = () => {
     console.log("signed out")
     firebase.auth().signOut()
     window.location.href = "/"
   }
 
-  const deleteCoin = (coin) => {
-    return ref.update({
-      name: firebase.firestore.FieldValue.arrayRemove(coin),
-    })
-  }
+  // const deleteCoin = (coin) => {
+  //   console.log(coin)
+  //   // return ref.update({
+  //   //   name: firebase.firestore.FieldValue.arrayRemove(coin),
+  //   // })
+  // }
 
   useEffect(() => {
-    console.log("waiting for changes in firestore")
+    console.log(user)
+    console.log(firebase)
+    console.log(auth)
     // return ref.onSnapshot((doc) => {
     //   setFavourites(doc.data().name)
     // })
-  })
+  }, [user])
 
   return (
     <>
@@ -41,12 +46,11 @@ const LoggedIn = ({ user, data }) => {
         </div>
         <Switch>
           <Route exact path='/'>
-            <Crypto user={user} data={data} />
+            <Crypto data={data} />
           </Route>
           <Route path='/favourites'>
             <Favourites
-              deleteCoin={deleteCoin}
-              user={user}
+              // deleteCoin={deleteCoin}
               data={data}
               favourites={favourites}
             />

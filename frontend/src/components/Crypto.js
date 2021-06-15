@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
+import { AuthContext } from "../contexts/AuthContext"
 import Cards from "./Cards"
 
-const Crypto = ({ user, data }) => {
+const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
-
+  const { data } = useContext(AuthContext)
   return (
     <div id='crypto-page'>
       <h1> Cryptocurrencies</h1>
@@ -30,7 +31,6 @@ const Crypto = ({ user, data }) => {
           .filter((el) => el.name.toLowerCase().includes(searchInput.toLowerCase()))
           .map((obj) => (
             <Cards
-              user={user}
               key={obj.market_cap}
               name={obj.name}
               symbol={obj.symbol}

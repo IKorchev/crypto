@@ -1,8 +1,11 @@
-import React, { useRef, useEffect } from "react"
+import React, { useRef, useEffect, useContext } from "react"
 import gsap from "gsap"
 import firebase from "firebase"
+import { AuthContext } from "../contexts/AuthContext"
 
-const Cards = ({ user, name, symbol, price, marketCap, image }) => {
+const Cards = ({ name, symbol, price, marketCap, image }) => {
+  const { user } = useContext(AuthContext)
+
   let pRef = useRef(null)
   useEffect(() => {
     console.log()
