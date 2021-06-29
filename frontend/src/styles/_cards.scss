@@ -83,7 +83,7 @@
 }
 #cards-container {
   width: 100%;
-  height: 50vh;
+  height: 400px;
   background: lighten($dark, 5);
   margin: 0 auto;
   display: flex;
@@ -105,7 +105,7 @@
   align-items: center;
   color: $text-light;
   gap: 5%;
-  grid-template-columns: 10% 25% 25% 25%;
+  grid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr 0.1fr;
   background-color: lighten($dark, 10);
 
   &:not(.info):hover {
@@ -137,8 +137,9 @@
     margin: auto;
     height: 40px;
   }
-
-  //hover
+  .bi {
+    color: yellow;
+  }
 
   //media queries
 

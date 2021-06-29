@@ -1,6 +1,5 @@
 require("dotenv").config()
 const express = require("express")
-const WebSocket = require("ws")
 const twilio = require("twilio")
 const app = express()
 const path = require("path")
@@ -18,11 +17,6 @@ const fetchCoinData = async () => {
     console.log(err)
   }
 }
-
-socket.onopen = (event) => {
-  console.log("socket opened")
-}
-// socket.onmessage = (e) => console.log(JSON.parse(e.data))
 app.use(express.json())
 
 app.get("/api", async (req, res) => {

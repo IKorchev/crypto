@@ -1,62 +1,45 @@
-import React, { useRef, useEffect, useContext } from "react"
-import gsap from "gsap"
-import firebase from "firebase"
-import { AuthContext } from "../contexts/AuthContext"
-
+import React, { useRef, useEffect, useState } from "react"
+import { useStore } from "../contexts/StoreContext"
 const Cards = ({ name, symbol, price, marketCap, image }) => {
-  const { user } = useContext(AuthContext)
+  const { userFavourites, addCoin, deleteCoin } = useStore()
+  const [coinPrice, setCoinPrice] = useState(price)
+  const [realTimePrice, setRealTimePrice] = useState(null)
+  const [isFavourite, setIsFavourite] = useState(null)
 
-  let pRef = useRef(null)
-  useEffect(() => {
-    console.log()
-    return gsap.fromTo(
-      pRef,
-      {
-        y: -10,
-        opacity: 0,
-        duration: 0.2,
-        ease: "slow",
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.2,
-        ease: "slow",
-      }
-    )
-  }, [price])
-  const addToCollection = async (e) => {
+  const handleIconClick = (e) => {
     e.preventDefault()
-    console.log("clicked")
-
-    if (typeof user.uid === "string") {
-      try {
-        const db = firebase.firestore().collection("users").doc(user.uid)
-        const doc = await db.get()
-        if (doc.exists)
-          await db.update({
-            name: firebase.firestore.FieldValue.arrayUnion(name),
-          })
-        if (!doc.exists) {
-          await db.set({
-            name: firebase.firestore.FieldValue.arrayUnion(name),
-          })
-        }
-        return
-      } catch (err) {
-        console.log(err)
-      }
-    }
+    isFavourite ? deleteCoin(name) : addCoin(name)
   }
+  useEffect(() => {
+    if (userFavourites.includes(name)) {
+      setIsFavourite(true)
+    } else {
+      setIsFavourite(false)
+    }
+  }, [userFavourites, name])
+
+  useEffect(() => {
+    const socket = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol}usdt@ticker`)
+    socket.onmessage = (evt) => {
+      // listen to data sent from the websocket server
+      const message = JSON.parse(evt.data)
+      setCoinPrice(parseFloat(message.c))
+    }
+    return () => {
+      socket.close()
+    }
+  }, [symbol])
+
   return (
     //prettier-ignore
-    <div className='card' onClick={addToCollection} >
+    <div className='card'>
       <img className='card-icon' src={image} alt="Coin logo" />
       <p>
         {name} / <strong>{symbol.toUpperCase()}</strong>
       </p>
-      <p ref={(el) => pRef = el}>${price.toLocaleString()}</p>
+      <p>${!realTimePrice ? coinPrice.toFixed(2) : realTimePrice.toFixed(2)}</p>
       <p>${marketCap.toLocaleString()}</p>
+      <i onClick={handleIconClick} className={`bi bi-${isFavourite ? "star-fill" : "star"}`}></i>
     </div>
   )
 }

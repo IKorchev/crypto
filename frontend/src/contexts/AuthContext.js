@@ -1,12 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import React from "react"
 import firebase from "firebase"
-const firebaseui = require("firebaseui")
 
-export const AuthContext = createContext(null)
-export const useAuth = () => {
-  return useContext(AuthContext)
-}
+export const AuthContext = createContext()
+export const useAuth = () => useContext(AuthContext)
 
 const config = {
   apiKey: "AIzaSyBQm93ASu9oeveKdsZGwU60BB0wDd1iDnw",
@@ -17,30 +14,33 @@ const config = {
   appId: "1:894868313343:web:6f54b81eb2ba0bcc8a28ca",
 }
 firebase.initializeApp(config)
-const ui = new firebaseui.auth.AuthUI(firebase.auth())
 
-export const startUI = (ref) => {
-  const config = {
-    signInFlow: "popup",
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      signInSuccessWithAuthResult: async (user) => {
-        return false
-      },
+const uiConfig = {
+  signInSuccessUrl: "/",
+  signInFlow: "popup",
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  ],
+  callbacks: {
+    signInSuccessWithAuthResult: async (user) => {
+      return false
     },
-  }
-  return ui.start(ref, config)
+  },
 }
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState()
+  const [user, setUser] = useState(null)
   const auth = firebase.auth()
+  const [data, setData] = useState([])
+  const store = firebase.firestore()
+  const handleSignout = () => {
+    return auth.signOut()
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser)
@@ -50,11 +50,13 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, [user, auth])
   const value = {
+    data,
     auth,
     user,
     firebase,
+    handleSignout,
+    uiConfig,
+    store,
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
-
-export default AuthContext

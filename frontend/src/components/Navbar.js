@@ -26,25 +26,34 @@ const Navbar = ({ handleSignout }) => {
   }
 
   return (
-    <nav className='navbar'>
-      <Link id='navbar-title' exact='true' to='/'></Link>
-      <div>
-        <button aria-controls='' id='menu-toggler' onClick={() => setToggled(true)}>
-          <i className={`bi bi-${toggled ? "x" : "list"}`}></i>
-        </button>
-        <div id='nav-links-container' className={`${toggled ? "toggle" : ""}`}>
-          <Link className='nav-link' onClick={handleClick} exact='true' to='/'>
-            Home
-          </Link>
-          <Link className='nav-link' onClick={handleClick} to='/favourites'>
-            My favourites
-          </Link>
-          <Link onClick={handleSignout} className='nav-link' to={() => false}>
-            Sign out
-          </Link>
+    <>
+      <nav className='navbar'>
+        <Link id='navbar-title' exact='true' to='/'></Link>
+        <div>
+          <button
+            aria-controls='nav-links-container'
+            id='menu-toggler'
+            onClick={() => setToggled((toggled) => !toggled)}>
+            <i className={`bi bi-${toggled ? "x" : "list"}`}></i>
+          </button>
+          <div id='nav-links-container' className={`${toggled ? "toggle" : ""}`}>
+            <span onClick={handleClick}>
+              <Link className='nav-link' exact='true' to='/'>
+                Home
+              </Link>
+            </span>
+            <span onClick={handleClick}>
+              <Link className='nav-link' to='/favourites'>
+                My favourites
+              </Link>
+            </span>
+            <Link onClick={handleSignout} className='nav-link' to='/'>
+              Sign out
+            </Link>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   )
 }
 

@@ -1,38 +1,24 @@
 import React, { useState, useEffect } from "react"
-const Favourites = ({ favourites, deleteCoin }) => {
-  const [coins, setCoins] = useState([
-    "Bitcoin",
-    "Ethereum",
-    "Bitcoin",
-    "Ethereum",
-    "Bitcoin",
-    "Ethereum",
-    "Bitcoin",
-    "Ethereum",
-    "Bitcoin",
-    "Ethereum",
-  ])
-  const reduceArr = (arr, coin) => {
-    let newArr = arr.filter((item) => item !== coin)
-    return newArr
-  }
+import { useAuth } from "../contexts/AuthContext"
+import { useStore } from "../contexts/StoreContext"
 
-  useEffect(() => {
-    console.log(coins)
-  }, [coins])
+const Favourites = () => {
+  const { userFavourites, deleteCoin, db } = useStore()
+  const [favs, setFavs] = useState()
+
   return (
     <>
-      {coins.length > 0 ? (
+      {userFavourites ? (
         <div id='favourites-page'>
           <h1>Your saved cryptocurrencies</h1>
           <div className='container'>
-            {coins.map((coin, i) => (
+            {userFavourites.map((coin, i) => (
               <div key={i} className='coin-container'>
                 <h3>{coin}</h3>
                 <button
                   onClick={(e) => {
                     e.preventDefault()
-                    setCoins(reduceArr(coins, coin))
+                    deleteCoin(coin)
                   }}>
                   Delete
                 </button>

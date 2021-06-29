@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react"
-import { AuthContext } from "../contexts/AuthContext"
+import { useStore } from "../contexts/StoreContext"
+
 import Cards from "./Cards"
 
 const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
-  const { data } = useContext(AuthContext)
+  const { data } = useStore()
+
   return (
     <div id='crypto-page'>
       <h1> Cryptocurrencies</h1>

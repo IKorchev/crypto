@@ -1,5 +1,5 @@
 .navbar {
-  z-index: 1000;
+  z-index: 99999 !important;
   background: none;
   font-family: "Montserrat", sans-serif;
   padding: 20px 13%;
@@ -30,6 +30,7 @@
     }
   }
   #navbar-title {
+    z-index: 99999;
     background: url("../assets/Group\ 15.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -41,6 +42,7 @@
     transform: translateY(600px);
   }
   div {
+    z-index: 99999;
     width: 500px;
     justify-content: space-around;
     #nav-links-container {
@@ -63,12 +65,13 @@
         left: 0;
         background: rgb(30, 235, 242);
         background: linear-gradient(
-          180deg,
-          rgba(30, 235, 242, 0.99) -500%,
+          50deg,
+          rgba(30, 235, 242, 0.99) -1500%,
           rgba(0, 0, 0, 0.99) 100%
         );
       }
       .nav-link {
+        z-index: 10000;
         padding: 10px;
         font-size: 1.3rem;
         text-decoration: none;
@@ -76,17 +79,6 @@
         color: white;
         &:hover {
           opacity: 0.5;
-        }
-
-        &:last-child {
-          padding: 10px;
-          border: 1px solid white;
-          background-color: rgba(255, 20, 20, 0.6);
-
-          &:hover {
-            opacity: 1;
-            background-color: rgba(255, 20, 20, 1);
-          }
         }
       }
     }

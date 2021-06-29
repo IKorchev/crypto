@@ -2,13 +2,14 @@
   font-family: "Montserrat", sans-serif;
   position: fixed;
   top: 0;
-  z-index: 999;
+  z-index: -100;
   width: 100%;
   height: max-content;
   display: grid;
   place-items: center;
   backdrop-filter: blur(2px);
   transition: all 0.4s ease-in;
+  opacity: 0;
 }
 
 .form-alert {
