@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useStore } from "../contexts/StoreContext"
-
+import Spinner from "./Spinner"
 import Cards from "./Cards"
 
 const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
-  const { data } = useStore()
+  const { data, userFavourites } = useStore()
+  const [sortByFavourites, setSortByFavourites] = useState(false)
+  const [sortAlphabetically, setSortAlphabetically] = useState(false)
 
   return (
     <div id='crypto-page'>
@@ -23,24 +25,50 @@ const Crypto = () => {
         />
       </div>
       <div className='card info'>
-        <p></p>
+        <p>Icon</p>
         <p>Name</p>
         <p>Price</p>
         <p>Market Cap</p>
+        <i
+          role='button'
+          aria-controls='cards-container'
+          className={`bi bi-star${sortByFavourites ? "-fill" : ""}`}
+          onClick={(e) => {
+            e.preventDefault()
+            setSortByFavourites((state) => !state)
+          }}></i>
       </div>
       <div id='cards-container'>
-        {data
-          .filter((el) => el.name.toLowerCase().includes(searchInput.toLowerCase()))
-          .map((obj) => (
-            <Cards
-              key={obj.market_cap}
-              name={obj.name}
-              symbol={obj.symbol}
-              marketCap={obj.market_cap}
-              price={obj.current_price}
-              image={obj.image}
-            />
-          ))}
+        {data === null ? (
+          <Spinner />
+        ) : sortByFavourites ? (
+          data
+            .filter((el) => userFavourites.includes(el.name))
+            .filter((el) => el.name.toLowerCase().includes(searchInput.toLowerCase()))
+            .map((obj) => (
+              <Cards
+                key={obj.market_cap}
+                name={obj.name}
+                symbol={obj.symbol}
+                marketCap={obj.market_cap}
+                price={obj.current_price}
+                image={obj.image}
+              />
+            ))
+        ) : (
+          data
+            .filter((el) => el.name.toLowerCase().includes(searchInput.toLowerCase()))
+            .map((obj) => (
+              <Cards
+                key={obj.market_cap}
+                name={obj.name}
+                symbol={obj.symbol}
+                marketCap={obj.market_cap}
+                price={obj.current_price}
+                image={obj.image}
+              />
+            ))
+        )}
       </div>
     </div>
   )

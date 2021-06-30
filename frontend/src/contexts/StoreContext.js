@@ -7,7 +7,8 @@ export const StoreContextProvider = ({ children }) => {
   const { store, user, firebase } = useAuth()
   // const db = store.collection("users").doc(user.uid)
   const [userFavourites, setUserFavourites] = useState([])
-  const [data, setData] = useState([])
+  const [data, setData] = useState(null)
+  const [events, setEvents] = useState(null)
 
   useEffect(() => {
     if (user !== null) {
@@ -41,9 +42,9 @@ export const StoreContextProvider = ({ children }) => {
     const fetchData = async () => {
       const res = await fetch("/api")
       const data = await res.json()
-      const arr = data.data.splice(0, 50)
-      console.log(arr)
-      return setData(arr)
+      // const arr = data[1].data.splice(0, 50)
+      setEvents(data[1])
+      setData(data[0])
     }
     fetchData()
   }, [])
@@ -53,6 +54,7 @@ export const StoreContextProvider = ({ children }) => {
     userFavourites,
     deleteCoin,
     addCoin,
+    events,
   }
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>
 }

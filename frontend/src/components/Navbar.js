@@ -44,7 +44,7 @@ const Navbar = ({ handleSignout }) => {
             </span>
             <span onClick={handleClick}>
               <Link className='nav-link' to='/favourites'>
-                My favourites
+                Crypto events
               </Link>
             </span>
             <Link onClick={handleSignout} className='nav-link' to='/'>

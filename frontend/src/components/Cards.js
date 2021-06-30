@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useStore } from "../contexts/StoreContext"
 const Cards = ({ name, symbol, price, marketCap, image }) => {
   const { userFavourites, addCoin, deleteCoin } = useStore()
@@ -39,7 +39,7 @@ const Cards = ({ name, symbol, price, marketCap, image }) => {
       </p>
       <p>${!realTimePrice ? coinPrice.toFixed(2) : realTimePrice.toFixed(2)}</p>
       <p>${marketCap.toLocaleString()}</p>
-      <i onClick={handleIconClick} className={`bi bi-${isFavourite ? "star-fill" : "star"}`}></i>
+      <i role="button" onClick={handleIconClick} className={`bi bi-${isFavourite ? "star-fill" : "star"}`}></i>
     </div>
   )
 }

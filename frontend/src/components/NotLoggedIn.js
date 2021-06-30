@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import React, { useRef } from "react"
+import { Route } from "react-router-dom"
 import Navbar from "./Navbar"
 import Header from "./Header"
 const NotLoggedIn = ({ headerRef }) => {
@@ -7,14 +7,10 @@ const NotLoggedIn = ({ headerRef }) => {
 
   return (
     <>
-      <Router>
-        <Switch>
-          <Route exact path='/'>
-            <Navbar />
-            <Header ref={formRef} myRef={headerRef} />
-          </Route>
-        </Switch>
-      </Router>
+      <Route exact path='/'>
+        <Navbar />
+        <Header ref={formRef} myRef={headerRef} />
+      </Route>
     </>
   )
 }

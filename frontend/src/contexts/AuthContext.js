@@ -35,7 +35,6 @@ const uiConfig = {
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const auth = firebase.auth()
-  const [data, setData] = useState([])
   const store = firebase.firestore()
   const handleSignout = () => {
     return auth.signOut()
@@ -50,7 +49,6 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, [user, auth])
   const value = {
-    data,
     auth,
     user,
     firebase,

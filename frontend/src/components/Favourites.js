@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from "react"
-import { useAuth } from "../contexts/AuthContext"
 import { useStore } from "../contexts/StoreContext"
-
+import EventCards from "./EventCards"
 const Favourites = () => {
-  const { userFavourites, deleteCoin, db } = useStore()
-  const [favs, setFavs] = useState()
-
+  const { events } = useStore()
+  const [eventsArr, setEventsArr] = useState([])
+  useEffect(() => {
+    return setEventsArr(events)
+  }, [events])
   return (
-    <>
-      {userFavourites ? (
-        <div id='favourites-page'>
-          <h1>Your saved cryptocurrencies</h1>
-          <div className='container'>
-            {userFavourites.map((coin, i) => (
-              <div key={i} className='coin-container'>
-                <h3>{coin}</h3>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault()
-                    deleteCoin(coin)
-                  }}>
-                  Delete
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <div id='favourites-page'>
-          <h1>You haven't saved anything yet</h1>
-        </div>
-      )}
-    </>
+    <div className='events-wrapper'>
+      <h1>Upcoming events</h1>
+      <div className='events-container'>
+        {eventsArr.lenght === 0 ? (
+          <h2>Nothing to show here</h2>
+        ) : (
+          eventsArr.map((e) => (
+            <EventCards
+              title={e.title}
+              description={e.description}
+              startDate={e.start_date}
+              website={e.website}
+              venue={e.venue}
+              city={e.city}
+              country={e.country}
+              screenshot={e.screenshot}
+            />
+          ))
+        )}
+      </div>
+    </div>
   )
 }
 

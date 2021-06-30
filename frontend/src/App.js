@@ -3,7 +3,7 @@ import { useRef } from "react"
 import Main from "./components/Main"
 import { AuthContextProvider } from "./contexts/AuthContext"
 import { StoreContextProvider } from "./contexts/StoreContext"
-import { BrowserRouter as Router } from "react-router-dom"
+import { BrowserRouter as Router, Switch } from "react-router-dom"
 
 //FIREBASE
 // APP
@@ -13,11 +13,13 @@ const App = () => {
 
   return (
     <Router>
-      <AuthContextProvider>
-        <StoreContextProvider>
-          <Main formRef={formRef} headerRef={headerRef} />
-        </StoreContextProvider>
-      </AuthContextProvider>
+      <Switch>
+        <AuthContextProvider>
+          <StoreContextProvider>
+            <Main formRef={formRef} headerRef={headerRef} />
+          </StoreContextProvider>
+        </AuthContextProvider>
+      </Switch>
     </Router>
   )
 }
