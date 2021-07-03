@@ -1,31 +1,30 @@
 require("dotenv").config()
-const api = require("binance")
 const express = require("express")
-const twilio = require("twilio")
 const app = express()
 const path = require("path")
 const PORT = process.env.PORT || 5500
 const axios = require("axios")
 const API_KEY = process.env.COIN_API_KEY
-const data = require("./example.json")
 const CoinGecko = require("coingecko-api")
-const { json } = require("express")
 const CoinGeckoClient = new CoinGecko()
-const binanceWS = new api.BinanceWS(true)
-const streams = binanceWS.streams
+const NewsAPI = require("newsapi")
+const NEWS_KEY = process.env.NEWS_KEY
 
-// const openSocket = (arr) => {
-//   arr.forEach((id) => {
-//     binanceWS.onAggTrade(id, (data) => {
-//       return `${data.symbol} : ${data.price}`
-//     })
-//   })
-// }
-
+const fetchNewsData = async () => {
+  const newsapi = new NewsAPI(NEWS_KEY)
+  // To query /v2/top-headlines
+  const cryptoNews = await newsapi.v2.topHeadlines({
+    q: "bitcoin",
+    category: "business",
+    language: "en",
+  })
+  return cryptoNews
+}
 const fetchCoinData = async () => {
   try {
     const coinsResponse = await CoinGeckoClient.coins.markets()
     const eventsResponse = await CoinGeckoClient.events.all()
+    // const news = await fetchNewsData()
     const data = coinsResponse.data
     const events = eventsResponse.data.data
     return [data, events]
