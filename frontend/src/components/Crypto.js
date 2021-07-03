@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useStore } from "../contexts/StoreContext"
 import Spinner from "./Spinner"
 import Cards from "./Cards"
@@ -7,7 +7,6 @@ const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
   const { data, userFavourites } = useStore()
   const [sortByFavourites, setSortByFavourites] = useState(false)
-  const [sortAlphabetically, setSortAlphabetically] = useState(false)
 
   return (
     <div id='crypto-page'>

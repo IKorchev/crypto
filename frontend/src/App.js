@@ -4,7 +4,8 @@ import Main from "./components/Main"
 import { AuthContextProvider } from "./contexts/AuthContext"
 import { StoreContextProvider } from "./contexts/StoreContext"
 import { BrowserRouter as Router, Switch } from "react-router-dom"
-
+import Navbar from "./components/Navbar"
+import "bootstrap"
 //FIREBASE
 // APP
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <Switch>
         <AuthContextProvider>
           <StoreContextProvider>
+            <Navbar />
             <Main formRef={formRef} headerRef={headerRef} />
           </StoreContextProvider>
         </AuthContextProvider>

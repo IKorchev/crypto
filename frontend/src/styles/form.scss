@@ -2,7 +2,6 @@
   font-family: "Montserrat", sans-serif;
   position: fixed;
   top: 0;
-  z-index: -100;
   width: 100%;
   height: max-content;
   display: grid;
@@ -37,10 +36,6 @@
 
 .fade-in {
   animation: fadeInAnimation 0.2s forwards linear;
-}
-.display-none {
-  z-index: -99999;
-  display: none !important;
 }
 
 @keyframes fadeInAnimation {

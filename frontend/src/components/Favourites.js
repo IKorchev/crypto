@@ -11,7 +11,7 @@ const Favourites = () => {
     <div className='events-wrapper'>
       <h1>Upcoming events</h1>
       <div className='events-container'>
-        {eventsArr.lenght === 0 ? (
+        {!eventsArr ? (
           <h2>Nothing to show here</h2>
         ) : (
           eventsArr.map((e) => (

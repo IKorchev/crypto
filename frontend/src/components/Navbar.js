@@ -1,10 +1,12 @@
-import React, { createRef, useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
+import Banner from "./Banner"
 import { Link } from "react-router-dom"
-
-const Navbar = ({ handleSignout }) => {
+import { useAuth } from "../contexts/AuthContext"
+const Navbar = () => {
+  const { handleSignout } = useAuth()
   const [toggled, setToggled] = useState(false)
   const [width, setWidth] = useState()
-
+  const { user } = useAuth()
   useEffect(() => {
     // make sure when resized navbar is toggled off
     const handleResize = () => {
@@ -43,16 +45,23 @@ const Navbar = ({ handleSignout }) => {
               </Link>
             </span>
             <span onClick={handleClick}>
-              <Link className='nav-link' to='/favourites'>
+              <Link className='nav-link' to='/events'>
                 Crypto events
               </Link>
             </span>
-            <Link onClick={handleSignout} className='nav-link' to='/'>
-              Sign out
-            </Link>
+            {user ? (
+              <Link onClick={handleSignout} className='nav-link' to='/'>
+                Sign out
+              </Link>
+            ) : (
+              <Link onClick={handleSignout} className='nav-link' to='/login'>
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </nav>
+      <Banner />
     </>
   )
 }

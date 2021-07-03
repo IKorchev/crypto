@@ -33,7 +33,7 @@ const uiConfig = {
 }
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(undefined)
   const auth = firebase.auth()
   const store = firebase.firestore()
   const handleSignout = () => {

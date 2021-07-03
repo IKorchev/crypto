@@ -1,16 +1,17 @@
 .navbar {
-  z-index: 99999 !important;
+  z-index: 1 !important;
   background: none;
   font-family: "Montserrat", sans-serif;
   padding: 20px 13%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 992px) {
+    justify-content: start;
+  }
   @media (max-width: 1200px) {
     padding: 20px 1%;
-    justify-content: space-around;
   }
-
   #menu-toggler {
     z-index: 99999;
     display: none;
@@ -25,12 +26,12 @@
     @media (max-width: 992px) {
       display: initial;
       position: absolute;
-      top: 0.4em;
+      top: 7px;
       right: 20px;
     }
   }
   #navbar-title {
-    z-index: 99999;
+    z-index: 9999;
     background: url("../assets/Group\ 15.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -63,12 +64,7 @@
         height: 500px;
         width: 100vw;
         left: 0;
-        background: rgb(30, 235, 242);
-        background: linear-gradient(
-          50deg,
-          rgba(30, 235, 242, 0.99) -1500%,
-          rgba(0, 0, 0, 0.99) 100%
-        );
+        background: rgba(0, 0, 0, 0.99) 100%;
       }
       .nav-link {
         z-index: 10000;

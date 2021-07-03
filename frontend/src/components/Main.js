@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useAuth } from "../contexts/AuthContext"
 import NotLoggedIn from "./NotLoggedIn"
 import LoggedIn from "./LoggedIn"
-import firebase from "firebase"
 import Spinner from "./Spinner"
 // IMAGES
 
 const Main = () => {
   const { user } = useAuth()
-
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    user !== undefined && setIsLoading(false)
+  }, [user])
   return (
     <>
-      {user === undefined ? <Spinner /> : user === null ? <NotLoggedIn /> : <LoggedIn />}
+      {isLoading && <Spinner />}
+      {!isLoading && <> {user ? <LoggedIn /> : <NotLoggedIn />}</>}
     </>
   )
 }
