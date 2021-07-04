@@ -1,0 +1,24 @@
+.myaccount-wrapper {
+  width: 100%;
+}
+.myaccount-card {
+  padding: 50px 20px;
+  width: 50%;
+  margin: 5% auto;
+  color: white;
+  background: $card-bg;
+}
+.myaccount-card-title {
+  text-align: center;
+  color: $light;
+}
+
+.myaccount-card-item {
+  padding: 0 10%;
+  h6 {
+    display: inline-block;
+  }
+  text-align: start;
+  display: flex;
+  justify-content: space-between;
+}

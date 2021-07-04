@@ -1,6 +1,7 @@
-.firebaseui-card-content {
-  padding: 50px !important;
-  background-color: $light;
-  margin-top: 10%;
-  border-radius: 5px;
+#firebaseui_container {
+  width: 100%;
+  .firebaseui-card-content {
+    display: grid;
+    place-items: center;
+  }
 }

@@ -11,11 +11,11 @@ const Crypto = () => {
   return (
     <div id='crypto-page'>
       <h1> Cryptocurrencies</h1>
-      <div id='search-bar'>
+      <div className='search-bar'>
         <label htmlFor='coin-name'>Search</label>
         <span id='input-wrapper'></span>
         <input
-          id='coin-name'
+          className='coin-name'
           placeholder='Search'
           type='text'
           onChange={(e) => {

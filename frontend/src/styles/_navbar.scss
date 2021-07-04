@@ -2,7 +2,7 @@
   z-index: 1 !important;
   background: none;
   font-family: "Montserrat", sans-serif;
-  padding: 20px 13%;
+  padding: 0 15%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,7 +10,15 @@
     justify-content: start;
   }
   @media (max-width: 1200px) {
-    padding: 20px 1%;
+    padding: 10px 1%;
+  }
+
+  .nav-link {
+    display: flex;
+    flex-direction: row;
+    i {
+      padding: 0 5px;
+    }
   }
   #menu-toggler {
     z-index: 99999;
@@ -26,17 +34,20 @@
     @media (max-width: 992px) {
       display: initial;
       position: absolute;
-      top: 7px;
+      top: 0;
       right: 20px;
     }
   }
   #navbar-title {
     z-index: 9999;
-    background: url("../assets/Group\ 15.svg");
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: auto;
+    @media (max-width: 992px) {
+      img {
+        width: 100px !important;
+        height: auto;
+      }
+    }
   }
 
   .toggle {
@@ -44,13 +55,25 @@
   }
   div {
     z-index: 99999;
-    width: 500px;
-    justify-content: space-around;
+    width: 600px;
+    justify-content: space-between;
     #nav-links-container {
       display: flex;
       align-items: center;
       z-index: 9999;
       flex-direction: row;
+
+      .nav-link {
+        z-index: 10000;
+        padding: 10px;
+        font-size: 1.3rem;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        color: white;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
 
       // Turns into hamburger menu
       @media (max-width: 992px) {
@@ -64,18 +87,7 @@
         height: 500px;
         width: 100vw;
         left: 0;
-        background: rgba(0, 0, 0, 0.99) 100%;
-      }
-      .nav-link {
-        z-index: 10000;
-        padding: 10px;
-        font-size: 1.3rem;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        color: white;
-        &:hover {
-          opacity: 0.5;
-        }
+        background-color: $dark;
       }
     }
   }

@@ -5,17 +5,21 @@ const BannerItem = ({ coin }) => {
   const [priceDiff, setPriceDiff] = useState(coin.price_change_percentage_24h.toFixed(2))
   const isPositive = priceDiff > 0
 
-  useEffect(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
     if (coin) {
-      console.log(coin)
-      const socket = new WebSocket(
-        `wss://stream.binance.com:9443/ws/${coin.symbol}usdt@ticker`
-      )
-      socket.onmessage = (evt) => {
-        // listen to data sent from the websocket server
-        const message = JSON.parse(evt.data)
-        setCoinPrice(parseFloat(message.c))
-        setPriceDiff(parseFloat(message.P).toFixed(2))
+      try {
+        const socket = new WebSocket(
+          `wss://stream.binance.com:9443/ws/${coin.symbol}usdt@ticker`
+        )
+        socket.onmessage = (evt) => {
+          // listen to data sent from the websocket server
+          const message = JSON.parse(evt.data)
+          setCoinPrice(parseFloat(message.c))
+          setPriceDiff(parseFloat(message.P).toFixed(2))
+        }
+      } catch (err) {
+        throw err
       }
     }
   }, [coin, isPositive])
@@ -28,9 +32,11 @@ const BannerItem = ({ coin }) => {
           <h5>
             {coin.symbol.toUpperCase()} <span className='muted'>{coin.name}</span>
           </h5>
-          <div className={`prices ${isPositive ? "text-green" : "text-red"}  `}>
+          <div className='prices'>
             <h5>${coinPrice.toFixed(2).toLocaleString("en-US")} </h5>
-            <span>{isPositive && ` +${priceDiff}%`}</span>
+            <span className={`${isPositive ? "text-green" : "text-red"}  `}>
+              {isPositive && ` +${priceDiff}%`}
+            </span>
           </div>
         </div>
       )}

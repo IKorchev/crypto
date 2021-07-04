@@ -2,6 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 import Crypto from "./Crypto"
 import Favourites from "./Favourites"
+import AccountInfo from "./AccountInfo"
 import { useStore } from "../contexts/StoreContext"
 
 // IMAGES
@@ -16,6 +17,9 @@ const Main = () => {
       </Route>
       <Route path='/events'>
         <Favourites data={data} />
+      </Route>
+      <Route path='/account'>
+        <AccountInfo />
       </Route>
     </>
   )

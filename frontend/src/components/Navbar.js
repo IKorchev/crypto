@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import Banner from "./Banner"
 import { Link } from "react-router-dom"
+import Logo from "../assets/Group 15.svg"
 import { useAuth } from "../contexts/AuthContext"
 const Navbar = () => {
   const { handleSignout } = useAuth()
@@ -26,11 +27,12 @@ const Navbar = () => {
       setToggled(false)
     }
   }
-
   return (
     <>
       <nav className='navbar'>
-        <Link id='navbar-title' exact='true' to='/'></Link>
+        <Link id='navbar-title' exact='true' to='/'>
+          <img src={Logo} alt='Logo'></img>
+        </Link>
         <div>
           <button
             aria-controls='nav-links-container'
@@ -41,22 +43,35 @@ const Navbar = () => {
           <div id='nav-links-container' className={`${toggled ? "toggle" : ""}`}>
             <span onClick={handleClick}>
               <Link className='nav-link' exact='true' to='/'>
-                Home
+                <i className='bi bi-house-fill'></i> <span>Home</span>
               </Link>
             </span>
             <span onClick={handleClick}>
               <Link className='nav-link' to='/events'>
-                Crypto events
+                <i className='bi bi-calendar3'></i> <span>Events</span>
               </Link>
             </span>
             {user ? (
-              <Link onClick={handleSignout} className='nav-link' to='/'>
-                Sign out
-              </Link>
+              <>
+                <span onClick={handleClick}>
+                  <Link className='nav-link' to='/account'>
+                    <i className='bi bi-person'></i> <span>My account</span>
+                  </Link>
+                </span>
+                <Link onClick={handleSignout} className='nav-link' to='/'>
+                  <i className='bi bi-arrow-bar-right'></i> <span>Sign out</span>
+                </Link>
+              </>
             ) : (
-              <Link onClick={handleSignout} className='nav-link' to='/login'>
-                Login
-              </Link>
+              <span onClick={handleClick}>
+                <a
+                  onClick={handleSignout}
+                  className='nav-link'
+                  data-bs-toggle='modal'
+                  href='#modal'>
+                  <i className='bi bi-door-open'></i> <span>Login</span>
+                </a>
+              </span>
             )}
           </div>
         </div>

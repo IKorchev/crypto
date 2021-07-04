@@ -18,13 +18,7 @@ firebase.initializeApp(config)
 const uiConfig = {
   signInSuccessUrl: "/",
   signInFlow: "popup",
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-  ],
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
   callbacks: {
     signInSuccessWithAuthResult: async (user) => {
       return false
@@ -38,6 +32,28 @@ export const AuthContextProvider = ({ children }) => {
   const store = firebase.firestore()
   const handleSignout = () => {
     return auth.signOut()
+  }
+  const login = async (email, password) => {
+    try {
+      const res = await auth.signInWithEmailAndPassword(email, password)
+      return res
+    } catch (err) {
+      return err
+    }
+  }
+  const register = async (name, email, password, confirmPassword) => {
+    if (confirmPassword === password)
+      try {
+        const res = await auth.createUserWithEmailAndPassword(email, password)
+        if (res.user) {
+          store.collection("users").doc(res.user.uid).set({
+            cryptos: [],
+          })
+        }
+        return res
+      } catch (error) {
+        return error
+      }
   }
 
   useEffect(() => {
@@ -55,6 +71,8 @@ export const AuthContextProvider = ({ children }) => {
     handleSignout,
     uiConfig,
     store,
+    login,
+    register,
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

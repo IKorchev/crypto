@@ -4,10 +4,14 @@
   .banner-list {
     margin: 0;
     padding: 5px 15%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    h5,
+    .prices {
+      font-size: 0.8rem;
+      margin-bottom: 0;
+    }
     .muted {
       color: rgba(216, 216, 216, 0.638);
     }
@@ -22,7 +26,8 @@
       padding: 5px 2%;
       justify-content: space-between;
       h5 {
-        font-size: 1rem;
+        text-align: center;
+        font-size: 0.8rem;
       }
       .prices > span,
       .muted {
@@ -36,6 +41,9 @@
     list-style-type: none;
     color: white;
     flex-direction: row;
+    @media (max-width: 992px) {
+      padding: 5px 0;
+    }
   }
   .text-red {
     color: red;

@@ -5,32 +5,9 @@ export const useStore = () => useContext(StoreContext)
 
 export const StoreContextProvider = ({ children }) => {
   const { store, user, firebase } = useAuth()
-  // const db = store.collection("users").doc(user.uid)
-  const [userFavourites, setUserFavourites] = useState([])
   const [news, setNews] = useState(null)
   const [data, setData] = useState(null)
   const [events, setEvents] = useState(null)
-  const [btcPrice, setBtcPrice] = useState(null)
-
-  useEffect(() => {
-    const socket = new WebSocket(`wss://stream.binance.com:9443/ws/btcusdt@ticker`)
-    socket.onmessage = (evt) => {
-      // listen to data sent from the websocket server
-      const message = JSON.parse(evt.data)
-      setBtcPrice(parseFloat(message.c))
-    }
-
-    if (user !== undefined && user !== null) {
-      const db = store.collection("users").doc(user.uid)
-      db.onSnapshot((snap) => {
-        if (snap) {
-          setUserFavourites(snap.data().cryptos)
-        } else {
-          console.log("waiting")
-        }
-      })
-    }
-  }, [user, store, btcPrice])
 
   const deleteCoin = (name) => {
     const db = store.collection("users").doc(user.uid)
@@ -61,11 +38,11 @@ export const StoreContextProvider = ({ children }) => {
 
   const value = {
     data,
-    userFavourites,
     deleteCoin,
     addCoin,
     events,
     news,
+    store,
   }
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>
 }

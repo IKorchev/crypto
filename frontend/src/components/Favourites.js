@@ -14,8 +14,9 @@ const Favourites = () => {
         {!eventsArr ? (
           <h2>Nothing to show here</h2>
         ) : (
-          eventsArr.map((e) => (
+          eventsArr.map((e, i) => (
             <EventCards
+              key={i}
               title={e.title}
               description={e.description}
               startDate={e.start_date}

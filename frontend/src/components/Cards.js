@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from "react"
 import { useStore } from "../contexts/StoreContext"
+import { useAuth } from "../contexts/AuthContext"
+
 const Cards = ({ name, symbol, price, marketCap, image }) => {
-  const { userFavourites, addCoin, deleteCoin } = useStore()
+  const { user } = useAuth()
+  const { addCoin, deleteCoin, store } = useStore()
   const [coinPrice, setCoinPrice] = useState(price)
-  const [realTimePrice, setRealTimePrice] = useState(null)
   const [isFavourite, setIsFavourite] = useState(null)
+  const [userFavourites, setUserFavourites] = useState([])
 
   const handleIconClick = (e) => {
     e.preventDefault()
     isFavourite ? deleteCoin(name) : addCoin(name)
   }
   useEffect(() => {
+    const db = store.collection("users").doc(user.uid)
     if (userFavourites.includes(name)) {
       setIsFavourite(true)
     } else {
       setIsFavourite(false)
     }
-  }, [userFavourites, name])
+    return db.onSnapshot((snap) => {
+      if (snap) {
+        setUserFavourites(snap.data().cryptos)
+      } else {
+        console.log("waiting")
+      }
+    })
+  }, [userFavourites, name, store, user.uid])
 
   useEffect(() => {
     const socket = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol}usdt@ticker`)
@@ -37,9 +48,9 @@ const Cards = ({ name, symbol, price, marketCap, image }) => {
       <p>
         {name} / <strong>{symbol.toUpperCase()}</strong>
       </p>
-      <p>${!realTimePrice ? coinPrice.toFixed(2) : realTimePrice.toFixed(2)}</p>
+      <p>${coinPrice.toFixed(2)}</p>
       <p>${marketCap.toLocaleString()}</p>
-      <i role="button" onClick={handleIconClick} className={`bi bi-${isFavourite ? "star-fill" : "star"}`}></i>
+      <i type="button" role="button" tabIndex="-1" onClick={handleIconClick} className={`bi bi-${isFavourite ? "star-fill" : "star"}`}></i>
     </div>
   )
 }
