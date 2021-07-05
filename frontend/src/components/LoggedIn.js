@@ -1,8 +1,8 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import Crypto from "./Crypto"
-import Favourites from "./Favourites"
-import AccountInfo from "./AccountInfo"
+import Favourites from "../pages/events"
+import AccountInfo from "../pages/myaccount"
 import { useStore } from "../contexts/StoreContext"
 
 // IMAGES

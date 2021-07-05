@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState} from "react"
 import { useStore } from "../contexts/StoreContext"
 import Spinner from "./Spinner"
 import Cards from "./Cards"
@@ -38,7 +38,7 @@ const Crypto = () => {
           }}></i>
       </div>
       <div id='cards-container'>
-        {data === null ? (
+        { data === null ? (
           <Spinner />
         ) : sortByFavourites ? (
           data

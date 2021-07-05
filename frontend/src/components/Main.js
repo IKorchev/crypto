@@ -5,16 +5,30 @@ import LoggedIn from "./LoggedIn"
 import Spinner from "./Spinner"
 // IMAGES
 
-const Main = () => {
+const Main = ({ showRegisterModal, showLoginModal }) => {
   const { user } = useAuth()
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-    user !== undefined && setIsLoading(false)
+    return user !== undefined && setIsLoading(false)
   }, [user])
   return (
     <>
       {isLoading && <Spinner />}
-      {!isLoading && <> {user ? <LoggedIn /> : <NotLoggedIn />}</>}
+      {!isLoading && (
+        <>
+          {user ? (
+            <LoggedIn
+              showRegisterModal={showRegisterModal}
+              showLoginModal={showLoginModal}
+            />
+          ) : (
+            <NotLoggedIn
+              showRegisterModal={showRegisterModal}
+              showLoginModal={showLoginModal}
+            />
+          )}
+        </>
+      )}
     </>
   )
 }

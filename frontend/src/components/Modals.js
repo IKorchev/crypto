@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import { useAuth } from "../contexts/AuthContext"
+import { useModal } from "../contexts/ModalContext"
 import { Modal } from "react-bootstrap"
-export const RegisterModal = ({ showRegisterModal, setShowRegisterModal }) => {
+export const RegisterModal = () => {
   const { register } = useAuth()
+  const { showRegisterModal, setShowRegisterModal } = useModal()
   const [error, setError] = useState()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -59,8 +61,9 @@ export const RegisterModal = ({ showRegisterModal, setShowRegisterModal }) => {
   )
 }
 
-export const LoginModal = ({ uiConfig, auth, showLoginModal, setShowLoginModal }) => {
+export const LoginModal = ({ uiConfig, auth }) => {
   const { login } = useAuth()
+  const { showLoginModal, setShowLoginModal } = useModal()
   const [email, setEmail] = useState("")
   const [error, setError] = useState()
   const [password, setPassword] = useState("")
@@ -76,7 +79,7 @@ export const LoginModal = ({ uiConfig, auth, showLoginModal, setShowLoginModal }
             onSubmit={async (e) => {
               e.preventDefault()
               const response = await login(email, password)
-              response.code && setError(response.message)
+              response.code ? setError(response.message) : handleClose()
             }}>
             <label>Email </label>
             <input

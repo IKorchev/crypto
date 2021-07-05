@@ -10,9 +10,9 @@ const EventCards = ({
 }) => {
   return (
     <div className='event-card'>
-      <div className='event-image'>
+      <a href={website} className='event-image' target='_blank' rel='noreferrer'>
         <img src={screenshot} alt='event header'></img>
-      </div>
+      </a>
       <div className='event-description'>
         <div className='event-card-content'>
           <div className='event-card-title'>

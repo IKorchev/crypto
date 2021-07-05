@@ -4,15 +4,24 @@ import { useAuth } from "../contexts/AuthContext"
 
 const Cards = ({ name, symbol, price, marketCap, image }) => {
   const { user } = useAuth()
-  const { addCoin, deleteCoin, store } = useStore()
+  const { addCoin, deleteCoin, store, realtimePrices } = useStore()
   const [coinPrice, setCoinPrice] = useState(price)
   const [isFavourite, setIsFavourite] = useState(null)
   const [userFavourites, setUserFavourites] = useState([])
-
   const handleIconClick = (e) => {
     e.preventDefault()
     isFavourite ? deleteCoin(name) : addCoin(name)
   }
+  useEffect(() => {
+    realtimePrices.forEach((el) => {
+      const elsymbol = el.s.toLowerCase()
+      const mappedSymbol = `${symbol.toLowerCase()}usdt`
+      if (mappedSymbol === elsymbol) {
+        setCoinPrice(parseFloat(el.p))
+      }
+    })
+  }, [realtimePrices, symbol])
+
   useEffect(() => {
     const db = store.collection("users").doc(user.uid)
     if (userFavourites.includes(name)) {
@@ -28,18 +37,6 @@ const Cards = ({ name, symbol, price, marketCap, image }) => {
       }
     })
   }, [userFavourites, name, store, user.uid])
-
-  useEffect(() => {
-    const socket = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol}usdt@ticker`)
-    socket.onmessage = (evt) => {
-      // listen to data sent from the websocket server
-      const message = JSON.parse(evt.data)
-      setCoinPrice(parseFloat(message.c))
-    }
-    return () => {
-      socket.close()
-    }
-  }, [symbol])
 
   return (
     //prettier-ignore

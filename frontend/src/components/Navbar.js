@@ -3,8 +3,10 @@ import Banner from "./Banner"
 import { Link } from "react-router-dom"
 import Logo from "../assets/Group 15.svg"
 import { useAuth } from "../contexts/AuthContext"
+import { useModal } from "../contexts/ModalContext"
 const Navbar = () => {
   const { handleSignout } = useAuth()
+  const { setShowLoginModal } = useModal()
   const [toggled, setToggled] = useState(false)
   const [width, setWidth] = useState()
   const { user } = useAuth()
@@ -12,7 +14,6 @@ const Navbar = () => {
     // make sure when resized navbar is toggled off
     const handleResize = () => {
       setWidth(window.innerWidth)
-      console.log(width)
     }
     if (width > 992 && toggled === true) {
       setToggled(!toggled)
@@ -64,12 +65,14 @@ const Navbar = () => {
               </>
             ) : (
               <span onClick={handleClick}>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a
-                  onClick={handleSignout}
                   className='nav-link'
-                  data-bs-toggle='modal'
-                  href='#modal'>
-                  <i className='bi bi-door-open'></i> <span>Login</span>
+                  onClick={() => {
+                    setShowLoginModal(true)
+                  }}>
+                  <i className='bi bi-door-open'></i>
+                  <span>Log in</span>
                 </a>
               </span>
             )}

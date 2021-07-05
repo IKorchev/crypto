@@ -4,7 +4,9 @@ import firebase from "firebase"
 
 export const AuthContext = createContext()
 export const useAuth = () => useContext(AuthContext)
-
+export const uiConfig = {
+  
+}
 const config = {
   apiKey: "AIzaSyBQm93ASu9oeveKdsZGwU60BB0wDd1iDnw",
   authDomain: "different-96334.firebaseapp.com",
@@ -15,21 +17,11 @@ const config = {
 }
 firebase.initializeApp(config)
 
-const uiConfig = {
-  signInSuccessUrl: "/",
-  signInFlow: "popup",
-  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-  callbacks: {
-    signInSuccessWithAuthResult: async (user) => {
-      return false
-    },
-  },
-}
-
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(undefined)
   const auth = firebase.auth()
   const store = firebase.firestore()
+
   const handleSignout = () => {
     return auth.signOut()
   }
@@ -69,7 +61,6 @@ export const AuthContextProvider = ({ children }) => {
     user,
     firebase,
     handleSignout,
-    uiConfig,
     store,
     login,
     register,

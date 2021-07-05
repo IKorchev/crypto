@@ -2,21 +2,25 @@ import React, { useEffect, useState } from "react"
 import { useStore } from "../contexts/StoreContext"
 import BannerItem from "./BannerItem"
 const Banner = () => {
-  const { data } = useStore()
-  const [top5, setTop5] = useState(null)
+  const { data, realtimePrices } = useStore()
+  const [top, setTop] = useState(null)
   useEffect(() => {
-    data && setTop5(data.slice(0, 9))
+    data && setTop(data.slice(0, 9))
   }, [data])
+
+
   return (
     <div className='banner-wrapper'>
       <ul className='banner-list'>
-        {!top5 ? (
+        {!top ? (
           <></>
         ) : (
-          top5.map(
+          top.map(
             (coin, i) =>
               coin.symbol !== "usdt" &&
-              coin.symbol !== "usdc" && <BannerItem key={i} coin={coin} />
+              coin.symbol !== "usdc" && (
+                <BannerItem key={i} coin={coin} realtimePrices={realtimePrices} />
+              )
           )
         )}
       </ul>
