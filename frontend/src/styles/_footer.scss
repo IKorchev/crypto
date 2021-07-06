@@ -1,8 +1,10 @@
 .footer-wrapper {
+  position: relative;
   margin-top: 100px;
   border-top: 1px solid white;
   padding-top: 30px;
   font-family: "Montserrat", sans-serif;
+
   .footer-content {
     padding: 30px 10%;
   }
@@ -10,9 +12,6 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-  }
-  li {
-    margin-left: 10px;
   }
   li > a {
     font-size: 0.9rem;
@@ -23,8 +22,9 @@
   }
 }
 .footer-title {
+  position: absolute;
+  top: -10px;
   a {
-    padding: 20px 10%;
     color: white !important;
     font-size: 1rem;
     text-decoration: none;

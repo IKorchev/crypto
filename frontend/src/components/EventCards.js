@@ -26,7 +26,7 @@ const EventCards = ({
               ) : (
                 " "
               )}
-              <p> {startDate ? `Date: ${startDate}` : `Date: unknown`}</p>
+              <p className="card-description"> {startDate ? `Date: ${startDate}` : `Date: unknown`}</p>
             </div>
           </div>
 

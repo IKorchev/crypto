@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useStore } from "../contexts/StoreContext"
 import { useAuth } from "../contexts/AuthContext"
+import Spinner from "./Spinner"
 import Cards from "./Cards"
 import gsap from "gsap"
 const Crypto = () => {
@@ -12,10 +13,8 @@ const Crypto = () => {
 
   useEffect(() => {
     gsap.from("#cards-container", {
-      height: 500,
       opacity: 0,
-      duration: 0.9,
-      ease: "slow",
+      height: 800,
     })
   }, [])
 
@@ -44,8 +43,6 @@ const Crypto = () => {
         />
       </div>
       {/* prettier-ignore */}
-
-      <div id='cards-container'>
       <div className='card info'>
         <p className="card-icon">Icon</p>
         <p>Name</p>
@@ -60,8 +57,9 @@ const Crypto = () => {
             setSortByFavourites((state) => !state)
           }}></i>
       </div>
+      <div id='cards-container'>
         {data === null ? (
-          <></>
+          <Spinner />
         ) : sortByFavourites ? (
           data
             .filter((el) => userFavourites.includes(el.name))

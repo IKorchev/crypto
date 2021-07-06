@@ -1,11 +1,11 @@
 import React from "react"
-import Logo from "../assets/Group 15.svg"
+import CryptoInfo from "../assets/CryptoInfo.svg"
 const Footer = () => {
   return (
     <div className=' footer-wrapper container text-white'>
       <h1 className='footer-title'>
         <a href='/'>
-          <img src={Logo} alt='Website logo' width='50' /> CryptoInfo
+          <img src={CryptoInfo} alt='Website logo' width='100' />
         </a>
       </h1>
       <div className='footer-content row justify-content-between'>
@@ -35,26 +35,7 @@ const Footer = () => {
             </a>
           </li>
         </ul>
-        <ul>
-          <h6>Contact links</h6>
-          <li>
-            <a target='_blank' rel='noreferrer' href='https://binance.com/'>
-              Github
-            </a>
-          </li>
-          <li>
-            <a target='_blank' rel='noreferrer' href='https://binance.com/'>
-              <i className='bi bi-gthub'></i>
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a target='_blank' rel='noreferrer' href='mailto:korchev94@gmail.com'>
-              <i className='bi bi-gthub'></i>
-              Email
-            </a>
-          </li>
-        </ul>
+
         <ul>
           <h6>Project links</h6>
           <li>
@@ -81,6 +62,28 @@ const Footer = () => {
           <li>
             <a target='_blank' rel='noreferrer' href='https://www.coingecko.com/en'>
               Coingecko
+            </a>
+          </li>
+        </ul>
+        <ul>
+          <h6>Contact links</h6>
+          <li>
+            <a target='_blank' rel='noreferrer' href='https://github.com/ikorchev'>
+              Github
+            </a>
+          </li>
+          <li>
+            <a
+              target='_blank'
+              rel='noreferrer'
+              href='https://linkedin.com/in/ivaylo-korchev'>
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a target='_blank' rel='noreferrer' href='mailto:korchev94@gmail.com'>
+              <i className='bi bi-gthub'></i>
+              Email
             </a>
           </li>
         </ul>

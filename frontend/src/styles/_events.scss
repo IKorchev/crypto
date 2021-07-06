@@ -20,82 +20,43 @@
   padding: 0 10%;
   height: 100%;
   display: grid;
+  gap: 2%;
   justify-content: center;
   align-items: center;
-  gap: 2%;
-  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 
   @media (max-width: 1500px) {
-    grid-template-columns: 1fr;
+    padding: 0 5%;
+    grid-template-columns: 1fr 1fr;
   }
   @media (max-width: 1100px) {
-    padding: 50px 3%;
+    padding: 50px 25%;
     grid-template-columns: 1fr;
+  }
+  @media (max-width: 992px) {
+    padding: 50px 15%;
+  }
+  @media (max-width: 632px) {
+    padding: 50px 1%;
   }
 }
 
 .event-card {
-  display: grid;
-  grid-template-columns: 0.8fr 1fr;
-  place-items: center;
+  height: 100%;
+  border-radius: 5px;
   background: rgb(26, 26, 26);
   backdrop-filter: blur(1.5px);
   -webkit-backdrop-filter: blur(5px);
   color: white;
-  height: max-content;
-
+  display: flex;
+  flex-direction: column;
   @media (max-width: 1200px) {
-    display: flex;
-    flex-direction: column;
-    .event-card-title {
-      margin-top: 2rem;
-      h1 {
-        text-align: start;
-      }
-      div {
-        text-align: end;
-      }
-    }
-  }
-  .event-card-content {
-    padding: 5% 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-  }
-
-  .event-card-title {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: space-between;
-    h1 {
-      width: 50%;
-    }
-    div {
-      width: 50%;
-    }
-    @media (max-width: 992px) {
-      h1 {
-        font-size: 1.3rem;
-      }
-      p {
-        font-size: rem;
-      }
+    .event-card-content {
+      padding: 2% !important;
+      padding-bottom: 5% !important;
     }
   }
 
-  .event-info {
-    display: flex;
-    width: 100%;
-    justify-content: flex-start;
-    align-items: center;
-    p {
-      margin: 0;
-      margin-right: 20px;
-    }
-  }
   h1 {
     margin-bottom: 3rem;
     color: $turquoise;
@@ -108,9 +69,9 @@
     font-size: 2rem;
   }
   img {
+    height: 250px;
     width: 100%;
-    height: 300px;
-    object-fit: cover !important;
+    border-radius: 2px;
   }
   a {
     font-size: 1rem;
@@ -123,5 +84,44 @@
     font-size: 1rem;
     font-weight: 100;
     margin: 1% 0;
+  }
+}
+.event-card-title {
+  width: 100%;
+  h1 {
+    margin-bottom: 10px;
+  }
+  p {
+    color: rgb(184, 184, 184);
+  }
+  @media (max-width: 992px) {
+    h1 {
+      font-size: 1.3rem;
+    }
+    p {
+      font-size: rem;
+    }
+  }
+}
+
+.event-card-content {
+  padding: 5% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  h5 {
+    margin-top: 10px;
+  }
+}
+.event-info {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  p {
+    margin: 0;
+    margin-right: 20px;
   }
 }
