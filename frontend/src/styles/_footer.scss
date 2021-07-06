@@ -1,0 +1,32 @@
+.footer-wrapper {
+  margin-top: 100px;
+  border-top: 1px solid white;
+  padding-top: 30px;
+  font-family: "Montserrat", sans-serif;
+  .footer-content {
+    padding: 30px 10%;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  li {
+    margin-left: 10px;
+  }
+  li > a {
+    font-size: 0.9rem;
+    color: rgb(157, 157, 157) !important;
+  }
+  p {
+    margin-top: 40px;
+  }
+}
+.footer-title {
+  a {
+    padding: 20px 10%;
+    color: white !important;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+}

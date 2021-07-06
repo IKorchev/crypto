@@ -1,13 +1,33 @@
-import React, { useState} from "react"
+import React, { useState, useEffect } from "react"
 import { useStore } from "../contexts/StoreContext"
-import Spinner from "./Spinner"
+import { useAuth } from "../contexts/AuthContext"
 import Cards from "./Cards"
-
+import gsap from "gsap"
 const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
-  const { data, userFavourites } = useStore()
+  const { data, store } = useStore()
+  const { user } = useAuth()
   const [sortByFavourites, setSortByFavourites] = useState(false)
+  const [userFavourites, setUserFavourites] = useState(null)
 
+  useEffect(() => {
+    gsap.from("#cards-container", {
+      height: 500,
+      opacity: 0,
+      duration: 0.9,
+      ease: "slow",
+    })
+  }, [])
+
+  useEffect(() => {
+    const unsubscribe = store
+      .collection("users")
+      .doc(user.uid)
+      .onSnapshot((snap) => {
+        setUserFavourites(snap.data().cryptos)
+      })
+    return () => unsubscribe()
+  }, [store, user.uid])
   return (
     <div id='crypto-page'>
       <h1> Cryptocurrencies</h1>
@@ -23,8 +43,11 @@ const Crypto = () => {
           }}
         />
       </div>
+      {/* prettier-ignore */}
+
+      <div id='cards-container'>
       <div className='card info'>
-        <p>Icon</p>
+        <p className="card-icon">Icon</p>
         <p>Name</p>
         <p>Price</p>
         <p>Market Cap</p>
@@ -37,9 +60,8 @@ const Crypto = () => {
             setSortByFavourites((state) => !state)
           }}></i>
       </div>
-      <div id='cards-container'>
-        { data === null ? (
-          <Spinner />
+        {data === null ? (
+          <></>
         ) : sortByFavourites ? (
           data
             .filter((el) => userFavourites.includes(el.name))

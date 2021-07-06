@@ -1,12 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import React from "react"
-import firebase from "firebase"
+import firebase from "firebase/firebase"
 
 export const AuthContext = createContext()
 export const useAuth = () => useContext(AuthContext)
-export const uiConfig = {
-  
-}
+export const uiConfig = {}
 const config = {
   apiKey: "AIzaSyBQm93ASu9oeveKdsZGwU60BB0wDd1iDnw",
   authDomain: "different-96334.firebaseapp.com",
@@ -59,7 +57,6 @@ export const AuthContextProvider = ({ children }) => {
   const value = {
     auth,
     user,
-    firebase,
     handleSignout,
     store,
     login,

@@ -17,10 +17,14 @@ const Cards = ({ name, symbol, price, marketCap, image }) => {
       const elsymbol = el.s.toLowerCase()
       const mappedSymbol = `${symbol.toLowerCase()}usdt`
       if (mappedSymbol === elsymbol) {
-        setCoinPrice(parseFloat(el.p))
+        setCoinPrice(
+          parseFloat(el.p)
+            .toFixed(coinPrice < 10 ? 3 : 2) //if price is less than $10 show 1 extra number
+            .toLocaleString("en-US")
+        )
       }
     })
-  }, [realtimePrices, symbol])
+  }, [realtimePrices, symbol, coinPrice])
 
   useEffect(() => {
     const db = store.collection("users").doc(user.uid)
@@ -45,7 +49,7 @@ const Cards = ({ name, symbol, price, marketCap, image }) => {
       <p>
         {name} / <strong>{symbol.toUpperCase()}</strong>
       </p>
-      <p>${coinPrice.toFixed(2)}</p>
+      <p>${coinPrice}</p>
       <p>${marketCap.toLocaleString()}</p>
       <i type="button" role="button" tabIndex="-1" onClick={handleIconClick} className={`bi bi-${isFavourite ? "star-fill" : "star"}`}></i>
     </div>

@@ -1,10 +1,8 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useAuth } from "../contexts/AuthContext"
 const AccountInfo = () => {
   const { user } = useAuth()
-  useEffect(() => {
-    console.log(user)
-  })
+
   return (
     <div className='myaccount-wrapper'>
       <div className='myaccount-card'>

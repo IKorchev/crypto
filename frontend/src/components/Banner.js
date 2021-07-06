@@ -5,7 +5,7 @@ const Banner = () => {
   const { data, realtimePrices } = useStore()
   const [top, setTop] = useState(null)
   useEffect(() => {
-    data && setTop(data.slice(0, 9))
+    data && setTop(data.slice(0, 7))
   }, [data])
 
 

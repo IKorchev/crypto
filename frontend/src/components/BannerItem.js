@@ -11,10 +11,14 @@ const BannerItem = ({ coin, realtimePrices }) => {
       const elsymbol = el.s.toLowerCase()
       const mappedSymbol = `${coin.symbol.toLowerCase()}usdt`
       if (mappedSymbol === elsymbol) {
-        setCoinPrice(parseFloat(el.p))
+        setCoinPrice(
+          parseFloat(el.p)
+            .toFixed(coinPrice < 10 ? 3 : 2) // if price is less than $10 show 1 extra number
+            .toLocaleString("en-US")
+        )
       }
     })
-  }, [realtimePrices, coin, priceChange])
+  }, [realtimePrices, coin, priceChange, coinPrice])
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return (
     <li className='banner-item'>
@@ -26,7 +30,8 @@ const BannerItem = ({ coin, realtimePrices }) => {
             {coin.symbol.toUpperCase()} <span className='muted'>{coin.name}</span>
           </h5>
           <div className='prices'>
-            <h5>${coinPrice.toFixed(2).toLocaleString("en-US")} </h5>
+            {/* if price is higher than $10 show 1 extra number*/}
+            <h5>${coinPrice} </h5>
             <span className={`${isPositive ? "text-green" : "text-red"}  `}>
               {/* prettier-ignore */ }
               {`${isPositive ? "+" : " "} ${priceChange.current.toFixed(2)}%`}

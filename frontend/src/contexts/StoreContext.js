@@ -1,25 +1,31 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { useAuth } from "./AuthContext"
+import firebase from "firebase/firebase"
 const StoreContext = React.createContext()
-export const useStore = () => useContext(StoreContext)
 
+export const useStore = () => useContext(StoreContext)
 export const StoreContextProvider = ({ children }) => {
-  const { store, user, firebase } = useAuth()
+  const { store, user } = useAuth()
   const [news, setNews] = useState(null)
   const [data, setData] = useState(null)
   const [realtimePrices, setRealtimePrices] = useState([])
   const [events, setEvents] = useState(null)
   const socket = useRef(new WebSocket(`wss://fstream.binance.com/ws/!markPrice@arr@1s`))
-
   useEffect(() => {
-    let ws = socket.current
-    ws.onmessage = (event) => {
-      setRealtimePrices(JSON.parse(event.data))
+    // Connection opene
+
+    // Listen for messages
+    socket.current.onopen = (e) => {
+      console.log("socket opened")
     }
-    return () => {
-      ws.close()
+    socket.current.onerror = (err) => {
+      return
     }
-  }, [socket])
+    socket.current.onmessage = (m) => {
+      setRealtimePrices(JSON.parse(m.data))
+    }
+  }, [])
+
   const deleteCoin = (name) => {
     const db = store.collection("users").doc(user.uid)
     db.update({
@@ -34,6 +40,8 @@ export const StoreContextProvider = ({ children }) => {
       cryptos: firebase.firestore.FieldValue.arrayUnion(`${name}`),
     })
   }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const fetchData = async () => {

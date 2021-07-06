@@ -12,7 +12,7 @@ const Events = () => {
     return setEventsArr(events)
   }, [events])
   useEffect(() => {
-    gsap.from(ref.childNodes, { opacity: 0, y: 100, duration: 0.8, stagger: 0.2 })
+    gsap.from(ref.childNodes, { opacity: 0, x: 100, duration: 0.8, stagger: 0.2 })
   }, [ref, eventsArr])
   return (
     <div className='events-wrapper'>

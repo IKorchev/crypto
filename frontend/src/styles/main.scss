@@ -3,7 +3,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
 @import "~bootstrap-icons/font/bootstrap-icons";
 @import "bootstrap";
-
 @import "./variables"; //variables
 @import "./navbar";
 @import "./cards";
@@ -15,6 +14,7 @@
 @import "./events";
 @import "./news";
 @import "./myaccount";
+@import "./footer";
 
 body {
   margin: 0;

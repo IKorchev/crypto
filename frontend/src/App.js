@@ -6,12 +6,13 @@ import { StoreContextProvider } from "./contexts/StoreContext"
 import { ModalContextProvider } from "./contexts/ModalContext"
 import { BrowserRouter as Router, Switch } from "react-router-dom"
 import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 //FIREBASE
 // APP
 const App = () => {
   const formRef = useRef(null)
   const headerRef = useRef()
-
+ 
   return (
     <Router>
       <Switch>
@@ -21,6 +22,7 @@ const App = () => {
               <Navbar />
               <Main formRef={formRef} headerRef={headerRef} />
             </ModalContextProvider>
+            <Footer />
           </StoreContextProvider>
         </AuthContextProvider>
       </Switch>
