@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState, useRef } from "react"
 import { useAuth } from "./AuthContext"
 import firebase from "firebase/firebase"
 const StoreContext = React.createContext()
-
 export const useStore = () => useContext(StoreContext)
 export const StoreContextProvider = ({ children }) => {
   const { store, user } = useAuth()
@@ -10,11 +9,9 @@ export const StoreContextProvider = ({ children }) => {
   const [data, setData] = useState(null)
   const [realtimePrices, setRealtimePrices] = useState([])
   const [events, setEvents] = useState(null)
-  const socket = useRef(new WebSocket(`wss://fstream.binance.com/ws/!markPrice@arr@1s`))
-  useEffect(() => {
-    // Connection opene
 
-    // Listen for messages
+  const socket = useRef(new WebSocket(`wss://fstream.binance.com/ws/!ticker@arr`))
+  useEffect(() => {
     socket.current.onopen = (e) => {
       console.log("socket opened")
     }
@@ -33,7 +30,6 @@ export const StoreContextProvider = ({ children }) => {
     })
   }
   const addCoin = (name) => {
-    console.log("adding")
     const db = store.collection("users").doc(user.uid)
 
     db.update({

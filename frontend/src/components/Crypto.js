@@ -10,6 +10,23 @@ const Crypto = () => {
   const { user } = useAuth()
   const [sortByFavourites, setSortByFavourites] = useState(false)
   const [userFavourites, setUserFavourites] = useState(null)
+  const filterFunction = (el) => {
+    if (el.name.toLowerCase().includes(searchInput.toLowerCase())) {
+      if (!sortByFavourites) {
+        return true
+      } else {
+        return userFavourites.includes(el.name)
+      }
+    }
+    if (el.symbol.toLowerCase().includes(searchInput.toLowerCase())) {
+      if (sortByFavourites) {
+        return true
+      } else {
+        return userFavourites.includes(el.name)
+      }
+    }
+    return false
+  }
 
   useEffect(() => {
     gsap.from("#cards-container", {
@@ -60,23 +77,9 @@ const Crypto = () => {
       <div id='cards-container'>
         {data === null ? (
           <Spinner />
-        ) : sortByFavourites ? (
-          data
-            .filter((el) => userFavourites.includes(el.name))
-            .filter((el) => el.name.toLowerCase().includes(searchInput.toLowerCase()))
-            .map((obj) => (
-              <Cards
-                key={obj.market_cap}
-                name={obj.name}
-                symbol={obj.symbol}
-                marketCap={obj.market_cap}
-                price={obj.current_price}
-                image={obj.image}
-              />
-            ))
         ) : (
           data
-            .filter((el) => el.name.toLowerCase().includes(searchInput.toLowerCase()))
+            .filter((el) => filterFunction(el))
             .map((obj) => (
               <Cards
                 key={obj.market_cap}
