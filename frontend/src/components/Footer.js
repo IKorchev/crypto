@@ -10,7 +10,7 @@ const Footer = () => {
       </h1>
       <div className='footer-content row justify-content-between'>
         <ul>
-          <h6>Links</h6>
+          <h6>Useful</h6>
           <li>
             <a
               target='_blank'
@@ -37,7 +37,7 @@ const Footer = () => {
         </ul>
 
         <ul>
-          <h6>Project links</h6>
+          <h6>Project</h6>
           <li>
             <a
               target='_blank'
@@ -66,7 +66,7 @@ const Footer = () => {
           </li>
         </ul>
         <ul>
-          <h6>Contact links</h6>
+          <h6>Contact</h6>
           <li>
             <a target='_blank' rel='noreferrer' href='https://github.com/ikorchev'>
               Github

@@ -1,6 +1,7 @@
 import React, { useRef } from "react"
 import CryptoInfo from "../assets/CryptoInfo.svg"
 import HeaderImage from "../assets/Group 17.svg"
+import LandingPageCards from "../components/LandingPageCards"
 
 import News from "./news"
 import { useModal } from "../contexts/ModalContext"
@@ -26,9 +27,8 @@ const Home = () => {
             <button onClick={() => setShowRegisterModal(true)}>Register</button>
           </div>
         </div>
-
-        <img src={HeaderImage} alt='Header background' id='header-image'></img>
       </div>
+      <LandingPageCards />
       <News />
     </div>
   )

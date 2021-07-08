@@ -4,7 +4,6 @@ import firebase from "firebase/firebase"
 
 export const AuthContext = createContext()
 export const useAuth = () => useContext(AuthContext)
-export const uiConfig = {}
 const config = {
   apiKey: "AIzaSyBQm93ASu9oeveKdsZGwU60BB0wDd1iDnw",
   authDomain: "different-96334.firebaseapp.com",
@@ -38,6 +37,9 @@ export const AuthContextProvider = ({ children }) => {
         if (res.user) {
           store.collection("users").doc(res.user.uid).set({
             cryptos: [],
+          })
+          res.user.updateProfile({
+            displayName: name,
           })
         }
         return res

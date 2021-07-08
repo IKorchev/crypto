@@ -1,24 +1,24 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState } from "react"
 
-const BannerItem = ({ coin, realtimePrices }) => {
+const BannerItem = ({ coin }) => {
   const [coinPrice, setCoinPrice] = useState(" ")
   const [the24hrPriceChange, setThe24hrPriceChange] = useState(" ")
   useEffect(() => {
-    realtimePrices.forEach((el) => {
-      const elsymbol = el.s.toLowerCase()
-      const mappedSymbol = `${coin.symbol.toLowerCase()}usdt`
-      if (mappedSymbol === elsymbol) {
-        const price = parseFloat(el.c)
-        const formattedPrice = new Intl.NumberFormat("en-US").format(price)
-        setCoinPrice(`$${formattedPrice}`)
-        setThe24hrPriceChange(` ${el.P > 0 ? "+" : " "}${parseFloat(el.P).toFixed(2)}%`)
-      }
-    })
-  }, [realtimePrices, coin, coinPrice, the24hrPriceChange])
+    setThe24hrPriceChange(
+      !coin.new24hrChange
+        ? "No data"
+        : coin.new24hrChange > 0
+        ? `+${coin.new24hrChange.toFixed(2)}%`
+        : `${coin.new24hrChange.toFixed(2)}%`
+    )
+    setCoinPrice(
+      !coin.newPrice ? coinPrice : `$${new Intl.NumberFormat().format(coin.newPrice)}`
+    )
+  }, [coin.newPrice, coin.new24hrChange, coinPrice])
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return (
     <li className='banner-item'>
-      {!coin || !coinPrice ? (
+      {!coin.new24hrChange ? (
         <></>
       ) : (
         <div className='banner-content'>
@@ -28,11 +28,11 @@ const BannerItem = ({ coin, realtimePrices }) => {
           <div className='prices'>
             {/* if price is higher than $10 show 1 extra number*/}
             <h5>{coinPrice} </h5>
-            <sub
+            <h5
               className={the24hrPriceChange.startsWith(" +") ? "text-green" : "text-red"}>
               {/* prettier-ignore */ }
               {the24hrPriceChange}
-            </sub>
+            </h5>
           </div>
         </div>
       )}

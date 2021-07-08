@@ -3,7 +3,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import { useAuth } from "../contexts/AuthContext"
 import { useModal } from "../contexts/ModalContext"
 import { Modal } from "react-bootstrap"
-export const RegisterModal = () => {
+export const RegisterModal = ({ uiConfig, auth }) => {
   const { register } = useAuth()
   const { showRegisterModal, setShowRegisterModal } = useModal()
   const [error, setError] = useState()
@@ -17,35 +17,39 @@ export const RegisterModal = () => {
     <>
       <Modal show={showRegisterModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Register</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form
             onSubmit={async (e) => {
               e.preventDefault()
               const response = await register(name, email, password, passwordConfirm)
-              response.code && setError(response.message)
+              response.code ? setError(response.message) : handleClose()
             }}>
             <label>Name </label>
             <input
+              autoComplete='given-name'
               type='text'
               className='search-bar'
               onChange={(e) => setName(e.target.value)}
             />
             <label>Email </label>
             <input
+              autoComplete='email'
               type='email'
               className='search-bar'
               onChange={(e) => setEmail(e.target.value)}
             />
             <label>Password </label>
             <input
+              autoComplete='new-password'
               type='password'
               className='search-bar'
               onChange={(e) => setPassword(e.target.value)}
             />
             <label>Confirm password </label>
             <input
+              autoComplete='new-password'
               type='password'
               className='search-bar'
               onChange={(e) => setPasswordConfirm(e.target.value)}
@@ -55,6 +59,8 @@ export const RegisterModal = () => {
             </button>
             {error && <h6 className='alert alert-danger'>{error}</h6>}
           </form>
+          <h5 className='text-center'>or</h5>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
         </Modal.Body>
       </Modal>
     </>
@@ -83,12 +89,14 @@ export const LoginModal = ({ uiConfig, auth }) => {
             }}>
             <label>Email </label>
             <input
+              autoComplete='email'
               type='email'
               className='search-bar'
               onChange={(e) => setEmail(e.target.value)}
             />
             <label>Password </label>
             <input
+              autoComplete='current-password'
               type='password'
               className='search-bar'
               onChange={(e) => setPassword(e.target.value)}
@@ -98,8 +106,9 @@ export const LoginModal = ({ uiConfig, auth }) => {
             </button>
             {error && <h6 className='alert alert-warning'>{error}</h6>}
           </form>
+          <h5 className='text-center'>or</h5>
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
         </Modal.Body>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
       </Modal>
     </>
   )

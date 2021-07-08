@@ -2,32 +2,19 @@ import React, { useState, useEffect } from "react"
 import { useStore } from "../contexts/StoreContext"
 import { useAuth } from "../contexts/AuthContext"
 import Spinner from "./Spinner"
-import Cards from "./Cards"
+import CryptoCard from "./CryptoCard"
 import gsap from "gsap"
+import { filterFunction } from "./helper"
 const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
   const { data, store } = useStore()
   const { user } = useAuth()
   const [sortByFavourites, setSortByFavourites] = useState(false)
   const [userFavourites, setUserFavourites] = useState(null)
-  const filterFunction = (el) => {
-    if (el.name.toLowerCase().includes(searchInput.toLowerCase())) {
-      if (!sortByFavourites) {
-        return true
-      } else {
-        return userFavourites.includes(el.name)
-      }
-    }
-    if (el.symbol.toLowerCase().includes(searchInput.toLowerCase())) {
-      if (sortByFavourites) {
-        return true
-      } else {
-        return userFavourites.includes(el.name)
-      }
-    }
-    return false
-  }
 
+  //Filter function for whenever searching
+
+  //ANIMATION
   useEffect(() => {
     gsap.from("#cards-container", {
       opacity: 0,
@@ -35,6 +22,7 @@ const Crypto = () => {
     })
   }, [])
 
+  //Listen for any changes in DB
   useEffect(() => {
     const unsubscribe = store
       .collection("users")
@@ -44,6 +32,7 @@ const Crypto = () => {
       })
     return () => unsubscribe()
   }, [store, user.uid])
+
   return (
     <div id='crypto-page'>
       <h1> Cryptocurrencies</h1>
@@ -64,6 +53,7 @@ const Crypto = () => {
         <p className="card-icon">Icon</p>
         <p>Name</p>
         <p>Price</p>
+        <p>24hr</p>
         <p>Market Cap</p>
         <i
           role='button'
@@ -79,15 +69,19 @@ const Crypto = () => {
           <Spinner />
         ) : (
           data
-            .filter((el) => filterFunction(el))
+            .filter((el) =>
+              filterFunction(el, sortByFavourites, userFavourites, searchInput)
+            )
             .map((obj) => (
-              <Cards
+              <CryptoCard
                 key={obj.market_cap}
                 name={obj.name}
                 symbol={obj.symbol}
                 marketCap={obj.market_cap}
                 price={obj.current_price}
                 image={obj.image}
+                newPrice={obj.newPrice}
+                new24hrChange={obj.new24hrChange}
               />
             ))
         )}

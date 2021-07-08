@@ -1,14 +1,14 @@
 .banner-wrapper {
   background-color: rgba(0, 0, 0, 0.193);
   margin: 0;
-  padding: 10px 0;
+  padding: 20px 0;
   .banner-list {
     margin: 0 auto;
-    padding: 5px 15%;
+    padding: 1px 25%;
     display: grid;
     place-items: center;
+    justify-content: space-around;
     grid-template-columns: repeat(6, 1fr);
-    gap: 10px;
     h5,
     .prices {
       font-size: 0.8rem;
@@ -18,17 +18,21 @@
       color: rgba(216, 216, 216, 0.638);
     }
     .prices {
+      margin-top: 3px;
       display: flex;
     }
 
     @media (max-width: 1400px) {
-      padding: 5px 8%;
+      padding: 5px 15%;
     }
     @media (max-width: 992px) {
       grid-template-columns: repeat(3, 1fr);
       gap: 5px;
-      padding: 5px 2%;
+      padding: 5px 15%;
       justify-content: space-between;
+    }
+    @media (max-width: 500px) {
+      padding: 5px 5%;
     }
   }
   .banner-item {

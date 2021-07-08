@@ -1,12 +1,14 @@
 .myaccount-wrapper {
-  width: 100%;
+  padding: 0 20%;
 }
 .myaccount-card {
+  border-radius: 20px;
   padding: 50px 20px;
   width: 50%;
   margin: 5% auto;
   color: white;
   background: $card-bg;
+  box-shadow: 0 0 10px rgb(16, 12, 12);
 }
 .myaccount-card-title {
   text-align: center;
