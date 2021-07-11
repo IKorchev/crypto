@@ -7,7 +7,7 @@ export const filterFunction = (el, bool, array, searchInput) => {
     }
   }
   if (el.symbol.toLowerCase().includes(searchInput.toLowerCase())) {
-    if (bool) {
+    if (!bool) {
       return true
     } else {
       return array.includes(el.name)
