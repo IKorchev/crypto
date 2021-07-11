@@ -3,10 +3,12 @@ import { useAuth } from "../contexts/AuthContext"
 import NotLoggedIn from "./NotLoggedIn"
 import LoggedIn from "./LoggedIn"
 import Spinner from "./Spinner"
+import { useStore } from "../contexts/StoreContext"
 // IMAGES
 
 const Main = ({ showRegisterModal, showLoginModal }) => {
   const { user } = useAuth()
+  const { data } = useStore()
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     return user !== undefined && setIsLoading(false)
@@ -14,20 +16,13 @@ const Main = ({ showRegisterModal, showLoginModal }) => {
   return (
     <>
       {isLoading && <Spinner />}
-      {!isLoading && (
-        <>
-          {user ? (
-            <LoggedIn
-              showRegisterModal={showRegisterModal}
-              showLoginModal={showLoginModal}
-            />
-          ) : (
-            <NotLoggedIn
-              showRegisterModal={showRegisterModal}
-              showLoginModal={showLoginModal}
-            />
-          )}
-        </>
+      {user ? (
+        <LoggedIn showRegisterModal={showRegisterModal} showLoginModal={showLoginModal} />
+      ) : (
+        <NotLoggedIn
+          showRegisterModal={showRegisterModal}
+          showLoginModal={showLoginModal}
+        />
       )}
     </>
   )

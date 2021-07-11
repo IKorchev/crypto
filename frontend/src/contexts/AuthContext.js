@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import React from "react"
-import firebase from "firebase/firebase"
-
+import firebase from "firebase"
+import { useHistory } from "react-router"
 export const AuthContext = createContext()
 export const useAuth = () => useContext(AuthContext)
 const config = {
@@ -18,12 +18,13 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(undefined)
   const auth = firebase.auth()
   const store = firebase.firestore()
-
+  const history = useHistory()
   const handleSignout = () => {
     return auth.signOut()
   }
   const login = async (email, password) => {
     try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       const res = await auth.signInWithEmailAndPassword(email, password)
       return res
     } catch (err) {
@@ -38,14 +39,35 @@ export const AuthContextProvider = ({ children }) => {
           store.collection("users").doc(res.user.uid).set({
             cryptos: [],
           })
-          res.user.updateProfile({
-            displayName: name,
-          })
+          console.log(res.user)
         }
         return res
       } catch (error) {
         return error
       }
+  }
+  const reauthenticate = (currentPassword) => {
+    if (currentPassword) {
+      console.log(user)
+      const cred = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword)
+      return user.reauthenticateWithCredential(cred)
+    } else {
+      return user.reauthenticateWithPopup(new firebase.auth.GoogleAuthProvider())
+    }
+  }
+  const deleteAccount = async (password) => {
+    try {
+      const newUserCred = await reauthenticate(password)
+      const deletedDocument = await store
+        .collection("users")
+        .doc(newUserCred.user.uid)
+        .delete()
+      console.log("document deleted" + deletedDocument)
+      await newUserCred.user.delete()
+      history.push("/")
+    } catch (err) {
+      throw err
+    }
   }
 
   useEffect(() => {
@@ -57,6 +79,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, [user, auth])
   const value = {
+    deleteAccount,
     auth,
     user,
     handleSignout,

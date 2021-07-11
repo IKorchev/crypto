@@ -6,3 +6,12 @@ $card-bg: #393c41;
 $text-light: rgb(226, 226, 226);
 $hover-bg: darken($dark, 5);
 $red: rgba(255, 20, 20, 0.6);
+$purple: rgba(232, 0, 251, 1);
+$gradient-bg: linear-gradient(
+  300deg,
+  rgba(8, 32, 43, 0.041) -150%,
+  rgba(31, 31, 31, 0.055) 120%
+);
+
+// rgba(66, 61, 65, 1)
+// rgba(0, 30, 31, 1)

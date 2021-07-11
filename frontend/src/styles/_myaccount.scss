@@ -1,22 +1,28 @@
 .myaccount-wrapper {
   padding: 0 20%;
+  @media (max-width: 1200px) {
+    padding: 0;
+  }
 }
 .myaccount-card {
   border-radius: 20px;
-  padding: 50px 20px;
-  width: 50%;
+  padding: 4rem;
+  width: 40rem;
   margin: 5% auto;
   color: white;
   background: $card-bg;
-  box-shadow: 0 0 10px rgb(16, 12, 12);
+  box-shadow: 0 0 10px rgba(16, 12, 12, 0.185);
+  @media (max-width: 1200px) {
+    width: 90%;
+  }
 }
 .myaccount-card-title {
+  padding: 2rem;
   text-align: center;
   color: $light;
 }
 
 .myaccount-card-item {
-  padding: 0 10%;
   h6 {
     display: inline-block;
   }

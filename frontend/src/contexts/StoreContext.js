@@ -1,22 +1,25 @@
 import React, { useContext, useEffect, useState, useRef } from "react"
 import { useAuth } from "./AuthContext"
-import firebase from "firebase/firebase"
+import firebase from "firebase"
 const StoreContext = React.createContext()
 
 export const useStore = () => useContext(StoreContext)
 export const StoreContextProvider = ({ children }) => {
   const { store, user } = useAuth()
-  const [news, setNews] = useState(null)
+  const [socketIsOpen, setSocketIsOpen] = useState(false)
+  // const [news, setNews] = useState(null)
   const [data, setData] = useState(null)
-  const [realtimePrices, setRealtimePrices] = useState([])
+  const [loaded, setLoaded] = useState(false)
+  const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
-  const socket = useRef(new WebSocket(`wss://fstream.binance.com/ws/!ticker@arr`))
 
   useEffect(() => {
-    socket.current.onopen = (e) => {
-      console.log("opened")
+    const socket2 = new WebSocket("ws://localhost:5501/", "echo-protocol")
+
+    socket2.onopen = (e) => {
+      setSocketIsOpen(true)
     }
-    socket.current.onmessage = (m) => {
+    socket2.onmessage = (m) => {
       setRealtimePrices(JSON.parse(m.data))
     }
   }, [])
@@ -30,11 +33,12 @@ export const StoreContextProvider = ({ children }) => {
     })
   }
   const addCoin = (name) => {
-    const db = store.collection("users").doc(user.uid)
-
-    db.update({
-      cryptos: firebase.firestore.FieldValue.arrayUnion(`${name}`),
-    })
+    store
+      .collection("users")
+      .doc(user.uid)
+      .update({
+        cryptos: firebase.firestore.FieldValue.arrayUnion(name),
+      })
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,29 +53,30 @@ export const StoreContextProvider = ({ children }) => {
       setData(data[0])
     }
     fetchData()
+    return setLoaded(true)
   }, [])
   useEffect(() => {
-    if (data) {
+    data &&
+      realtimePrices &&
       realtimePrices.forEach((el) => {
         const elsymbol = el.s.toLowerCase()
-        if (elsymbol.endsWith("usdt") && !elsymbol.startsWith("btcdom")) {
-          data.forEach((item) => {
-            if (elsymbol.startsWith(item.symbol)) {
-              item.new24hrChange = parseFloat(el.P)
-              item.newPrice = parseFloat(el.c)
-            }
-          })
+        for (const element of data) {
+          if (elsymbol === `${element.symbol}usdt`) {
+            element.new24Change = parseFloat(el.P)
+            element.newPrice = parseFloat(el.c)
+          }
         }
       })
-    }
   }, [realtimePrices, data])
 
   const value = {
+    loaded,
+    socketIsOpen,
     data,
     deleteCoin,
     addCoin,
     events,
-    news,
+    // news,
     store,
     realtimePrices,
   }

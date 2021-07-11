@@ -1,42 +1,51 @@
-import React, { useEffect, useState } from "react"
+import gsap from "gsap"
+import { useEffect } from "react"
 
-const BannerItem = ({ coin }) => {
-  const [coinPrice, setCoinPrice] = useState(" ")
-  const [the24hrPriceChange, setThe24hrPriceChange] = useState(" ")
+const BannerItem = ({ new24Change, name, newPrice, symbol }) => {
   useEffect(() => {
-    setThe24hrPriceChange(
-      !coin.new24hrChange
-        ? "No data"
-        : coin.new24hrChange > 0
-        ? `+${coin.new24hrChange.toFixed(2)}%`
-        : `${coin.new24hrChange.toFixed(2)}%`
+    gsap.fromTo(
+      ".banner-item",
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.1,
+        delay: 0.5,
+      }
     )
-    setCoinPrice(
-      !coin.newPrice ? coinPrice : `$${new Intl.NumberFormat().format(coin.newPrice)}`
-    )
-  }, [coin.newPrice, coin.new24hrChange, coinPrice])
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
-    <li className='banner-item'>
-      {!coin.new24hrChange ? (
-        <></>
-      ) : (
+    <>
+      <li className='banner-item'>
         <div className='banner-content'>
           <h5>
-            {coin.symbol.toUpperCase()} <span className='muted'>{coin.name}</span>
+            <span className='mr-1'>{symbol.toUpperCase()}</span>
+            <span className='muted'>{name}</span>
           </h5>
           <div className='prices'>
-            {/* if price is higher than $10 show 1 extra number*/}
-            <h5>{coinPrice} </h5>
+            <h5 className='mr-1'>${newPrice.toLocaleString()}</h5>
             <h5
-              className={the24hrPriceChange.startsWith(" +") ? "text-green" : "text-red"}>
-              {/* prettier-ignore */ }
-              {the24hrPriceChange}
+              className={
+                // if positive text will be green if negative it will be red
+                !new24Change
+                  ? "display-none"
+                  : new24Change > 0
+                  ? "text-green"
+                  : "text-red"
+              }>
+              {
+                // make sure there's a + or - when displaying the percentage change
+                new24Change > 0 ? "+" + new24Change : new24Change
+              }
+              %
             </h5>
           </div>
         </div>
-      )}
-    </li>
+      </li>
+    </>
   )
 }
 

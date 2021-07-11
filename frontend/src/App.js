@@ -7,25 +7,24 @@ import { ModalContextProvider } from "./contexts/ModalContext"
 import { BrowserRouter as Router, Switch } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
+
 //FIREBASE
 // APP
 const App = () => {
   const formRef = useRef(null)
   const headerRef = useRef()
- 
+
   return (
     <Router>
-      <Switch>
-        <AuthContextProvider>
-          <StoreContextProvider>
-            <ModalContextProvider>
-              <Navbar />
-              <Main formRef={formRef} headerRef={headerRef} />
-            </ModalContextProvider>
-            <Footer />
-          </StoreContextProvider>
-        </AuthContextProvider>
-      </Switch>
+      <AuthContextProvider>
+        <StoreContextProvider>
+          <ModalContextProvider>
+            <Navbar />
+            <Main formRef={formRef} headerRef={headerRef} />
+          </ModalContextProvider>
+          <Footer />
+        </StoreContextProvider>
+      </AuthContextProvider>
     </Router>
   )
 }

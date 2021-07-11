@@ -42,6 +42,7 @@
 }
 
 .event-card {
+  overflow: hidden;
   height: max-content;
   border-radius: 15px;
   background: rgb(26, 26, 26);
@@ -69,9 +70,13 @@
     font-size: 2rem;
   }
   img {
-    height: 250px;
+    height: 15.625rem;
     width: 100%;
     border-radius: 2px;
+    transition: transform 0.7s ease;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
   a {
     font-size: 1rem;

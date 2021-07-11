@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react"
 import { RegisterModal, LoginModal } from "../components/Modals"
-import { useAuth, uiConfig } from "./AuthContext"
-import firebase from "firebase/firebase"
+import firebase from "firebase"
+import { useAuth } from "./AuthContext"
 
 const ModalContext = React.createContext()
 
@@ -10,13 +10,28 @@ export const useModal = () => useContext(ModalContext)
 export const ModalContextProvider = ({ children }) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
-  const { auth } = useAuth()
+  const { auth, store } = useAuth()
   const uiConfig = {
     callbacks: {
-      signInSuccessWithAuthResult: (authResult, redirectUrl) => false,
+      signInSuccessWithAuthResult: (auth) => {
+        if (auth.additionalUserInfo.isNewUser) {
+          console.log(auth.additionalUserInfo.isNewUser)
+          store.collection("users").doc(auth.user.uid).set({
+            cryptos: [],
+          })
+        }
+        setShowLoginModal(false)
+        setShowRegisterModal(false)
+        return false
+      },
     },
     signInFlow: "popup",
-    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+    signInOptions: [
+      {
+        signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
+      },
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
   }
 
   const value = {
@@ -27,8 +42,8 @@ export const ModalContextProvider = ({ children }) => {
   }
   return (
     <ModalContext.Provider value={value}>
-      <RegisterModal uiConfig={uiConfig} auth={auth} />
-      <LoginModal uiConfig={uiConfig} auth={auth} />
+      <RegisterModal uiConfig={uiConfig} firebaseAuth={auth} />
+      <LoginModal uiConfig={uiConfig} firebaseAuth={auth} />
       {children}
     </ModalContext.Provider>
   )

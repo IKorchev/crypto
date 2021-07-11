@@ -46,29 +46,40 @@
   }
 }
 
-.fade-out {
-  animation: fadeOutAnimation 0.2s forwards linear;
-}
+.modal-content {
+  background-color: rgba(23, 25, 26, 0.955) !important;
+  backdrop-filter: blur(5px);
+  border-radius: 2rem;
+  .modal-header {
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: none;
+    padding: 0;
+  }
 
-.fade-in {
-  animation: fadeInAnimation 0.2s forwards linear;
+  .close {
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    color: white;
+  }
 }
+.confirm-modal {
+  form {
+    padding-bottom: 2rem;
+  }
 
-@keyframes fadeInAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-    z-index: 99999 !important;
-  }
-}
-@keyframes fadeOutAnimation {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    z-index: -99999 !important;
+  .delete-button {
+    width: 50% !important;
+    margin: 0 auto;
+    font-weight: bolder;
+    padding: 0.5rem 0;
+    border-radius: 0.7rem;
+    background: rgb(255, 0, 0);
+    color: white;
+    outline: none;
+    border: 1px solid red;
+    &:hover {
+      background: rgba(200, 0, 0, 0.4) !important;
+    }
   }
 }

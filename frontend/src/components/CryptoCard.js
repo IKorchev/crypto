@@ -1,35 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { useStore } from "../contexts/StoreContext"
 import { useAuth } from "../contexts/AuthContext"
-const CryptoCard = ({
-  name,
-  symbol,
-  price,
-  marketCap,
-  image,
-  newPrice,
-  new24hrChange,
-}) => {
+const CryptoCard = ({ name, symbol, price, marketCap, image, new24hrChange }) => {
   const { user } = useAuth()
   const { addCoin, deleteCoin, store } = useStore()
-  const [coinPrice, setCoinPrice] = useState(`$${new Intl.NumberFormat().format(price)}`)
-  const [the24hrPriceChange, setThe24hrPriceChange] = useState("No data")
   const [isFavourite, setIsFavourite] = useState(null)
   const [userFavourites, setUserFavourites] = useState([])
   const handleIconClick = (e) => {
     e.preventDefault()
     isFavourite ? deleteCoin(name) : addCoin(name)
   }
-  useEffect(() => {
-    setThe24hrPriceChange(
-      new24hrChange === undefined
-        ? "No data"
-        : new24hrChange > 0
-        ? `+${new24hrChange.toFixed(2)}%`
-        : `${new24hrChange.toFixed(2)}%`
-    )
-    setCoinPrice(!newPrice ? coinPrice : `$${new Intl.NumberFormat().format(newPrice)}`)
-  }, [newPrice, new24hrChange, coinPrice])
 
   useEffect(() => {
     const db = store.collection("users").doc(user.uid)
@@ -57,12 +37,28 @@ const CryptoCard = ({
           <p>
             {name} / <strong>{symbol.toUpperCase()}</strong>
           </p>
-          <p>{coinPrice}</p>
-          <p
-            className={`${
-              the24hrPriceChange.startsWith("-") ? "text-red" : "text-green"
-            }`}>
-            {the24hrPriceChange}
+          <p>
+            $
+            {price
+              .toFixed(
+                2
+                // price > 10
+                //   ? 2
+                //   : price < 9.99 && price > 0.1
+                //   ? 4
+                //   : price < 0.1 && price > 0.0009
+                //   ? 6
+                //   : price < 0.00099 && price > 0.0000009
+                //   ? 8
+                //   : 10
+              )
+              .toLocaleString("en-US")}
+          </p>
+          <p className={new24hrChange > 0 ? "text-green" : "text-red"}>
+            {new24hrChange > 0
+              ? ` +` + new24hrChange.toFixed(2)
+              : new24hrChange.toFixed(2)}
+            %
           </p>
           <p>${marketCap.toLocaleString()}</p>
           <i

@@ -1,0 +1,47 @@
+.scroll-btn-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .scroll-btn {
+    transition: all 0.5s ease;
+    &:hover {
+      transform: scale(1.04);
+      opacity: 0.5;
+    }
+    width: 1rem;
+    border-radius: 0.7rem;
+    border: 2px solid white;
+    padding: 1rem 0.5rem;
+    background: 0;
+    color: white;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0.5rem;
+      left: 0.35rem;
+      background-color: $purple;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      animation: animate 1.5s ease-in-out alternate infinite;
+    }
+  }
+  span {
+    position: absolute;
+    bottom: -2rem;
+    left: -2.5rem;
+    width: 6rem;
+    color: white;
+  }
+}
+@keyframes animate {
+  from {
+    top: 0.5rem;
+  }
+  to {
+    top: 1.2rem;
+  }
+}

@@ -78,10 +78,9 @@ const Crypto = () => {
                 name={obj.name}
                 symbol={obj.symbol}
                 marketCap={obj.market_cap}
-                price={obj.current_price}
+                price={obj.newPrice || obj.current_price}
                 image={obj.image}
-                newPrice={obj.newPrice}
-                new24hrChange={obj.new24hrChange}
+                new24hrChange={obj.new24hrChange || obj.price_change_percentage_24h}
               />
             ))
         )}

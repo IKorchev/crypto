@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Banner from "./Banner"
-import { Link } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import Logo from "../assets/Group 15.svg"
 import { useAuth } from "../contexts/AuthContext"
 import { useModal } from "../contexts/ModalContext"
@@ -43,28 +43,32 @@ const Navbar = () => {
           </button>
           <div id='nav-links-container' className={`${toggled ? "toggle" : ""}`}>
             <span onClick={handleClick}>
-              <Link className='nav-link' exact='true' to='/'>
+              <NavLink className='nav-link' activeClassName='active' exact={true} to='/'>
                 <i className='bi bi-house-fill'></i> <span>Home</span>
-              </Link>
+              </NavLink>
             </span>
             <span onClick={handleClick}>
-              <Link className='nav-link' to='/events'>
+              <NavLink className='nav-link' activeClassName='active' to='/events'>
                 <i className='bi bi-calendar3'></i> <span>Events</span>
-              </Link>
+              </NavLink>
             </span>
             {user ? (
               <>
                 <span onClick={handleClick}>
-                  <Link className='nav-link' to='/account'>
-                    <i className='bi bi-person'></i> <span>My account</span>
-                  </Link>
+                  <NavLink className='nav-link' activeClassName='active' to='/account'>
+                    <i className='bi bi-person'></i> <span>Account</span>
+                  </NavLink>
                 </span>
-                <Link onClick={handleSignout} className='nav-link' to='/'>
+                <NavLink
+                  onClick={handleSignout}
+                  className='nav-link'
+                  activeClassName=''
+                  to='/'>
                   <i className='bi bi-arrow-bar-right'></i> <span>Sign out</span>
-                </Link>
+                </NavLink>
               </>
             ) : (
-              <span onClick={handleClick}>
+              <span onClick={handleClick} tabIndex='-1'>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a
                   className='nav-link'
