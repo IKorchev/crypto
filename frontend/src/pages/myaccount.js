@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useAuth } from "../contexts/AuthContext"
-import { ConfirmModal } from "../components/Modals"
+import { ConfirmModal } from "../components/Home/Crypto/Modals"
 const AccountInfo = () => {
   const { user } = useAuth()
   const [show, setShow] = useState()

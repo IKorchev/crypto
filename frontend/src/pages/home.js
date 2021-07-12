@@ -1,18 +1,17 @@
 import React, { useRef, useEffect } from "react"
 import CryptoInfo from "../assets/CryptoInfo.svg"
-import LandingPageCards from "../components/LandingPageCards"
+import LandingPageCards from "../components/Home/Crypto/LandingPageCards"
 import { useModal } from "../contexts/ModalContext"
 import gsap from "gsap"
 import { Power1 } from "gsap"
 import { ScrollToPlugin } from "gsap/all"
-import { useStore } from "../contexts/StoreContext"
-import { Spinner } from "react-bootstrap"
+
 gsap.registerPlugin(ScrollToPlugin)
 const Home = () => {
   const headerRef = useRef(null)
-  const { setShowRegisterModal } = useModal()
+  const { setShowRegisterModal, setShowLoginModal } = useModal()
   const scrollDown = () => {
-    gsap.to(window, { duration: 1, scrollTo: ".landing-page-cards-wrapper" })
+    gsap.to(window, { duration: 0.5, delay: 0, scrollTo: ".landing-page-cards-wrapper" })
   }
   useEffect(() => {
     gsap.from(headerRef.current.children, {
@@ -36,7 +35,19 @@ const Home = () => {
             </h5>
           </div>
           <div>
-            <button onClick={() => setShowRegisterModal(true)}>Register</button>
+            <button
+              className='register-button'
+              onClick={() => setShowRegisterModal(true)}>
+              Register
+            </button>
+          </div>
+          <div className='login-button-container'>
+            <p>
+              Already have an account?
+              <button onClick={() => setShowLoginModal(true)} className='login-button'>
+                Log in
+              </button>
+            </p>
           </div>
         </div>
         <div className='scroll-btn-div'>

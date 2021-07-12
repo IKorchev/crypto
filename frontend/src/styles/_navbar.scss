@@ -1,6 +1,8 @@
 .navbar {
+  position: sticky;
+  top: 0;
   z-index: 1 !important;
-  background: none;
+  background: $dark;
   font-family: "Montserrat", sans-serif;
   padding: 0 15%;
   display: flex;
@@ -41,8 +43,8 @@
     @media (max-width: 992px) {
       display: initial;
       position: absolute;
-      top: 0;
-      right: 20px;
+      top: -0.7rem;
+      right: 1.2rem;
     }
   }
 
@@ -103,12 +105,12 @@
 #navbar-title {
   img {
     z-index: 9999;
-    width: 10rem !important;
+    width: 7rem !important;
     height: auto;
   }
   @media (max-width: 992px) {
     img {
-      width: 7rem !important;
+      width: 4rem !important;
       height: auto;
     }
   }

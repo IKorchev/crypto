@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
-import { useAuth } from "../contexts/AuthContext"
-import { useModal } from "../contexts/ModalContext"
+import { useAuth } from "../../../contexts/AuthContext"
+import { useModal } from "../../../contexts/ModalContext"
 import { Modal } from "react-bootstrap"
-
+import { useHistory } from "react-router"
 export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
   const { register } = useAuth()
   const { showRegisterModal, setShowRegisterModal } = useModal()
@@ -130,10 +130,13 @@ export const ConfirmModal = ({ show, setShow }) => {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const { deleteAccount } = useAuth()
+  const history = useHistory()
 
-  const handleDeleteAccount = async () => {
+  const handleDeleteAccount = async (e) => {
+    e.preventDefault()
     try {
       await deleteAccount(password)
+      history.push("/")
     } catch (err) {
       setError(err)
     }
@@ -144,7 +147,9 @@ export const ConfirmModal = ({ show, setShow }) => {
         <Modal.Header closeButton />
         <Modal.Body className='confirm-modal'>
           <h3 className='mb-5'>Delete account</h3>
-          <form className='container d-flex flex-column px-5'>
+          <form
+            className='container d-flex flex-column px-5'
+            onSubmit={handleDeleteAccount}>
             <label for='delete-user-password'>
               <h5 className=''>Confirm your password</h5>
             </label>
@@ -156,7 +161,7 @@ export const ConfirmModal = ({ show, setShow }) => {
               id='delete-user-password'
               placeholder='Password'
             />
-            <button className='delete-button' onClick={handleDeleteAccount}>
+            <button className='delete-button' type='submit'>
               Delete account
             </button>
           </form>

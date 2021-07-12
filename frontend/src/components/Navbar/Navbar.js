@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
 import Banner from "./Banner"
 import { NavLink, Link } from "react-router-dom"
-import Logo from "../assets/Group 15.svg"
-import { useAuth } from "../contexts/AuthContext"
-import { useModal } from "../contexts/ModalContext"
+import Logo from "../../assets/Group 15.svg"
+import { useAuth } from "../../contexts/AuthContext"
+import { useModal } from "../../contexts/ModalContext"
 const Navbar = () => {
   const { handleSignout } = useAuth()
   const { setShowLoginModal } = useModal()
@@ -30,7 +30,7 @@ const Navbar = () => {
   }
   return (
     <>
-      <nav className='navbar'>
+      <nav className='navbar' onBlur={() => setToggled(false)}>
         <Link id='navbar-title' exact='true' to='/'>
           <img src={Logo} alt='Logo'></img>
         </Link>

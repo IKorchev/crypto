@@ -32,7 +32,7 @@ const LandingPageCards = () => {
       ease: Power0,
       scrollTrigger: {
         trigger: parentEl.current.children,
-        start: "-250% 98%",
+        start: "top bottom",
       },
     })
   }, [])

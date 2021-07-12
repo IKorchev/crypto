@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import { useStore } from "../contexts/StoreContext"
+import { useStore } from "../../contexts/StoreContext"
 import BannerItem from "./BannerItem"
 
 const Banner = () => {
@@ -7,7 +7,7 @@ const Banner = () => {
   const [top, setTop] = useState([])
   const bannerListRef = useRef(null)
   useEffect(() => {
-    if (realtimePrices !== null) {
+    if (realtimePrices !== null && data) {
       return setTop(data.slice(0, 7))
     }
   }, [data, realtimePrices])

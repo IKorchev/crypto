@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { useStore } from "../contexts/StoreContext"
-import { useAuth } from "../contexts/AuthContext"
+import { useStore } from "../../../contexts/StoreContext"
+import { useAuth } from "../../../contexts/AuthContext"
+
 const CryptoCard = ({ name, symbol, price, marketCap, image, new24hrChange }) => {
   const { user } = useAuth()
   const { addCoin, deleteCoin, store } = useStore()

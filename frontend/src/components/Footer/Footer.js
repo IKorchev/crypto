@@ -1,11 +1,11 @@
 import React from "react"
-import CryptoInfo from "../assets/CryptoInfo.svg"
+import CryptoInfo from "../../assets/CryptoInfo.svg"
 import { links } from "./footerLinks"
 
 const FooterLinkList = ({ link, title, label }) => {
   return (
     <ul>
-      <h6>{label}</h6>
+      <h5>{label}</h5>
       <li>
         <a target='_blank' rel='noreferrer' href={link}>
           {title}
@@ -23,7 +23,7 @@ const Footer = () => {
           <img src={CryptoInfo} alt='Website logo' />
         </a>
       </h1>
-      <div className='footer-content row justify-content-between'>
+      <div className='footer-content d-flex justify-content-between'>
         <div>
           {links.usefulLinks.map((object, i) => (
             <FooterLinkList

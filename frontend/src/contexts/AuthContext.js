@@ -62,9 +62,8 @@ export const AuthContextProvider = ({ children }) => {
         .collection("users")
         .doc(newUserCred.user.uid)
         .delete()
-      console.log("document deleted" + deletedDocument)
-      await newUserCred.user.delete()
-      history.push("/")
+      const response = await newUserCred.user.delete()
+      console.log(response)
     } catch (err) {
       throw err
     }

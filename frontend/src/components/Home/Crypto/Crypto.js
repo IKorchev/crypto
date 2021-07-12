@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
-import { useStore } from "../contexts/StoreContext"
-import { useAuth } from "../contexts/AuthContext"
-import Spinner from "./Spinner"
-import CryptoCard from "./CryptoCard"
-import gsap from "gsap"
+import { useStore } from "../../../contexts/StoreContext"
+import { useAuth } from "../../../contexts/AuthContext"
+import CryptoCard from "../Crypto/CryptoCard"
 import { filterFunction } from "./helper"
+
 const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
   const { data, store } = useStore()
@@ -15,12 +14,6 @@ const Crypto = () => {
   //Filter function for whenever searching
 
   //ANIMATION
-  useEffect(() => {
-    gsap.from("#cards-container", {
-      opacity: 0,
-      height: 800,
-    })
-  }, [])
 
   //Listen for any changes in DB
   useEffect(() => {
@@ -49,8 +42,9 @@ const Crypto = () => {
         />
       </div>
       {/* prettier-ignore */}
+      {/* This is the upper card with the Labels */}
       <div className='card info'>
-        <p className="card-icon">Icon</p>
+        <p className='card-icon'>Icon</p>
         <p>Name</p>
         <p>Price</p>
         <p>24hr</p>
@@ -65,9 +59,7 @@ const Crypto = () => {
           }}></i>
       </div>
       <div id='cards-container'>
-        {data === null ? (
-          <Spinner />
-        ) : (
+        {data &&
           data
             .filter((el) =>
               filterFunction(el, sortByFavourites, userFavourites, searchInput)
@@ -80,10 +72,9 @@ const Crypto = () => {
                 marketCap={obj.market_cap}
                 price={obj.newPrice || obj.current_price}
                 image={obj.image}
-                new24hrChange={obj.new24hrChange || obj.price_change_percentage_24h}
+                new24hrChange={obj.new24Change || obj.price_change_percentage_24h}
               />
-            ))
-        )}
+            ))}
       </div>
     </div>
   )

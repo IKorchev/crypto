@@ -1,10 +1,9 @@
 #spinner {
-  height: 100vh;
-  width: 100vh;
-
+  height: 99vh !important;
+  overflow: hidden;
   .loader {
     font-size: 10px;
-    margin: 15% auto;
+    margin: 0 auto;
     text-indent: -9999em;
     width: 11em;
     height: 11em;

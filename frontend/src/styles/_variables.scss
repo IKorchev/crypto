@@ -7,11 +7,13 @@ $text-light: rgb(226, 226, 226);
 $hover-bg: darken($dark, 5);
 $red: rgba(255, 20, 20, 0.6);
 $purple: rgba(232, 0, 251, 1);
-$gradient-bg: linear-gradient(
-  300deg,
-  rgba(8, 32, 43, 0.041) -150%,
-  rgba(31, 31, 31, 0.055) 120%
-);
+$bg-dark-transparent: rgba(23, 25, 26, 0.955);
 
+@mixin darkBgWithFilter {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
+  background-color: rgba(63, 64, 65, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
 // rgba(66, 61, 65, 1)
 // rgba(0, 30, 31, 1)

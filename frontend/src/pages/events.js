@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
 import { useStore } from "../contexts/StoreContext"
-import EventCards from "../components/EventCards"
+import EventCards from "../components/Events/EventCards"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import News from "../components/Events/News"
 gsap.registerPlugin(ScrollTrigger)
 const Events = () => {
   const { events } = useStore()
@@ -11,16 +12,18 @@ const Events = () => {
   useEffect(() => {
     return setEventsArr(events)
   }, [events])
-  useEffect(() => {
-    gsap.from(ref.childNodes, { opacity: 0, y: 100, duration: 0.8, stagger: 0.2 })
-  }, [ref, eventsArr])
-  return (
+
+  return !eventsArr ? (
+    <></>
+  ) : (
     <div className='events-wrapper'>
-      <h1>Upcoming events</h1>
-      <div className='events-container' ref={(el) => (ref = el)}>
+      <News />
+      <div ref={ref} className='accordion accordion-flush' id='accordionExample'>
+        <h3>Events</h3>
         {eventsArr &&
           eventsArr.map((e, i) => (
             <EventCards
+              eventId={`accordion${i}`}
               key={i}
               title={e.title}
               description={e.description}

@@ -47,7 +47,7 @@
 }
 
 .modal-content {
-  background-color: rgba(23, 25, 26, 0.955) !important;
+  background-color: rgba($dark, 0.8) !important;
   backdrop-filter: blur(5px);
   border-radius: 2rem;
   .modal-header {
@@ -78,6 +78,7 @@
     color: white;
     outline: none;
     border: 1px solid red;
+    transition: background 0.3s ease;
     &:hover {
       background: rgba(200, 0, 0, 0.4) !important;
     }
