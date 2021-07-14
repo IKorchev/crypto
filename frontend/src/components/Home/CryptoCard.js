@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { useStore } from "../../../contexts/StoreContext"
-import { useAuth } from "../../../contexts/AuthContext"
-
+import { useStore } from "../../contexts/StoreContext"
+import { useAuth } from "../../contexts/AuthContext"
+import { fixNumber } from "./helper"
 const CryptoCard = ({ name, symbol, price, marketCap, image, new24hrChange }) => {
   const { user } = useAuth()
   const { addCoin, deleteCoin, store } = useStore()
@@ -38,23 +38,7 @@ const CryptoCard = ({ name, symbol, price, marketCap, image, new24hrChange }) =>
           <p>
             {name} / <strong>{symbol.toUpperCase()}</strong>
           </p>
-          <p>
-            $
-            {price
-              .toFixed(
-                2
-                // price > 10
-                //   ? 2
-                //   : price < 9.99 && price > 0.1
-                //   ? 4
-                //   : price < 0.1 && price > 0.0009
-                //   ? 6
-                //   : price < 0.00099 && price > 0.0000009
-                //   ? 8
-                //   : 10
-              )
-              .toLocaleString("en-US")}
-          </p>
+          <p>${fixNumber(price).toLocaleString("en-US")}</p>
           <p className={new24hrChange > 0 ? "text-green" : "text-red"}>
             {new24hrChange > 0
               ? ` +` + new24hrChange.toFixed(2)

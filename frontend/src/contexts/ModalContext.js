@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react"
-import { RegisterModal, LoginModal } from "../components/Home/Crypto/Modals"
+import { RegisterModal, LoginModal } from "../components/Home/Modals"
 import firebase from "firebase"
 import { useAuth } from "./AuthContext"
 

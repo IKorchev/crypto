@@ -11,9 +11,9 @@ const EventCards = ({
 }) => {
   return (
     <div className='accordion-item'>
-      <h2 className='accordion-header' id='headingOne'>
+      <h2 className='accordion-header' id={`#${eventId}-header`}>
         <button
-          className='accordion-button'
+          className='accordion-button collapsed'
           type='button'
           data-bs-toggle='collapse'
           data-bs-target={`#${eventId}`}
@@ -25,8 +25,8 @@ const EventCards = ({
       <div
         id={eventId}
         className='accordion-collapse collapse'
-        aria-labelledby='headingOne'
-        data-bs-parent='#accordionExample'>
+        aria-labelledby={`#${eventId}-header`}
+        data-bs-parent='#events-accordion'>
         <div className='accordion-body'>
           <div className='event-card-title'>
             <h1>{title}</h1>
@@ -40,7 +40,6 @@ const EventCards = ({
               </p>
             </div>
           </div>
-
           <h5>About the event</h5>
           <p>{description}</p>
         </div>

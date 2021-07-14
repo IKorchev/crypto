@@ -4,23 +4,41 @@ import firebase from "firebase"
 const StoreContext = React.createContext()
 
 export const useStore = () => useContext(StoreContext)
+
 export const StoreContextProvider = ({ children }) => {
   const { store, user } = useAuth()
   const [socketIsOpen, setSocketIsOpen] = useState(false)
   // const [news, setNews] = useState(null)
   const [data, setData] = useState(null)
   const [loaded, setLoaded] = useState(false)
+  const [trades, setTrades] = useState([])
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
+  const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
+  const socketUrl = `${socketProtocol}//${window.location.hostname}:5500/ws/`
 
   useEffect(() => {
-    const socket2 = new WebSocket("ws://localhost:5501/", "echo-protocol")
-
+    const socket2 = new WebSocket(socketUrl)
     socket2.onopen = (e) => {
       setSocketIsOpen(true)
     }
-    socket2.onmessage = (m) => {
-      setRealtimePrices(JSON.parse(m.data))
+    socket2.onmessage = (message) => {
+      const data = JSON.parse(message.data)
+      //if its price data
+      if (data.eventType !== "trade") {
+        setRealtimePrices(data)
+      }
+      //if its trade data
+      if (data.eventType === "trade") {
+        setTrades((oldArr) => {
+          if (oldArr.length < 10) {
+            return [data, ...oldArr]
+          } else {
+            oldArr.pop()
+            return [data, ...oldArr]
+          }
+        })
+      }
     }
   }, [])
 
@@ -76,6 +94,7 @@ export const StoreContextProvider = ({ children }) => {
     deleteCoin,
     addCoin,
     events,
+    trades,
     // news,
     store,
     realtimePrices,

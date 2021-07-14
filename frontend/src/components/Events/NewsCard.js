@@ -31,11 +31,11 @@ const NewsCard = ({
       <div ref={ref} className='news-article-card-content'>
         <h1 className='card-title mt-0'>{title}</h1>
         <div className='d-flex align-items-between mt-1'>
-          <div className='col-6 p-0'>
+          <div className='col-6p-0'>
             <p className='text-muted m-0'>Author: {author || "unknown"}</p>
             <p className='text-muted m-0'>{source.name}</p>
           </div>
-          <div col-6 p-0>
+          <div className='col-6 p-0'>
             <p className='text-muted m-0'>Date: {date}</p>
           </div>
         </div>

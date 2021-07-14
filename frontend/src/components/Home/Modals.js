@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
-import { useAuth } from "../../../contexts/AuthContext"
-import { useModal } from "../../../contexts/ModalContext"
+import { useAuth } from "../../contexts/AuthContext"
+import { useModal } from "../../contexts/ModalContext"
 import { Modal } from "react-bootstrap"
 import { useHistory } from "react-router"
 export const RegisterModal = ({ uiConfig, firebaseAuth }) => {

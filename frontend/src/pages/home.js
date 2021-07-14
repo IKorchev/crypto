@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react"
 import CryptoInfo from "../assets/CryptoInfo.svg"
-import LandingPageCards from "../components/Home/Crypto/LandingPageCards"
+import LandingPageCards from "../components/Home/LandingPageCards"
 import { useModal } from "../contexts/ModalContext"
 import gsap from "gsap"
 import { Power1 } from "gsap"
