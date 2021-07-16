@@ -12,6 +12,7 @@ export const StoreContextProvider = ({ children }) => {
   const [data, setData] = useState(null)
   const [loaded, setLoaded] = useState(false)
   const [trades, setTrades] = useState([])
+  const [liquidations, setLiquidations] = useState([])
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
@@ -19,23 +20,40 @@ export const StoreContextProvider = ({ children }) => {
 
   useEffect(() => {
     const socket2 = new WebSocket(socketUrl)
+
     socket2.onopen = (e) => {
       setSocketIsOpen(true)
     }
     socket2.onmessage = (message) => {
       const data = JSON.parse(message.data)
+
       //if its price data
-      if (data.eventType !== "trade") {
+      if (data.eventType !== "trade" && data.e !== "forceOrder") {
         setRealtimePrices(data)
       }
+
       //if its trade data
       if (data.eventType === "trade") {
         setTrades((oldArr) => {
           if (oldArr.length < 10) {
+            //limit the array's length to 10
             return [data, ...oldArr]
           } else {
+            // clean up the array and push new trade in
             oldArr.pop()
             return [data, ...oldArr]
+          }
+        })
+      }
+      if (data.e === "forceOrder") {
+        setLiquidations((old) => {
+          if (old.length < 10) {
+            //limit the array's length to 10
+            return [data, ...old]
+          } else {
+            // clean up the array and push new trade in
+            old.pop()
+            return [data, ...old]
           }
         })
       }
@@ -73,6 +91,7 @@ export const StoreContextProvider = ({ children }) => {
     fetchData()
     return setLoaded(true)
   }, [])
+
   useEffect(() => {
     data &&
       realtimePrices &&
@@ -96,6 +115,7 @@ export const StoreContextProvider = ({ children }) => {
     events,
     trades,
     // news,
+    liquidations,
     store,
     realtimePrices,
   }

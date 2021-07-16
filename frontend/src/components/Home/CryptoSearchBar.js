@@ -2,9 +2,9 @@ import React from "react"
 
 const CryptoSearchBar = ({ setSearchInput }) => {
   return (
-    <div className='d-flex justify-content-center align-items-center w-100'>
+    <div className='d-flex justify-content-center align-items-center w-100 my-2'>
       <label className='text-white text-end mx-2 fs-5'>Search</label>
-      <div className='search-bar w-25 mr-5'>
+      <div className='search-bar'>
         <label htmlFor='coin-name'>Search</label>
         <input
           className='coin-name'

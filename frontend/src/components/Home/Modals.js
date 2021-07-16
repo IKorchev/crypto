@@ -64,7 +64,7 @@ export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
             <button type='submit' className='search-bar form-button'>
-              Submit
+              Register
             </button>
             {error && <h6 className='alert alert-danger'>{error}</h6>}
           </form>
@@ -104,7 +104,7 @@ export const LoginModal = ({ uiConfig, firebaseAuth }) => {
               className='search-bar'
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label>Password </label>
+            <label>Password</label>
             <input
               placeholder='Password'
               autoComplete='current-password'
@@ -113,7 +113,7 @@ export const LoginModal = ({ uiConfig, firebaseAuth }) => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button type='submit' className='search-bar form-button'>
-              Submit
+              Log in
             </button>
             {error && <h6 className='alert alert-warning'>{error}</h6>}
           </form>

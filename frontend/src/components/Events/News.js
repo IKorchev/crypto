@@ -61,7 +61,7 @@ const News = () => {
     ],
   }
 
-  const [_news, setNews] = useState(null)
+  const [_news, setNews] = useState([])
 
   useEffect(() => {
     setNews(placeholderData.articles)
@@ -71,19 +71,18 @@ const News = () => {
     <div className='news-page-wrapper'>
       <h1 className='text-start h4 py-2 border-bottom '>Cryptocurrency news</h1>
       <div ref={cardsParentRef} className='news-cards-wrapper'>
-        {_news &&
-          _news.map((article, i) => (
-            <NewsCard
-              key={i}
-              datePublished={article.publishedAt}
-              description={article.description}
-              url={article.url}
-              title={article.title}
-              urlToImage={article.urlToImage}
-              author={article.author}
-              source={article.source}
-            />
-          ))}
+        {_news.map((article, i) => (
+          <NewsCard
+            key={i}
+            datePublished={article.publishedAt}
+            description={article.description}
+            url={article.url}
+            title={article.title}
+            urlToImage={article.urlToImage}
+            author={article.author}
+            source={article.source}
+          />
+        ))}
       </div>
     </div>
   )

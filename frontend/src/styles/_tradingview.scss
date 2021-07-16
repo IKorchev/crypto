@@ -1,0 +1,60 @@
+.tradingview-wrapper {
+  font-family: "Montserrat", sans-serif;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='2000' height='500' preserveAspectRatio='none' viewBox='0 0 2000 500'%3e%3cg mask='url(%26quot%3b%23SvgjsMask2349%26quot%3b)' fill='none'%3e%3crect width='2000' height='500' x='0' y='0' fill='url(%23SvgjsLinearGradient2350)'%3e%3c/rect%3e%3cpath d='M -1201.9226927787795%2c299 C -1068.52%2c267.4 -801.72%2c139.6 -534.9226927787796%2c141 C -268.12%2c142.4 -134.72%2c287 132.0773072212204%2c306 C 398.88%2c325 532.28%2c220 799.0773072212204%2c236 C 1065.88%2c252 1225.89%2c401 1466.0773072212205%2c386 C 1706.26%2c371 1893.22%2c206 2000%2c161' stroke='rgba(30%2c 235%2c 242%2c 0.12)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -949.0588309321367%2c185 C -815.66%2c209.4 -548.86%2c318.6 -282.05883093213674%2c307 C -15.26%2c295.4 118.14%2c102.8 384.94116906786326%2c127 C 651.74%2c151.2 785.14%2c414.2 1051.9411690678633%2c428 C 1318.74%2c441.8 1529.33%2c212 1718.9411690678633%2c196 C 1908.55%2c180 1943.79%2c317.6 2000%2c348' stroke='rgba(30%2c 235%2c 242%2c 0.12)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -635.0487210039707%2c226 C -501.65%2c249 -234.85%2c371.6 31.951278996029277%2c341 C 298.75%2c310.4 432.15%2c78.8 698.9512789960293%2c73 C 965.75%2c67.2 1099.15%2c289.2 1365.9512789960293%2c312 C 1632.75%2c334.8 1906.14%2c183 2032.9512789960293%2c187 C 2159.76%2c191 2006.59%2c303 2000%2c332' stroke='rgba(30%2c 235%2c 242%2c 0.12)' stroke-width='2'%3e%3c/path%3e%3cpath d='M -672.8715839927423%2c390 C -539.47%2c331.8 -272.67%2c115.2 -5.8715839927422975%2c99 C 260.93%2c82.8 394.33%2c300.2 661.1284160072577%2c309 C 927.93%2c317.8 1061.33%2c131.4 1328.1284160072578%2c143 C 1594.93%2c154.6 1860.75%2c379.2 1995.1284160072578%2c367 C 2129.5%2c354.8 1999.03%2c139 2000%2c82' stroke='rgba(30%2c 235%2c 242%2c 0.12)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask2349'%3e%3crect width='2000' height='500' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='100%25' x2='50%25' y2='0%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient2350'%3e%3cstop stop-color='rgba(66%2c 255%2c 245%2c 0)' offset='0'%3e%3c/stop%3e%3cstop stop-color='rgba(23%2c 10%2c 24%2c 0.07)' offset='1'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  padding: 12rem 10%;
+  @media (max-width: 1200px) {
+    padding: 2rem;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.tradingview-logo-wrapper {
+  width: 100%;
+  height: 15rem;
+  h1 {
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  @media (max-width: 992px) {
+    height: 12rem;
+  }
+}
+.tradingview-logo {
+  width: 100%;
+  height: 100%;
+  background: url(../assets/TradingViewLogo.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+.tradingview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20rem;
+  padding: 2rem;
+  text-align: center;
+
+  h1 {
+    font-size: 5rem;
+    font-weight: bolder;
+    @media (max-width: 700px) {
+      font-size: 3rem;
+    }
+  }
+  p {
+    font-size: 1.5rem;
+  }
+}

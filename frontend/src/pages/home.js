@@ -5,6 +5,8 @@ import { useModal } from "../contexts/ModalContext"
 import gsap from "gsap"
 import { Power1 } from "gsap"
 import { ScrollToPlugin } from "gsap/all"
+import TradingViewCard from "../components/TradingViewCard"
+import Footer from "../components/Footer/Footer"
 
 gsap.registerPlugin(ScrollToPlugin)
 const Home = () => {
@@ -57,6 +59,8 @@ const Home = () => {
         </div>
       </div>
       <LandingPageCards />
+      <TradingViewCard />
+      <Footer />
     </div>
   )
 }

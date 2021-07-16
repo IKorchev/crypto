@@ -8,10 +8,11 @@ import CryptoCardsLabel from "./CryptoCardsLabel"
 import CryptoSearchBar from "./CryptoSearchBar"
 import Spinner from "../Spinner"
 import Footer from "../Footer/Footer"
+import LiquidationsList from "./LiquidationsList"
 
 const Crypto = () => {
   const [searchInput, setSearchInput] = useState("")
-  const { data, store } = useStore()
+  const { data, store, liquidations } = useStore()
   const { user } = useAuth()
   const [sortByFavourites, setSortByFavourites] = useState(false)
   const [userFavourites, setUserFavourites] = useState(null)
@@ -78,6 +79,7 @@ const Crypto = () => {
               </div>
             </div>
             <Trades />
+            <LiquidationsList liquidations={liquidations} />
           </div>
           <Footer />
         </>

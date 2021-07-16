@@ -37,6 +37,12 @@ socket.on("connection", async (clientSocket) =>  {
        )
       }
     )
+    client.ws.futuresCustomSubStream(["!forceOrder@arr" ],
+     (event) => {
+      clientSocket.send(JSON.stringify(event)
+       )
+      }
+    )
   } catch (err) {
     console.log(err)
     client.send(err)

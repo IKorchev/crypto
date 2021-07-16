@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap");
-$accordion-icon-color: #fff !important;
 @import "~bootstrap-icons/font/bootstrap-icons";
 @import "bootstrap";
 @import "./variables"; //variables
@@ -18,6 +17,8 @@ $accordion-icon-color: #fff !important;
 @import "./footer";
 @import "./scrolldownbtn";
 @import "./charts";
+@import "./home";
+@import "./tradingview";
 
 @mixin hoverState() {
   transition: transform 0.5s ease;
@@ -201,73 +202,4 @@ body {
   html {
     font-size: 40px;
   }
-}
-
-.home-page-wrapper {
-  margin-top: 5rem;
-  padding: 0 5rem;
-  display: grid;
-  grid-template-columns: 1fr 0.5fr;
-  place-items: center;
-  justify-content: center;
-  gap: 2rem;
-
-  @media (max-width: 1200px) {
-    grid-template-columns: 1fr;
-  }
-  @media (max-width: 992px) {
-    padding: 0;
-  }
-}
-
-.trades-wrapper {
-  font-family: "Montserrat", sans-serif;
-  width: 100%;
-  h1 {
-    font-weight: 200;
-  }
-}
-
-.jumbotron-wrapper {
-  font-family: "Poppins", sans-serif;
-  padding: 2rem 0;
-  height: 90vh;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1051%26quot%3b)' fill='none'%3e%3cpath d='M0 345.61L10 372.77L20 367.12L30 409.92L40 434.47L50 501.23L60 452.19L70 489.77L80 462.91L90 469.62L100 435.68L110 461.44L120 412.64L130 355.71L140 399.38L150 385.36L160 427.68L170 423.45L180 419.26L190 436.08L200 496.91L210 506.83L220 527.58L230 487.35L240 553.46L250 519.58L260 471.15L270 412.7L280 469.27L290 507.38L300 547.02L310 487.37L320 431.38L330 402.29L340 360.89L350 428.89L360 421.97L370 405.18L380 433.92L390 401.12L400 431.99L410 461.99L420 510.01L430 534.08L440 482.99L450 426.2L460 430.13L470 450.55L480 519.74L490 524.23L500 535.49L510 467.6L520 444.27L530 453.77L540 508.62L550 496.46L560 511.7L570 472.02L580 464.41L590 442.45L600 483.42L610 484.79L620 517.37L630 468.55L640 406.28L650 417.14L660 357.4L670 307.7L680 345.1L690 350.82L700 390.86L710 393.17L720 357.39L730 426.84L740 459.21L750 457.8L760 480.91L770 498.87L780 546.35L790 484.57L800 460.34L810 439.44L820 508.23L830 542.28L840 558.57L850 518.2L860 460.91L870 396.05L880 433.59L890 495.79L900 485.78L910 546.54L920 526.37L930 539.61L940 470.23L950 515.36L960 499.81L970 542.84L980 557.71L990 501.4L1000 540.53L1010 516.15L1020 505.38L1030 479.93L1040 462.97L1050 504.34L1060 464.27L1070 500.45L1080 501.04L1090 515.29L1100 458.79L1110 409.72L1120 371.65L1130 330.11L1140 367.98L1150 340.5L1160 401.61L1170 461.86L1180 447.6L1190 428.77L1200 403.32L1210 400.83L1220 413.49L1230 429.34L1240 395.43L1250 428.07L1260 384.74L1270 387.31L1280 420.07L1290 444.59L1300 400.62L1310 361.04L1320 362.11L1330 315.92L1340 347.12L1350 333.01L1360 296.06L1370 256.15L1380 214.95L1390 212.41L1400 264.83L1410 199.97L1420 137.33L1430 127.95L1440 75.44' stroke='rgba(152%2c 36%2c 167%2c 0.2)' stroke-width='2'%3e%3c/path%3e%3cpath d='M0 345.61L10 372.77L20 367.12L30 409.92L40 434.47L50 501.23L60 452.19L70 489.77L80 462.91L90 469.62L100 435.68L110 461.44L120 412.64L130 355.71L140 399.38L150 385.36L160 427.68L170 423.45L180 419.26L190 436.08L200 496.91L210 506.83L220 527.58L230 487.35L240 553.46L250 519.58L260 471.15L270 412.7L280 469.27L290 507.38L300 547.02L310 487.37L320 431.38L330 402.29L340 360.89L350 428.89L360 421.97L370 405.18L380 433.92L390 401.12L400 431.99L410 461.99L420 510.01L430 534.08L440 482.99L450 426.2L460 430.13L470 450.55L480 519.74L490 524.23L500 535.49L510 467.6L520 444.27L530 453.77L540 508.62L550 496.46L560 511.7L570 472.02L580 464.41L590 442.45L600 483.42L610 484.79L620 517.37L630 468.55L640 406.28L650 417.14L660 357.4L670 307.7L680 345.1L690 350.82L700 390.86L710 393.17L720 357.39L730 426.84L740 459.21L750 457.8L760 480.91L770 498.87L780 546.35L790 484.57L800 460.34L810 439.44L820 508.23L830 542.28L840 558.57L850 518.2L860 460.91L870 396.05L880 433.59L890 495.79L900 485.78L910 546.54L920 526.37L930 539.61L940 470.23L950 515.36L960 499.81L970 542.84L980 557.71L990 501.4L1000 540.53L1010 516.15L1020 505.38L1030 479.93L1040 462.97L1050 504.34L1060 464.27L1070 500.45L1080 501.04L1090 515.29L1100 458.79L1110 409.72L1120 371.65L1130 330.11L1140 367.98L1150 340.5L1160 401.61L1170 461.86L1180 447.6L1190 428.77L1200 403.32L1210 400.83L1220 413.49L1230 429.34L1240 395.43L1250 428.07L1260 384.74L1270 387.31L1280 420.07L1290 444.59L1300 400.62L1310 361.04L1320 362.11L1330 315.92L1340 347.12L1350 333.01L1360 296.06L1370 256.15L1380 214.95L1390 212.41L1400 264.83L1410 199.97L1420 137.33L1430 127.95L1440 75.44L1440 560L0 560z' fill='url(%23SvgjsLinearGradient1052)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1051'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='50%25' y1='0%25' x2='50%25' y2='100%25' id='SvgjsLinearGradient1052'%3e%3cstop stop-opacity='0.65' stop-color='rgba(152%2c 36%2c 167%2c 0.2)' offset='0'%3e%3c/stop%3e%3cstop stop-opacity='0' stop-color='rgba(223%2c 149%2c 232%2c 0.2)' offset='0.8'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
-  background-size: cover;
-  h1 {
-    font-size: 4.5rem;
-  }
-}
-.trades-content {
-  background: linear-gradient(
-    270deg,
-    rgba(0, 10, 11, 0.17) 0%,
-    rgba(15, 0, 24, 0.21) 120%
-  );
-  backdrop-filter: blur(5px);
-  padding: 0 0 2rem 0;
-  height: 25rem;
-  border-radius: 0.3rem;
-  overflow-y: auto;
-}
-.trade-card-label,
-.trade-card {
-  width: 100%;
-  display: grid;
-  place-items: center;
-  grid-template-columns: repeat(4, 1fr);
-  color: $light;
-  border-bottom: 1px solid $light;
-  padding: 1rem;
-  p {
-    margin: 0;
-  }
-}
-
-.trade-card-label {
-  font-weight: bold;
-  background-color: darken($dark, 3);
-  position: sticky;
-  padding: outset 0 2rem;
-  top: 0rem;
 }

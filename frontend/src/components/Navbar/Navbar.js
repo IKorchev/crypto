@@ -81,10 +81,6 @@ const Navbar = () => {
               <NavLink className='nav-link' activeClassName='active' to='/events'>
                 <i className='bi bi-calendar3'></i> <span>Events</span>
               </NavLink>
-              <NavLink className='nav-link' activeClassName='active' to='/charts'>
-                <i class='bi bi-bar-chart'></i>
-                <span>Charts</span>
-              </NavLink>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
               <a
                 className='nav-link'
@@ -98,7 +94,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      <div className='mt-5'>
+      <div className='mt-5 tv-widget-tape'>
         <TickerTape widgetProps={config} />
       </div>
     </>
