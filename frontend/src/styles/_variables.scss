@@ -1,5 +1,7 @@
 $turquoise: #1eebf2;
-$dark: #212326;
+// $dark: #212326;
+$dark: rgb(0, 11, 14);
+
 $grey: #686d76;
 $light: #eeeeee;
 $card-bg: #393c41;
@@ -9,11 +11,19 @@ $red: rgba(255, 20, 20, 0.6);
 $purple: rgba(232, 0, 251, 1);
 $bg-dark-transparent: rgba(23, 25, 26, 0.955);
 
-@mixin darkBgWithFilter {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.363);
-  background-color: rgba(63, 64, 65, 0.5);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+
+
+@mixin home-page-padding {
+  padding-left: 13%;
+  padding-right: 13%;
+  @media (max-width: 1400px) {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  @media (max-width: 700px) {
+    padding-left: 0%;
+    padding-right: 0%;
+  }
 }
 // rgba(66, 61, 65, 1)
 // rgba(0, 30, 31, 1)

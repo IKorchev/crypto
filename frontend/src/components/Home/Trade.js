@@ -1,6 +1,6 @@
 export const Trade = ({ eventTime, symbol, price, quantity }) => {
-  let time = new Date(eventTime).toLocaleString("en-UK")
-
+  const dateAndTime = new Date(eventTime).toLocaleString("en-UK")
+  const time = dateAndTime.slice(dateAndTime.length - 8)
   return (
     <>
       <div className='trade-card'>

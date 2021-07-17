@@ -1,33 +1,23 @@
 .news-page-wrapper {
-  padding: 0 2rem 0 5rem;
   h1 {
     margin: 3rem 0;
     font-size: 4rem;
   }
-  @media (max-width: 1200px) {
-    padding: 0;
-  }
-}
-
-.news-cards-wrapper {
-  margin-top: 2rem;
-  padding: 0;
 }
 
 .news-article-card {
   border-radius: 0.6rem;
-  background: darken($dark, 4);
+  background: lighten($dark, 1);
   overflow: hidden;
   color: $light;
   display: flex;
   flex-direction: row;
-  width: 90%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   margin: 1rem auto !important;
   @media (max-width: 992px) {
     width: 100%;
   }
-  @media (max-width: 800px) {
+  @media (max-width: 1000px) {
     flex-direction: column;
     img {
       padding: 0;

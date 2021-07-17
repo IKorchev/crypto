@@ -6,7 +6,12 @@ const Trades = () => {
 
   return (
     <div className='trades-wrapper'>
-      <h2 className='text-white text-center'>Trades</h2>
+      <div className='d-flex justify-content-between text-white'>
+        <h1 className='text-white'>Trades</h1>
+        <h1>
+          <small>BTC & ETH</small>
+        </h1>
+      </div>
       <div className='trades-content styled-scrollbar'>
         <div className='trade-card-label'>
           <p>Time</p>

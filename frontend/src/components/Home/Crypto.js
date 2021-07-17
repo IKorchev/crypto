@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useStore } from "../../contexts/StoreContext"
 import { useAuth } from "../../contexts/AuthContext"
 import CryptoCard from "./CryptoCard"
@@ -9,8 +9,10 @@ import CryptoSearchBar from "./CryptoSearchBar"
 import Spinner from "../Spinner"
 import Footer from "../Footer/Footer"
 import LiquidationsList from "./LiquidationsList"
-
+import gsap from "gsap"
 const Crypto = () => {
+  const jumboRef = useRef()
+  const contentRef = useRef()
   const [searchInput, setSearchInput] = useState("")
   const { data, store, liquidations } = useStore()
   const { user } = useAuth()
@@ -36,21 +38,43 @@ const Crypto = () => {
       return setLoading(false)
     }
   }, [data, user])
+
+  useEffect(() => {
+    if (!loading) {
+      gsap.to(jumboRef.current, {
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+        ease: "circ.out",
+        duration: 1,
+      })
+
+      gsap.to(contentRef.current, {
+        delay: 1,
+        clipPath: "polygon(100% 0, 1% 0, 1% 100%, 100% 100%)",
+        duration: 2,
+        ease: "circ.out",
+      })
+    }
+  }, [loading])
+
   return (
     <>
       {loading ? (
         <Spinner />
       ) : (
-        <>
-          <div className='jumbotron-wrapper text-white text-center d-flex flex-column align-items-center justify-content-center'>
-            <h1>Welcome</h1>
-            <h2>to CryptoInfo</h2>
+        <div>
+          <div ref={jumboRef} className='jumbotron-wrapper text-white clipped-path'>
+            <h3>Welcome to</h3>
+            <h1 className='mb-5'>CryptoInfo</h1>
+            <h3>Take a look at the prices in real time</h3>
           </div>
-          <div className='home-page-wrapper'>
+          <div
+            ref={contentRef}
+            className='home-page-wrapper home-page-wrapper-outter clipped-path2'>
             <div id='crypto-page'>
-              <h1 className='text-center my-3'>Cryptocurrency prices</h1>
-
-              <CryptoSearchBar setSearchInput={setSearchInput} />
+              <div className='d-flex w-100 align-items-around'>
+                <h1 className='text-center my-3'>Prices</h1>
+                <CryptoSearchBar setSearchInput={setSearchInput} />
+              </div>
               {/* This is the upper card with the Labels */}
               <CryptoCardsLabel
                 sortByFavourites={sortByFavourites}
@@ -75,14 +99,14 @@ const Crypto = () => {
                     ))}
               </div>
               <div>
-                <h6 className='text-muted'>Prices based on Binance Exchange.</h6>
+                <h6 className='text-muted'>Prices based on Binance Futures Exchange.</h6>
               </div>
             </div>
             <Trades />
             <LiquidationsList liquidations={liquidations} />
           </div>
           <Footer />
-        </>
+        </div>
       )}
     </>
   )

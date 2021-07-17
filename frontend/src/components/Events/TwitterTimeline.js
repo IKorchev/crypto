@@ -22,7 +22,7 @@ const TwitterTimeline = ({ twitterName, twitterHandle }) => {
         data-bs-parent='#events-accordion'>
         <Timeline
           dataSource={{ sourceType: "profile", screenName: twitterHandle }}
-          options={{ theme: "dark", width: "100%", height: "30rem" }}
+          options={{ theme: "light", width: "100%", height: "10rem" }}
         />
       </div>
     </div>

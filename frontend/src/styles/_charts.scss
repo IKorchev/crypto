@@ -1,19 +1,12 @@
 .charts-container {
-  grid-template-rows: 1fr;
-  div {
+  padding: 0 10%;
+  #chart-container {
     height: 80vh;
+    @media (max-width: 1200px) {
+      height: 100vh;
+    }
   }
-
-  @media (max-width: 1400px) {
-    grid-template-columns: 1fr 0.5fr;
-    padding: 0 2rem;
-  }
-
   @media (max-width: 1200px) {
-    grid-template-columns: 1fr;
-    height: 60rem;
-  }
-  @media (max-width: 700px) {
-    padding: 0 1rem;
+    padding: 0 2%;
   }
 }

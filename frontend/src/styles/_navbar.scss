@@ -76,5 +76,7 @@
   background-color: $dark;
 }
 .tv-widget-tape {
+  position: relative;
   margin-top: 4rem !important;
+  z-index: 10 !important;
 }

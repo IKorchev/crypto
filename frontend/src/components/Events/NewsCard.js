@@ -11,24 +11,14 @@ const NewsCard = ({
   datePublished,
 }) => {
   const date = new Date(datePublished).toLocaleString()
-  const ref = useRef(null)
-  const wrapperRef = useRef(null)
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
 
-    const tl = gsap.timeline()
-    tl.from(wrapperRef.current, {
-      opacity: 0,
-      duration: 1,
-      ease: "power4.inOut",
-    })
-  }, [ref])
+ 
   return (
-    <div ref={wrapperRef} className='news-article-card'>
+    <div  className='news-article-card'>
       <a href={url} target='_blank' rel='noreferrer'>
         <img src={urlToImage} alt='Article'></img>
       </a>
-      <div ref={ref} className='news-article-card-content'>
+      <div  className='news-article-card-content'>
         <h1 className='card-title mt-0'>{title}</h1>
         <div className='d-flex align-items-between mt-1'>
           <div className='col-6 p-0'>

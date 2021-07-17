@@ -8,7 +8,6 @@ import News from "../components/Events/News"
 import TwitterTimeline from "../components/Events/TwitterTimeline"
 import Spinner from "../components/Spinner"
 import Footer from "../components/Footer/Footer"
-import { Timeline } from "react-tradingview-embed"
 gsap.registerPlugin(ScrollTrigger)
 const Events = () => {
   const { events } = useStore()
@@ -25,7 +24,7 @@ const Events = () => {
   return !eventsArr && loading ? (
     <Spinner />
   ) : (
-    <>
+    <div className='events-wrapper-outter'>
       <div className='events-wrapper'>
         <News />
         <div className='accordions-wrapper'>
@@ -52,11 +51,10 @@ const Events = () => {
             <TwitterTimeline twitterHandle='whale_alerts' twitterName='Whale Alerts' />
             <TwitterTimeline twitterHandle='WhaleTrades' twitterName='Whale Trades' />
           </div>
-       
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 

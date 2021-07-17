@@ -1,3 +1,4 @@
+import gsap from "gsap"
 import React, { useEffect, useState, useRef } from "react"
 import NewsCard from "./NewsCard"
 
@@ -66,7 +67,14 @@ const News = () => {
   useEffect(() => {
     setNews(placeholderData.articles)
   }, [])
-
+  useEffect(() => {
+    gsap.from(cardsParentRef.current.children, {
+      stagger: 0.5,
+      ease: "power4.out",
+      x: -100,
+      opacity: 0,
+    })
+  }, [_news])
   return (
     <div className='news-page-wrapper'>
       <h1 className='text-start h4 py-2 border-bottom '>Cryptocurrency news</h1>

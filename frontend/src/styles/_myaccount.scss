@@ -1,31 +1,14 @@
 .myaccount-wrapper {
-  padding: 0 20%;
-  @media (max-width: 1200px) {
-    padding: 0;
-  }
+  color: $light;
+
+  @include home-page-padding();
 }
 .myaccount-card {
-  @include darkBgWithFilter();
-  border-radius: 20px;
-  padding: 4rem;
-  width: 40rem;
-  margin: 5% auto;
-  color: white;
-  @media (max-width: 1200px) {
-    width: 90%;
-  }
+  display: grid;
+  place-items: center;
 }
-.myaccount-card-title {
-  padding: 2rem;
-  text-align: center;
-  color: $light;
-}
-
-.myaccount-card-item {
-  h6 {
-    display: inline-block;
+.myaccount-labels {
+  img {
+    border-radius: 50%;
   }
-  text-align: start;
-  display: flex;
-  justify-content: space-between;
 }

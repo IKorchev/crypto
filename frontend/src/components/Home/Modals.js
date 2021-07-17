@@ -66,7 +66,7 @@ export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
             <button type='submit' className='search-bar form-button'>
               Register
             </button>
-            {error && <h6 className='alert alert-danger'>{error}</h6>}
+            {error && <h6 className='text-danger my-2 text-center'>{error}</h6>}
           </form>
           <h5 className='text-center'>or</h5>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
@@ -115,9 +115,9 @@ export const LoginModal = ({ uiConfig, firebaseAuth }) => {
             <button type='submit' className='search-bar form-button'>
               Log in
             </button>
-            {error && <h6 className='alert alert-warning'>{error}</h6>}
+            {error && <h6 className='text-warning my-2 text-center'>{error}</h6>}
           </form>
-          <h5 className='text-center'>or</h5>
+          <h5 className='text-center '>or</h5>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
         </Modal.Body>
       </Modal>
@@ -165,7 +165,7 @@ export const ConfirmModal = ({ show, setShow }) => {
               Delete account
             </button>
           </form>
-          {error && <div className='alert text-warning'>{error.message}</div>}
+          {error && <h6 className='text-warning my-2 text-center'>{error.message}</h6>}
         </Modal.Body>
       </Modal>
     </>
