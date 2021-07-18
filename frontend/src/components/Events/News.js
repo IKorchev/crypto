@@ -69,7 +69,7 @@ const News = () => {
   }, [])
   useEffect(() => {
     gsap.from(cardsParentRef.current.children, {
-      stagger: 0.5,
+      stagger: 0.3,
       ease: "power4.out",
       x: -100,
       opacity: 0,

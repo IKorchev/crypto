@@ -1,14 +1,110 @@
 .myaccount-wrapper {
+  margin-top: 3rem;
   color: $light;
-
   @include home-page-padding();
+  button {
+    background: none !important;
+    outline: none !important;
+    border: none !important;
+    font-size: 1.2rem;
+    &:hover,
+    &:focus {
+      box-shadow: none !important;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
+
 .myaccount-card {
+  border-radius: 0.6rem;
+  padding: 2rem 2rem;
+  width: 100%;
+  background: lighten($dark, 2);
+  margin: 0 auto;
   display: grid;
+  grid-template-columns: 0.5fr 1fr;
   place-items: center;
+  gap: 2%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  @media (max-width: 1400px) {
+    width: 60%;
+  }
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
+  @media (max-width: 992px) {
+    width: 70%;
+  }
+  @media (max-width: 700px) {
+    width: 95%;
+
+    .myaccount-card-content {
+      width: 100%;
+    }
+  }
+
+  input {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    width: 100%;
+    max-width: 15rem;
+  }
+  .img-container {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50% !important;
+    display: grid;
+    place-items: center;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.myaccount-card-content {
+  margin: 0 auto;
+  width: 100%;
 }
 .myaccount-labels {
-  img {
-    border-radius: 50%;
+  margin-top: 1rem;
+  border-bottom: 1px solid $turquoise;
+  width: 100%;
+  padding: 0.5rem 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.3fr 1fr;
+  label {
+    margin: 0;
+  }
+  h5 {
+    width: 5rem !important;
+    margin: 0;
+  }
+}
+.account-tradingview-cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  .minichart {
+    width: 12rem;
+    margin: 0.5rem auto;
+    border-radius: 0.6rem;
+    background: lighten($dark, 2);
+    box-shadow: 0 0 0.6rem rgba(0, 0, 0, 0.4);
+  }
+  @media (max-width: 992px) {
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    padding: 3% !important;
   }
 }

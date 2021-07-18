@@ -1,6 +1,3 @@
-import gsap from "gsap"
-import { useEffect, useRef } from "react"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 const NewsCard = ({
   description,
   url,
@@ -12,13 +9,12 @@ const NewsCard = ({
 }) => {
   const date = new Date(datePublished).toLocaleString()
 
- 
   return (
-    <div  className='news-article-card'>
+    <div className='news-article-card'>
       <a href={url} target='_blank' rel='noreferrer'>
         <img src={urlToImage} alt='Article'></img>
       </a>
-      <div  className='news-article-card-content'>
+      <div className='news-article-card-content'>
         <h1 className='card-title mt-0'>{title}</h1>
         <div className='d-flex align-items-between mt-1'>
           <div className='col-6 p-0'>

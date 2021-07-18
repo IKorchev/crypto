@@ -48,7 +48,7 @@ const Events = () => {
           </div>
           <div className='accordion'>
             <h4>Tweets</h4>
-            <TwitterTimeline twitterHandle='whale_alerts' twitterName='Whale Alerts' />
+            <TwitterTimeline twitterHandle='whale_alert' twitterName='Whale Alert' />
             <TwitterTimeline twitterHandle='WhaleTrades' twitterName='Whale Trades' />
           </div>
         </div>

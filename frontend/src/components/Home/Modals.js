@@ -150,7 +150,7 @@ export const ConfirmModal = ({ show, setShow }) => {
           <form
             className='container d-flex flex-column px-5'
             onSubmit={handleDeleteAccount}>
-            <label for='delete-user-password'>
+            <label htmlFor='delete-user-password'>
               <h5 className=''>Confirm your password</h5>
             </label>
             <span className='my-2'>Leave blank if you signed in with google.</span>

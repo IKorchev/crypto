@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useAuth } from "./AuthContext"
 import firebase from "firebase"
 const StoreContext = React.createContext()
@@ -62,22 +62,23 @@ export const StoreContextProvider = ({ children }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
-  const deleteCoin = (name) => {
+  const deleteCoin = (object) => {
     const db = store.collection("users").doc(user.uid)
     db.update({
-      cryptos: firebase.firestore.FieldValue.arrayRemove(`${name}`),
+      cryptos: firebase.firestore.FieldValue.arrayRemove(object),
     })
   }
-  const addCoin = (name) => {
+  const addCoin = (object) => {
     store
       .collection("users")
       .doc(user.uid)
       .update({
-        cryptos: firebase.firestore.FieldValue.arrayUnion(name),
+        cryptos: firebase.firestore.FieldValue.arrayUnion(object),
       })
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
+
 
   useEffect(() => {
     const fetchData = async () => {

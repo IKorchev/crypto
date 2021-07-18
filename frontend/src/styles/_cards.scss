@@ -109,7 +109,6 @@
   }
   .bi {
     cursor: pointer;
-    color: gold;
   }
 
   &:not(.info):hover {
@@ -122,11 +121,12 @@
   }
 
   &:is(.info) {
+    color: $light;
+    font-weight: bolder !important;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-    background-color: darken($dark, 3);
+    background-color: lighten($dark, 3);
     position: sticky;
     top: 0;
-    font-weight: bolder;
     padding-right: 32px;
     p {
       margin-left: 5px;
@@ -144,9 +144,6 @@
       border-radius: 2px;
       border: 1px solid lighten($dark, 50);
       font-size: 1rem;
-    }
-    i {
-      color: white;
     }
   }
 

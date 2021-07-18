@@ -1,5 +1,3 @@
-import React from "react"
-
 const LiquidationsList = ({ liquidations }) => {
   return (
     <div className='liquidations-wrapper w-100 '>
@@ -14,8 +12,8 @@ const LiquidationsList = ({ liquidations }) => {
           <h6>Quantity</h6>
         </div>
         {liquidations &&
-          liquidations.map((el) => (
-            <div className='text-white d-flex flex-column '>
+          liquidations.map((el, i) => (
+            <div key={i} className='text-white d-flex flex-column '>
               <div className='liquidation-card'>
                 <h6>{el.o.s}</h6>
                 <h6>{el.o.o}</h6>

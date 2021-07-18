@@ -6,9 +6,9 @@ import Events from "../../pages/events"
 import Home from "../../pages/home"
 import AccountInfo from "../../pages/myaccount"
 import TradingViewCharts from "../../pages/TradingViewCharts"
-import Crypto from "../Home/Crypto"
+import Dashboard from "../Home/Dashboard"
 
-const Routes = ({ formRef, headerRef }) => {
+const Routes = ({ formRef }) => {
   const { user } = useAuth()
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
@@ -23,7 +23,7 @@ const Routes = ({ formRef, headerRef }) => {
             <>
               <Route exact path='/'>
                 <StoreContextProvider>
-                  <Crypto />
+                  <Dashboard />
                 </StoreContextProvider>
               </Route>
               <Route path='/events'>

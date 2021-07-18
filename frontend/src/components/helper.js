@@ -1,16 +1,18 @@
 export const filterFunction = (el, bool, array, searchInput) => {
+  const names = array.map((el) => el.name)
+  const symbols = array.map((el) => el.symbol)
   if (el.name.toLowerCase().includes(searchInput.toLowerCase())) {
     if (!bool) {
       return true
     } else {
-      return array.includes(el.name)
+      return names.includes(el.name)
     }
   }
   if (el.symbol.toLowerCase().includes(searchInput.toLowerCase())) {
     if (!bool) {
       return true
     } else {
-      return array.includes(el.name)
+      return symbols.includes(el.name)
     }
   }
   return false

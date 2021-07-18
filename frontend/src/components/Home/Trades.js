@@ -1,4 +1,3 @@
-import React from "react"
 import { Trade } from "./Trade"
 import { useStore } from "../../contexts/StoreContext"
 const Trades = () => {
@@ -19,8 +18,9 @@ const Trades = () => {
           <p>Price</p>
           <p>Amount</p>
         </div>
-        {trades.map((item) => (
+        {trades.map((item, i) => (
           <Trade
+            key={i}
             eventTime={item.eventTime}
             symbol={item.symbol}
             price={item.price}

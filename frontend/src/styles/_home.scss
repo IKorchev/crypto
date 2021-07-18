@@ -63,12 +63,6 @@
   }
 }
 .trades-content {
-  background: linear-gradient(
-    270deg,
-    rgba(0, 10, 11, 0.17) 0%,
-    rgba(15, 0, 24, 0.21) 120%
-  );
-  backdrop-filter: blur(5px);
   padding: 0 0 2rem 0;
   height: 33rem;
   border-radius: 0.3rem;
@@ -87,11 +81,14 @@
     margin: 0;
   }
 }
-
+.trade-card {
+  background-color: lighten($dark, 5) !important;
+}
 .trade-card-label {
   font-weight: bold;
-  background-color: darken($dark, 3);
+  background-color: lighten($dark, 3);
   position: sticky;
+  color: $light;
   padding: outset 0 2rem;
   top: 0rem;
 }

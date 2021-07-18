@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
+import Logo from "../../assets/Group 15.svg"
 import { NavLink, Link } from "react-router-dom"
 import { TickerTape } from "react-tradingview-embed"
-import Logo from "../../assets/Group 15.svg"
 import { useAuth } from "../../contexts/AuthContext"
 import { useModal } from "../../contexts/ModalContext"
 import { config } from "./config"
+
 const Navbar = () => {
   const { handleSignout } = useAuth()
   const { setShowLoginModal } = useModal()
@@ -12,20 +12,20 @@ const Navbar = () => {
 
   return (
     <>
-      <nav class='navbar navbar-expand-lg navbar-dark fixed-top'>
+      <nav className='navbar navbar-expand-lg navbar-dark fixed-top'>
         <div className='container-fluid'>
           <Link id='navbar-title' exact='true' to='/'>
             <img src={Logo} alt='Logo'></img>
           </Link>
           <button
-            class='navbar-toggler'
+            className='navbar-toggler'
             type='button'
             data-bs-toggle='collapse'
             data-bs-target='#navbarmenu'
             aria-controls='navbarmenu'
             aria-expanded='false'
             aria-label='Toggle navigation'>
-            <span class='navbar-toggler-icon'></span>
+            <span className='navbar-toggler-icon'></span>
           </button>
         </div>
         <div id='navbarmenu' className='collapse navbar-collapse'>
@@ -38,19 +38,19 @@ const Navbar = () => {
                 <i className='bi bi-calendar3'></i> <span>Events</span>
               </NavLink>
               <NavLink className='nav-link' activeClassName='active' to='/charts'>
-                <i class='bi bi-bar-chart'></i>
+                <i className='bi bi-bar-chart'></i>
                 <span>Charts</span>
               </NavLink>
-              <div class='dropdown dropcenter'>
+              <div className='dropdown dropcenter'>
                 <button
-                  class='dropdown-toggle btn  text-white'
+                  className='dropdown-toggle btn  text-white'
                   id='navbarDarkDropdownMenuLink'
                   data-bs-toggle='dropdown'
                   aria-expanded='false'>
                   <i className='bi bi-person'></i>
                 </button>
                 <ul
-                  class='dropdown-menu dropdown-menu-dark '
+                  className='dropdown-menu dropdown-menu-dark '
                   aria-labelledby='navbarDarkDropdownMenuLink'>
                   <li>
                     <NavLink className='nav-link' activeClassName='active' to='/account'>
@@ -58,7 +58,7 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <hr class='dropdown-divider'></hr>
+                    <hr className='dropdown-divider'></hr>
                   </li>
                   <li>
                     <NavLink

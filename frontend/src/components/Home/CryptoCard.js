@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useStore } from "../../contexts/StoreContext"
 import { useAuth } from "../../contexts/AuthContext"
-import { fixNumber } from "./helper"
+import { fixNumber } from "../helper"
 const CryptoCard = ({ name, symbol, price, marketCap, image, new24hrChange }) => {
   const { user } = useAuth()
   const { addCoin, deleteCoin, store } = useStore()
@@ -9,12 +9,13 @@ const CryptoCard = ({ name, symbol, price, marketCap, image, new24hrChange }) =>
   const [userFavourites, setUserFavourites] = useState([])
   const handleIconClick = (e) => {
     e.preventDefault()
-    isFavourite ? deleteCoin(name) : addCoin(name)
+    isFavourite ? deleteCoin({ name, symbol }) : addCoin({ name, symbol })
   }
 
   useEffect(() => {
     const db = store.collection("users").doc(user.uid)
-    if (userFavourites.includes(name)) {
+    const names = userFavourites.map((el) => el.name)
+    if (userFavourites.includes(name) || names.includes(name)) {
       setIsFavourite(true)
     } else {
       setIsFavourite(false)
@@ -22,15 +23,16 @@ const CryptoCard = ({ name, symbol, price, marketCap, image, new24hrChange }) =>
     return db.onSnapshot((snap) => {
       if (snap) {
         setUserFavourites(snap.data().cryptos)
-      } else {
-        console.log("waiting")
       }
     })
   }, [userFavourites, name, store, user.uid])
 
   return (
     <>
-      {symbol === "usdt" || symbol === "usdc" || symbol === "busd" ? (
+      {symbol === "usdt" ||
+      symbol === "usdc" ||
+      symbol === "busd" ||
+      symbol === "cusdc" ? (
         <></>
       ) : (
         <div className='card'>

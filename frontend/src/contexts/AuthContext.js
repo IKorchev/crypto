@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import React from "react"
 import firebase from "firebase"
-import { useHistory } from "react-router"
 export const AuthContext = createContext()
 export const useAuth = () => useContext(AuthContext)
 const config = {
@@ -18,7 +17,8 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(undefined)
   const auth = firebase.auth()
   const store = firebase.firestore()
-  const history = useHistory()
+  const [userFavourites, setUserFavourites] = useState(null)
+
   const handleSignout = () => {
     return auth.signOut()
   }
@@ -46,6 +46,18 @@ export const AuthContextProvider = ({ children }) => {
         return error
       }
   }
+  //prettier-ignore
+  const updateUserInfo = async (type, payload) => {
+    type === "photo" && 
+    user.updateProfile({photoURL: payload})
+    .then(() =>  "Photo URL updated")
+    .catch(error => "Could not update Photo URL")
+    type === "name" && 
+    user.updateProfile({displayName: payload})
+    .then(() => "Name updated")
+    .catch(error => "Could not update name")
+  }
+
   const reauthenticate = (currentPassword) => {
     if (currentPassword) {
       console.log(user)
@@ -58,10 +70,7 @@ export const AuthContextProvider = ({ children }) => {
   const deleteAccount = async (password) => {
     try {
       const newUserCred = await reauthenticate(password)
-      const deletedDocument = await store
-        .collection("users")
-        .doc(newUserCred.user.uid)
-        .delete()
+      store.collection("users").doc(newUserCred.user.uid).delete()
       const response = await newUserCred.user.delete()
       console.log(response)
     } catch (err) {
@@ -69,7 +78,8 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       setUser(currentUser)
     })
@@ -77,6 +87,21 @@ export const AuthContextProvider = ({ children }) => {
       unsubscribe()
     }
   }, [user, auth])
+
+  useEffect(() => {
+    if (user) {
+      const unsubscribe = store
+        .collection("users")
+        .doc(user.uid)
+        .onSnapshot((snap) => {
+          setUserFavourites(snap.data().cryptos)
+        })
+      return () => {
+        unsubscribe()
+      }
+    }
+  }, [store, user])
+
   const value = {
     deleteAccount,
     auth,
@@ -85,6 +110,8 @@ export const AuthContextProvider = ({ children }) => {
     store,
     login,
     register,
+    updateUserInfo,
+    userFavourites,
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

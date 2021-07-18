@@ -5,17 +5,14 @@ import { ModalContextProvider } from "./contexts/ModalContext"
 import { BrowserRouter as Router } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
 import Routes from "./components/Navbar/Routes"
-
 const App = () => {
   const formRef = useRef(null)
-  const headerRef = useRef()
-
   return (
     <Router>
       <AuthContextProvider>
         <ModalContextProvider>
           <Navbar />
-          <Routes formRef={formRef} headerRef={headerRef} />
+          <Routes formRef={formRef} />
         </ModalContextProvider>
       </AuthContextProvider>
     </Router>
