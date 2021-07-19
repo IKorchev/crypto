@@ -2,9 +2,9 @@
 
 # dependencies
 /node_modules
-
 # misc
 .env
+/build
 
 
 npm-debug.log*
