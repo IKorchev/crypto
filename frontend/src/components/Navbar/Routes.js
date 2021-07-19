@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react"
 import { Route } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 import { StoreContextProvider } from "../../contexts/StoreContext"
-import Events from "../../pages/events"
-import Home from "../../pages/home"
-import AccountInfo from "../../pages/myaccount"
-import TradingViewCharts from "../../pages/TradingViewCharts"
-import Dashboard from "../Home/Dashboard"
+import Events from "../../pages/Logged-out/events"
+import Home from "../../pages/Logged-out/home"
+import AccountInfo from "../../pages/Logged-in/myaccount"
+import TradingViewCharts from "../../pages/Logged-in/TradingViewCharts"
+import Dashboard from "../../pages/Logged-in/Dashboard"
 
 const Routes = ({ formRef }) => {
   const { user } = useAuth()

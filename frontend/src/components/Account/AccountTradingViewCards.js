@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react"
-import { useAuth } from "../contexts/AuthContext"
-import { MiniChart } from "react-tradingview-embed"
+import { useAuth } from "../../contexts/AuthContext"
 import { SingleTicker } from "react-tradingview-embed"
 import gsap from "gsap"
 const AccountTradingViewCards = () => {
@@ -15,12 +14,13 @@ const AccountTradingViewCards = () => {
   }, [userFavourites])
   return (
     <div>
-      <h1 className='text-center'>Your saved cryptocurrencies</h1>
+      <h1 className='text-center'>Your favourites</h1>
       <div ref={parentRef} className='account-tradingview-cards-container'>
         {userFavourites &&
-          userFavourites.map((object) => (
+          userFavourites.map((object, i) => (
             <div className='minichart'>
               <SingleTicker
+                key={i}
                 widgetProps={{
                   isTransparent: true,
                   width: "100%",

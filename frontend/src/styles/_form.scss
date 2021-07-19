@@ -18,7 +18,7 @@
     width: 85% !important;
     input,
     button {
-      width: 100% !important;
+      width: 100%;
     }
     button {
       margin-top: 1rem;
@@ -54,9 +54,11 @@
 }
 
 .modal-content {
-  background-color: rgba(0, 30, 38, 0.9) !important;
+  $bg-color: lighten($dark, 5);
+  background-color: rgba($bg-color, 0.95) !important;
   backdrop-filter: blur(5px);
-  border-radius: 2rem;
+  color: white;
+  border-radius: 1rem;
   .modal-header {
     justify-content: flex-end;
     align-items: center;
@@ -90,4 +92,13 @@
       background: rgba(200, 0, 0, 0.4) !important;
     }
   }
+}
+
+#forgotten-password-button {
+  margin: 0;
+  text-decoration: underline;
+  background: none !important;
+  width: max-content !important;
+  padding: none !important;
+  border: none;
 }

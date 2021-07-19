@@ -30,7 +30,7 @@ const Navbar = () => {
         </div>
         <div id='navbarmenu' className='collapse navbar-collapse'>
           {user ? (
-            <ul className='navbar-nav me-auto'>
+            <ul className='navbar-nav justify-content-end'>
               <NavLink className='nav-link' activeClassName='active' exact={true} to='/'>
                 <i className='bi bi-house-fill'></i> <span>Home</span>
               </NavLink>
@@ -43,7 +43,7 @@ const Navbar = () => {
               </NavLink>
               <div className='dropdown dropcenter'>
                 <button
-                  className='dropdown-toggle btn  text-white'
+                  className='dropdown-toggle btn w-100 text-white'
                   id='navbarDarkDropdownMenuLink'
                   data-bs-toggle='dropdown'
                   aria-expanded='false'>
@@ -82,14 +82,16 @@ const Navbar = () => {
                 <i className='bi bi-calendar3'></i> <span>Events</span>
               </NavLink>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-              <a
+              <NavLink
+                activeClassName=''
+                to='#'
                 className='nav-link'
                 onClick={() => {
                   setShowLoginModal(true)
                 }}>
                 <i className='bi bi-door-open'></i>
                 <span>Log in</span>
-              </a>
+              </NavLink>
             </ul>
           )}
         </div>

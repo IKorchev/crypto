@@ -1,23 +1,23 @@
 .footer-wrapper {
   position: relative;
-  margin-top: 100px;
+  margin: 5rem auto 0 auto;
   border-top: 1px solid white;
   padding-top: 30px;
   font-family: "Montserrat", sans-serif;
-  width: 100%;
+  width: 80%;
 
-  @media (max-width: 992px) {
-    max-width: 100%;
+  @media (max-width: 1200px) {
+    width: 96%;
   }
   .footer-content {
-    padding: 2rem 10%;
+    padding: 2rem 20%;
     margin-top: 2rem;
 
     div {
       height: max-content;
     }
     @media (max-width: 992px) {
-      padding: 2rem 0;
+      padding: 2rem 5%;
     }
     @media (max-width: 600px) {
       flex-direction: column;

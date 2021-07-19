@@ -29,7 +29,7 @@ export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
             }}>
             <label htmlFor='myaccount-name'>Name</label>
             <input
-              placeholder='Your name'
+              
               id='myaccount-name'
               autoComplete='given-name'
               type='text'
@@ -38,7 +38,6 @@ export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
             />
             <label htmlFor='myaccount-email'>Email</label>
             <input
-              placeholder='email@example.com'
               id='myaccount-email'
               autoComplete='email'
               type='email'
@@ -47,7 +46,7 @@ export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
             />
             <label htmlFor='myaccount-name'>Password (minimum 6 characters)</label>
             <input
-              placeholder='Password'
+              
               id='myaccount-password'
               autoComplete='new-password'
               type='password'
@@ -56,7 +55,7 @@ export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
             />
             <label htmlFor='myaccount-name'>Confirm password </label>
             <input
-              placeholder='Confirm password'
+              
               id='myaccount-confirm-password'
               autoComplete='new-password'
               type='password'
@@ -77,10 +76,11 @@ export const RegisterModal = ({ uiConfig, firebaseAuth }) => {
 }
 
 export const LoginModal = ({ uiConfig, firebaseAuth }) => {
-  const { login } = useAuth()
+  const { login, sendPasswordResetEmail } = useAuth()
   const { showLoginModal, setShowLoginModal } = useModal()
   const [email, setEmail] = useState("")
   const [error, setError] = useState()
+  const [resetError, setResetError] = useState(null)
   const [password, setPassword] = useState("")
   const handleClose = () => setShowLoginModal(false)
   return (
@@ -98,7 +98,7 @@ export const LoginModal = ({ uiConfig, firebaseAuth }) => {
             }}>
             <label>Email </label>
             <input
-              placeholder='email@example.com'
+             
               autoComplete='email'
               type='email'
               className='search-bar'
@@ -106,7 +106,7 @@ export const LoginModal = ({ uiConfig, firebaseAuth }) => {
             />
             <label>Password</label>
             <input
-              placeholder='Password'
+              
               autoComplete='current-password'
               type='password'
               className='search-bar'
@@ -115,7 +115,28 @@ export const LoginModal = ({ uiConfig, firebaseAuth }) => {
             <button type='submit' className='search-bar form-button'>
               Log in
             </button>
+            <h6 className='text-center my-2'>
+              Forgot your password?
+              <button
+                id='forgotten-password-button'
+                className='mt-2'
+                onClick={async (e) => {
+                  e.preventDefault()
+                  console.log(email)
+                  const res = await sendPasswordResetEmail(email)
+                  res === undefined ? setResetError(res) : setResetError(res.message)
+                }}>
+                Click here
+              </button>
+            </h6>
+
             {error && <h6 className='text-warning my-2 text-center'>{error}</h6>}
+            {resetError !== null && (
+              <h6
+                className={`text-${resetError ? "danger" : "success"} my-2 text-center`}>
+                {resetError || "Reset password email sent successfully"}
+              </h6>
+            )}
           </form>
           <h5 className='text-center '>or</h5>
           <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebaseAuth} />
@@ -159,7 +180,7 @@ export const ConfirmModal = ({ show, setShow }) => {
               className='search-bar'
               onChange={(e) => setPassword(e.target.value)}
               id='delete-user-password'
-              placeholder='Password'
+              
             />
             <button className='delete-button' type='submit'>
               Delete account

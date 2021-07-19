@@ -6,7 +6,6 @@
 @import "./variables"; //variables
 @import "./navbar";
 @import "./cards";
-@import "./favourites";
 @import "./spinner";
 @import "./firebaseui";
 @import "./form";
@@ -15,18 +14,9 @@
 @import "./myaccount";
 @import "./footer";
 @import "./scrolldownbtn";
-@import "./charts";
 @import "./home";
 @import "./liquidations";
 @import "./tradingview";
-
-@mixin hoverState() {
-  transition: transform 0.5s ease;
-  &:hover,
-  &:focus {
-    transform: translate(0, -3px);
-  }
-}
 
 body {
   margin: 0;
@@ -118,8 +108,14 @@ body {
       padding: 0;
       border: none;
       outline: none;
-      &:hover {
+      &:hover,
+      &:focus {
         color: darken($turquoise, 20);
+        text-decoration: underline;
+      }
+
+      &:focus {
+        border: 1px solid $turquoise;
       }
     }
   }
@@ -131,28 +127,6 @@ body {
   h5 {
     color: white;
     font-weight: bolder;
-  }
-
-  .register-button {
-    background: rgb(30, 235, 242);
-    background: linear-gradient(
-      -45deg,
-      rgba(232, 0, 251, 1) -20%,
-      rgba(30, 235, 242, 1) 0%,
-      rgba(232, 0, 251, 1) 100%
-    );
-    cursor: pointer;
-    font-size: 1.3rem;
-    font-weight: bolder;
-    padding: 0.7rem 2rem;
-    color: black;
-    border: none;
-    border-radius: 15px;
-    transition: transform 1s ease;
-    @include hoverState();
-    &:hover {
-      color: rgb(24, 24, 24);
-    }
   }
 
   // media queries
@@ -168,10 +142,6 @@ body {
   }
 }
 
-.modal-content {
-  background-color: $dark;
-  color: white;
-}
 .logged-out-header {
   text-align: center;
   margin-top: 300px;

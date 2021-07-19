@@ -17,7 +17,7 @@ const FooterLinkList = ({ link, title, label }) => {
 
 const Footer = () => {
   return (
-    <div className=' footer-wrapper container text-white'>
+    <div className='footer-wrapper text-white'>
       <h1 className='footer-title'>
         <a href='/'>
           <img src={CryptoInfo} alt='Website logo' />

@@ -2,23 +2,34 @@
   h1 {
     margin: 3rem 0;
     font-size: 4rem;
+    @media (max-width: 992px) {
+      font-size: 2rem;
+    }
   }
 }
 
 .news-article-card {
   border-radius: 0.6rem;
-  background: lighten($dark, 1);
+  background: lighten($dark, 5);
   overflow: hidden;
   color: $light;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   margin: 1rem auto !important;
+  a:not(.news-article-card-link) {
+    display: grid;
+    place-items: center;
+  }
+  img {
+    width: 100%;
+    min-width: 100% !important;
+  }
   @media (max-width: 992px) {
     width: 100%;
   }
   @media (max-width: 1000px) {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     img {
       padding: 0;
       max-width: 100% !important;

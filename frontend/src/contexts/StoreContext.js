@@ -8,15 +8,14 @@ export const useStore = () => useContext(StoreContext)
 export const StoreContextProvider = ({ children }) => {
   const { store, user } = useAuth()
   const [socketIsOpen, setSocketIsOpen] = useState(false)
-  // const [news, setNews] = useState(null)
+  const [news, setNews] = useState([])
   const [data, setData] = useState(null)
-  const [loaded, setLoaded] = useState(false)
   const [trades, setTrades] = useState([])
   const [liquidations, setLiquidations] = useState([])
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-  const socketUrl = `${socketProtocol}//${window.location.hostname}:5500/ws/`
+  const socketUrl = `${socketProtocol}//${window.location.hostname}/ws/`
 
   useEffect(() => {
     const socket2 = new WebSocket(socketUrl)
@@ -79,18 +78,16 @@ export const StoreContextProvider = ({ children }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
-
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("/api")
+      const res = await fetch("/data")
       const data = await res.json()
       // const arr = data[1].data.splice(0, 50)
-      // setNews(data[2])
+      setNews(data[2])
       setEvents(data[1])
       setData(data[0])
     }
     fetchData()
-    return setLoaded(true)
   }, [])
 
   useEffect(() => {
@@ -108,14 +105,13 @@ export const StoreContextProvider = ({ children }) => {
   }, [realtimePrices, data])
 
   const value = {
-    loaded,
     socketIsOpen,
     data,
     deleteCoin,
     addCoin,
     events,
     trades,
-    // news,
+    news,
     liquidations,
     store,
     realtimePrices,

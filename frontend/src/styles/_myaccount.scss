@@ -21,13 +21,13 @@
   border-radius: 0.6rem;
   padding: 2rem 2rem;
   width: 100%;
-  background: lighten($dark, 2);
+  background: lighten($dark, 15);
   margin: 0 auto;
   display: grid;
   grid-template-columns: 0.5fr 1fr;
   place-items: center;
   gap: 2%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 13px lighten($dark, 5);
   @media (max-width: 1400px) {
     width: 60%;
   }
@@ -52,7 +52,7 @@
     font-size: 1.2rem;
     font-weight: bold;
     width: 100%;
-    max-width: 15rem;
+    max-width: 19rem;
   }
   .img-container {
     width: 100%;

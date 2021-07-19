@@ -1,39 +1,50 @@
 import { useState, useEffect, useRef } from "react"
 import { useStore } from "../../contexts/StoreContext"
 import { useAuth } from "../../contexts/AuthContext"
-import { filterFunction } from "../helper"
+import { filterFunction } from "../../components/helper"
 //COMPONENTS
-import CryptoCard from "./CryptoCard"
-import Trades from "./Trades"
-import CryptoCardsLabel from "./CryptoCardsLabel"
-import CryptoSearchBar from "./CryptoSearchBar"
-import Spinner from "../Spinner"
-import Footer from "../Footer/Footer"
-import LiquidationsList from "./LiquidationsList"
+import CryptoCard from "../../components/Dashboard/CryptoCard"
+import Trades from "../../components/Dashboard/Trades"
+import CryptoCardsLabel from "../../components/Dashboard/CryptoCardsLabel"
+import CryptoSearchBar from "../../components/Dashboard/CryptoSearchBar"
+import Footer from "../../components/Footer/Footer"
+import LiquidationsList from "../../components/Dashboard/LiquidationsList"
+import { useHistory } from "react-router"
 import gsap from "gsap"
-import Jumbotron from "./Jumbotron"
+import Jumbotron from "../../components/Dashboard/Jumbotron"
+
 const Dashboard = () => {
   //contexts
   const { data, liquidations } = useStore()
   const { user, userFavourites } = useAuth()
   //refs and state
   const contentRef = useRef()
+  const parentRef = useRef()
   const [searchInput, setSearchInput] = useState("")
   const [sortByFavourites, setSortByFavourites] = useState(false)
   const [loading, setLoading] = useState(true)
-
-  // animation
+  const history = useHistory()
+  const handleScrollClick = () => {
+    gsap.to(window, { duration: 0.5, delay: 0, scrollTo: contentRef.current })
+  }
+  const handleClick = () => {
+    gsap.to(parentRef.current, {
+      opacity: 0,
+      duration: 2,
+      onComplete: () => {
+        history.push("/charts")
+      },
+    })
+  }
   useEffect(() => {
     data && user && setLoading(false)
   }, [data, user, loading])
 
   return (
     <>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <div>
-          <Jumbotron loading={loading} />
+      {!loading && (
+        <div ref={parentRef}>
+          <Jumbotron handleClick={handleClick} handleScrollClick={handleScrollClick} />
           <div ref={contentRef} className='home-page-wrapper home-page-wrapper-outter'>
             <div id='crypto-page'>
               <div className='d-flex w-100 align-items-around'>
@@ -47,7 +58,6 @@ const Dashboard = () => {
               />
               <div id='cards-container' className='styled-scrollbar'>
                 {data &&
-                  userFavourites &&
                   data
                     .filter((el) =>
                       filterFunction(el, sortByFavourites, userFavourites, searchInput)

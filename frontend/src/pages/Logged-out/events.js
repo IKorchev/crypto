@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from "react"
 
-import { useStore } from "../contexts/StoreContext"
-import EventCards from "../components/Events/EventCards"
+import { useStore } from "../../contexts/StoreContext"
+import EventCards from "../../components/Events/EventCards"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import News from "../components/Events/News"
-import TwitterTimeline from "../components/Events/TwitterTimeline"
-import Spinner from "../components/Spinner"
-import Footer from "../components/Footer/Footer"
+import News from "../../components/Events/News"
+import TwitterTimeline from "../../components/Events/TwitterTimeline"
+import Spinner from "../../components/Spinner"
+import Footer from "../../components/Footer/Footer"
 gsap.registerPlugin(ScrollTrigger)
 const Events = () => {
   const { events } = useStore()

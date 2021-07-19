@@ -22,6 +22,14 @@ export const AuthContextProvider = ({ children }) => {
   const handleSignout = () => {
     return auth.signOut()
   }
+  const sendPasswordResetEmail = async (email) => {
+    try {
+      const res = await auth.sendPasswordResetEmail(email)
+      return res
+    } catch (error) {
+      return error
+    }
+  }
   const login = async (email, password) => {
     try {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -112,6 +120,7 @@ export const AuthContextProvider = ({ children }) => {
     register,
     updateUserInfo,
     userFavourites,
+    sendPasswordResetEmail,
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

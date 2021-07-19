@@ -1,17 +1,22 @@
 $turquoise: #1eebf2;
 // $dark: #212326;
-$dark: rgb(0, 11, 14);
-
+// $dark: rgb(0, 4, 6);
+// $dark: rgb(0, 11, 14);
+$dark: rgb(18, 31, 38);
 $grey: #686d76;
-$light: #eeeeee;
-$card-bg: #393c41;
+$text-white: #eeeeee;
 $text-light: rgb(226, 226, 226);
 $hover-bg: darken($dark, 5);
 $red: rgba(255, 20, 20, 0.6);
 $purple: rgba(232, 0, 251, 1);
 $bg-dark-transparent: rgba(23, 25, 26, 0.955);
-
-
+@mixin hoverState() {
+  transition: transform 0.5s ease;
+  &:hover,
+  &:focus {
+    transform: translate(0, -3px);
+  }
+}
 
 @mixin home-page-padding {
   padding-left: 13%;
@@ -27,3 +32,22 @@ $bg-dark-transparent: rgba(23, 25, 26, 0.955);
 }
 // rgba(66, 61, 65, 1)
 // rgba(0, 30, 31, 1)
+.styled-scrollbar {
+  &::-webkit-scrollbar {
+    width: 10px !important;
+  }
+  &::-webkit-scrollbar-track {
+    background: lighten($dark, 7) !important ;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: lighten($dark, 45) !important;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: lighten($dark, 25) !important;
+  }
+}

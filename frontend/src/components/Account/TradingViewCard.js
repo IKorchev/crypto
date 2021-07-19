@@ -12,7 +12,7 @@ const TradingViewCard = () => {
       duration: 1,
       scrollTrigger: {
         trigger: ref.current.children,
-        start: "top center",
+        start: "top bottom",
       },
     })
   }, [])
@@ -24,7 +24,7 @@ const TradingViewCard = () => {
       </div>
       <div className='tradingview-content'>
         <h1>Create Charts</h1>
-        <p>Use the most popular charts platform</p>
+        <p>Using the most popular charting platform</p>
       </div>
     </div>
   )

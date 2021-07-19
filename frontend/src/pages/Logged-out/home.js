@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from "react"
-import CryptoInfo from "../assets/CryptoInfo.svg"
-import LandingPageCards from "../components/Home/LandingPageCards"
-import { useModal } from "../contexts/ModalContext"
+import CryptoInfo from "../../assets/CryptoInfo.svg"
+import LandingPageCards from "../../components/LandingPage/LandingPageCards"
+import { useModal } from "../../contexts/ModalContext"
 import gsap from "gsap"
 import { Power1 } from "gsap"
 import { ScrollToPlugin } from "gsap/all"
-import TradingViewCard from "../components/TradingViewCard"
-import Footer from "../components/Footer/Footer"
+import TradingViewCard from "../../components/Account/TradingViewCard"
+import Footer from "../../components/Footer/Footer"
 
 gsap.registerPlugin(ScrollToPlugin)
 const Home = () => {
@@ -38,7 +38,7 @@ const Home = () => {
           </div>
           <div>
             <button
-              className='register-button'
+              className='cto-button register-button'
               onClick={() => setShowRegisterModal(true)}>
               Register
             </button>

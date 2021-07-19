@@ -8,7 +8,7 @@ export const Trade = ({ eventTime, symbol, price, quantity }) => {
         <p> {symbol}</p>
         <p> ${parseFloat(price).toFixed(2)}</p>
         <p>
-          {parseFloat(quantity).toFixed(2)} {symbol.slice(0, -4)}
+          {parseFloat(quantity).toFixed(3)} {symbol.slice(0, -4)}
         </p>
       </div>
     </>
