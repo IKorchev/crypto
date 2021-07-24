@@ -18,20 +18,18 @@ const News = () => {
       <h1 className='text-start h4 py-2 border-bottom '>Cryptocurrency news</h1>
       <div ref={cardsParentRef} className='news-cards-wrapper'>
         {news &&
-          news
-            .reverse()
-            .map((article, i) => (
-              <NewsCard
-                key={i}
-                datePublished={article.publishedAt}
-                description={article.description}
-                url={article.url}
-                title={article.title}
-                urlToImage={article.urlToImage}
-                author={article.author}
-                source={article.source}
-              />
-            ))}
+          news.map((article, i) => (
+            <NewsCard
+              key={i}
+              datePublished={article.publishedAt}
+              description={article.description}
+              url={article.url}
+              title={article.title}
+              urlToImage={article.urlToImage}
+              author={article.author}
+              source={article.source}
+            />
+          ))}
       </div>
     </div>
   )
