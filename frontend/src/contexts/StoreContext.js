@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useAuth } from "./AuthContext"
 import firebase from "firebase"
-const API_URL = "polar-hamlet-55067.herokuapp.com"
+// const API_URL = "polar-hamlet-55067.herokuapp.com"
+const API_URL = "localhost:5500"
 const StoreContext = React.createContext()
 
 export const useStore = () => useContext(StoreContext)
@@ -17,6 +18,15 @@ export const StoreContextProvider = ({ children }) => {
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
   const socketUrl = `${socketProtocol}//${API_URL}/`
+  
+  const fetchData = async () => {
+    const res = await fetch(`/data`)
+    const data = await res.json()
+    console.log(data)
+    setNews(data[2])
+    setEvents(data[1])
+    setData(data[0])
+  }
 
   useEffect(() => {
     const socket2 = new WebSocket(socketUrl)
@@ -25,7 +35,6 @@ export const StoreContextProvider = ({ children }) => {
     }
     socket2.onmessage = (message) => {
       const data = JSON.parse(message.data)
-
       //if its price data
       if (data.eventType !== "trade" && data.e !== "forceOrder") {
         setRealtimePrices(data)
@@ -57,6 +66,7 @@ export const StoreContextProvider = ({ children }) => {
         })
       }
     }
+    fetchData()
   }, [socketUrl])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,26 +85,6 @@ export const StoreContextProvider = ({ children }) => {
         cryptos: firebase.firestore.FieldValue.arrayUnion(object),
       })
   }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`https://${API_URL}/data`, {
-        mode: "no-cors",
-      })
-      console.log(res)
-      const data = await res.json()
-      // const arr = data[1].data.splice(0, 50)
-      console.log(res)
-      setNews(data[2])
-      setEvents(data[1])
-      setData(data[0])
-    }
-    if (API_URL) {
-      fetchData()
-    }
-  }, [])
 
   useEffect(() => {
     data &&
