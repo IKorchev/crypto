@@ -12,7 +12,6 @@
     "firebase": "^8.6.2",
     "firebaseui": "^4.8.0",
     "gsap": "^3.6.1",
-    "node-sass": "^6.0.0",
     "popper.js": "^1.16.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
@@ -22,10 +21,11 @@
     "react-scripts": "4.0.3",
     "react-tradingview-embed": "^2.2.6",
     "react-twitter-widgets": "^1.10.0",
+    "sass": "^1.49.7",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

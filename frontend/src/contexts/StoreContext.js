@@ -15,11 +15,10 @@ export const StoreContextProvider = ({ children }) => {
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-  const socketUrl = `${socketProtocol}//${window.location.hostname}/ws/`
-
+  // const socketUrl = `${socketProtocol}//${window.location.hostname}/ws/`
+  const socketUrl = `${socketProtocol}//localhost:5500/`
   useEffect(() => {
     const socket2 = new WebSocket(socketUrl)
-
     socket2.onopen = (e) => {
       setSocketIsOpen(true)
     }
