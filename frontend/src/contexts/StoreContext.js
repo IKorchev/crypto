@@ -16,7 +16,7 @@ export const StoreContextProvider = ({ children }) => {
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
   // const socketUrl = `${socketProtocol}//${window.location.hostname}/ws/`
-  const socketUrl = `${socketProtocol}//${process.env.SERVER_URL || "localhost:5500"}/`
+  const socketUrl = `${socketProtocol}//${process.env.SERVER_URL}/`
 
   useEffect(() => {
     const socket2 = new WebSocket(socketUrl)
