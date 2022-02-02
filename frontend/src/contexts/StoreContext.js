@@ -17,7 +17,7 @@ export const StoreContextProvider = ({ children }) => {
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
   // const socketUrl = `${socketProtocol}//${window.location.hostname}/ws/`
   const socketUrl = `${socketProtocol}//${process.env.SERVER_URL || "localhost:5500"}/`
-  
+
   useEffect(() => {
     const socket2 = new WebSocket(socketUrl)
     socket2.onopen = (e) => {
@@ -57,7 +57,7 @@ export const StoreContextProvider = ({ children }) => {
         })
       }
     }
-  }, [])
+  }, [socketUrl])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
@@ -80,7 +80,7 @@ export const StoreContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("/data")
+      const res = await fetch(`https://${process.env.SERVER_URL}/data`)
       const data = await res.json()
       // const arr = data[1].data.splice(0, 50)
       setNews(data[2])
