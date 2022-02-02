@@ -15,8 +15,8 @@ export const StoreContextProvider = ({ children }) => {
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-  // const socketUrl = `${socketProtocol}//${window.location.hostname}/ws/`
-  const socketUrl = `${socketProtocol}//${process.env.REACT_APP_SERVER_URL}/`
+  const API_URL = `polar-hamlet-55067.herokuapp.com`
+  const socketUrl = `${socketProtocol}//${API_URL}/`
 
   useEffect(() => {
     const socket2 = new WebSocket(socketUrl)
@@ -80,7 +80,7 @@ export const StoreContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`https://${process.env.REACT_APP_SERVER_URL}/data`)
+      const res = await fetch(`https://${API_URL}/data`)
       const data = await res.json()
       // const arr = data[1].data.splice(0, 50)
       setNews(data[2])
