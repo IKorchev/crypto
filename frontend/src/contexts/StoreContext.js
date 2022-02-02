@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { useAuth } from "./AuthContext"
 import firebase from "firebase"
+const API_URL = "polar-hamlet-55067.herokuapp.com"
 const StoreContext = React.createContext()
 
 export const useStore = () => useContext(StoreContext)
@@ -15,7 +16,6 @@ export const StoreContextProvider = ({ children }) => {
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-  const API_URL = `polar-hamlet-55067.herokuapp.com`
   const socketUrl = `${socketProtocol}//${API_URL}/`
 
   useEffect(() => {
@@ -80,14 +80,20 @@ export const StoreContextProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`https://${API_URL}/data`)
+      const res = await fetch(`https://${API_URL}/data`, {
+        mode: "no-cors",
+      })
+      console.log(res)
       const data = await res.json()
       // const arr = data[1].data.splice(0, 50)
+      console.log(res)
       setNews(data[2])
       setEvents(data[1])
       setData(data[0])
     }
-    fetchData()
+    if (API_URL) {
+      fetchData()
+    }
   }, [])
 
   useEffect(() => {
