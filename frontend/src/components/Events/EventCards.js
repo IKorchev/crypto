@@ -1,14 +1,4 @@
-const EventCards = ({
-  eventId,
-  title,
-  description,
-  startDate,
-  website,
-  venue,
-  city,
-  country,
-  screenshot,
-}) => {
+const EventCards = ({ eventId, title, description, startDate, venue, city, country }) => {
   return (
     <div className='accordion-item'>
       <h2 className='accordion-header' id={`#${eventId}-header`}>

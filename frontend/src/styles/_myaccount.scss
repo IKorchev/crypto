@@ -2,7 +2,7 @@
   margin-top: 3rem;
   color: $light;
   @include home-page-padding();
-  button {
+  .button {
     background: none !important;
     outline: none !important;
     border: none !important;
@@ -55,6 +55,7 @@
     max-width: 19rem;
   }
   .img-container {
+    max-width: 20rem;
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react"
-import { Route } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 import { StoreContextProvider } from "../../contexts/StoreContext"
+import PrivateRoute from "./PrivateRoute"
 import Events from "../../pages/Logged-out/events"
 import Home from "../../pages/Logged-out/home"
 import AccountInfo from "../../pages/Logged-in/myaccount"
 import TradingViewCharts from "../../pages/Logged-in/TradingViewCharts"
 import Dashboard from "../../pages/Logged-in/Dashboard"
-
-const Routes = ({ formRef }) => {
+import Login from "../Login"
+import Register from "../Register"
+const RoutesWrapper = () => {
   const { user } = useAuth()
   const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
@@ -20,35 +22,20 @@ const Routes = ({ formRef }) => {
       {!isLoading && (
         <>
           {user ? (
-            <>
-              <Route exact path='/'>
-                <StoreContextProvider>
-                  <Dashboard />
-                </StoreContextProvider>
-              </Route>
-              <Route path='/events'>
-                <StoreContextProvider>
-                  <Events />
-                </StoreContextProvider>
-              </Route>
-              <Route path='/account'>
-                <AccountInfo />
-              </Route>
-              <Route path='/charts'>
-                <TradingViewCharts />
-              </Route>
-            </>
+            <StoreContextProvider>
+              <Routes>
+                <Route exact path='/' element={<Dashboard />} />
+                <Route path='/events' element={<Events />} />
+                <Route path='/account' element={<AccountInfo />} />
+                <Route path='/charts' element={<TradingViewCharts />} />
+              </Routes>
+            </StoreContextProvider>
           ) : (
-            <>
-              <Route exact path='/'>
-                <Home ref={formRef} />
-              </Route>
-              <Route path='/events'>
-                <StoreContextProvider>
-                  <Events />
-                </StoreContextProvider>
-              </Route>
-            </>
+            <Routes>
+              <Route exact path='/' element={<Home />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+            </Routes>
           )}
         </>
       )}
@@ -56,4 +43,4 @@ const Routes = ({ formRef }) => {
   )
 }
 
-export default Routes
+export default RoutesWrapper

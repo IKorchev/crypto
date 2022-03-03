@@ -1,18 +1,18 @@
 import React, { useRef, useState } from "react"
 import { useAuth } from "../../contexts/AuthContext"
-import { ConfirmModal } from "../../components/LandingPage/Modals"
 import AccountTradingViewCards from "../../components/Account/AccountTradingViewCards"
 
 const AccountInfo = () => {
-  const { user, updateUserInfo } = useAuth()
+  const { user, updateUserInfo, deleteAccount } = useAuth()
   const [name, setName] = useState(user.displayName)
   const [photoUrl, setPhotoUrl] = useState(user.photoURL)
+  const [error, setError] = useState(null)
   const editName = useRef()
   const editPhotoUrl = useRef()
-  const [show, setShow] = useState()
+  const [password, setPassword] = useState("")
+
   return (
     <div className='myaccount-wrapper'>
-      <ConfirmModal show={show} setShow={setShow} />
       <div>
         <div className='myaccount-card'>
           <div className='img-container'>
@@ -43,7 +43,7 @@ const AccountInfo = () => {
                     onClick={() => {
                       editPhotoUrl.current.select()
                     }}
-                    className='text-white'>
+                    className='button text-white'>
                     <i className='bi bi-pencil-square'></i>
                   </button>
                   <button
@@ -51,7 +51,7 @@ const AccountInfo = () => {
                       let res = await updateUserInfo("photo", photoUrl)
                       console.log(res)
                     }}
-                    className='text-white'>
+                    className='button text-white'>
                     Save
                   </button>
                 </div>
@@ -74,11 +74,11 @@ const AccountInfo = () => {
                     onClick={() => {
                       editName.current.select()
                     }}
-                    className='text-white'>
+                    className='button text-white'>
                     <i className='bi bi-pencil-square'></i>
                   </button>
                   <button
-                    className='text-white'
+                    className='button text-white'
                     onClick={async () => {
                       await updateUserInfo("name", name)
                       console.log(updateUserInfo("name", name))
@@ -94,13 +94,40 @@ const AccountInfo = () => {
               </label>
               <h4>{user.email}</h4>
             </div>
-            <h5 className='mt-5'>
-              {`Date of creation 
+            <h5 className='mt-4'>
+              {`Date created: 
             ${new Date(user.metadata.creationTime).toLocaleDateString("en-UK")}`}
             </h5>
-            <button className='px-0 text-danger py-1' onClick={() => setShow(true)}>
-              Delete account
-            </button>
+            <br />
+            <hr />
+            <h3 className='w-100 bg-turquiose rounded '>Delete your account</h3>
+            <div className='d-flex flex-row justify-content-between py-2 w-100 gap-4'>
+              <div>
+                <label htmlFor='password'>Password *</label>
+                <input
+                  id='password'
+                  type='password'
+                  className='bg-light text-dark rounded p-1 w-100'
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <button
+                type='button'
+                className='btn btn-danger w-50 h-50 align-self-end'
+                onClick={async (e) => {
+                  e.preventDefault()
+                  try {
+                    await deleteAccount(password)
+                  } catch (error) {
+                    setError(error)
+                  }
+                }}>
+                Delete
+              </button>
+            </div>
+            {error && (
+              <div className='alert alert-warning fw-bold text-center mt-3'>{error.message}</div>
+            )}
           </div>
         </div>
         <AccountTradingViewCards />

@@ -1,5 +1,5 @@
 import { AdvancedChart } from "react-tradingview-embed"
-import React, { useEffect, useState } from "react"
+import React, { useMemo } from "react"
 import Footer from "../../components/Footer/Footer.js"
 import { useAuth } from "../../contexts/AuthContext.js"
 
@@ -23,15 +23,10 @@ const chartProps = {
 
 const TradingViewCharts = () => {
   const { userFavourites } = useAuth()
-  const [userWatchlist, setUserWatchlist] = useState(["BINANCE:BTCUSDT"])
-  useEffect(() => {
-    //This is to pass in the Tradingview widget so the user can chart whichever cryptos he saved
-    if (userFavourites) {
-      const array = userFavourites.map((object) => `BINANCE:${object.symbol}USDT`)
-      setUserWatchlist(array)
-    }
-  }, [userFavourites])
-
+  const userWatchlist = useMemo(
+    () => userFavourites.map((object) => `BINANCE:${object.symbol}USDT`),
+    [userFavourites]
+  )
   return (
     <>
       <div className='charts-container text-white text-center'>

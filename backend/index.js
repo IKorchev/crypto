@@ -1,59 +1,73 @@
 require("dotenv").config()
-const path = require("path")
+const url = require("url")
+const { getAuth } = require("firebase-admin/auth")
+const { authenticate } = require("./middleware")
+const admin = require("firebase-admin")
 const express = require("express")
-const app = express()
+const cors = require("cors")
+const expressWs = require("express-ws")
+const app = expressWs(express(), undefined, { wsOptions: { clientTracking: true } }).app
 const PORT = process.env.PORT || 5500
 const CoinGecko = require("coingecko-api")
 const CoinGeckoClient = new CoinGecko()
-const { Server } = require("ws")
 const Binance = require("binance-api-node").default
 const client = Binance()
 const axios = require("axios")
 const NEWS_API_KEY = process.env.NEWS_API_KEY
 const { yesterdaysDate } = require("./lib/utils/yesterdaysDate")
+const newsUrl = `https://newsapi.org/v2/everything?q=bitcoin&from=${yesterdaysDate()}&language=en&apiKey=${NEWS_API_KEY}`
 
-console.log(yesterdaysDate())
+app.use(cors())
+app.use(authenticate)
 app.use(express.json())
-const server = app.listen(5500)
-const socket = new Server({ server: server })
-const url = `https://newsapi.org/v2/everything?q=bitcoin&from=${yesterdaysDate()}&language=en&apiKey=${NEWS_API_KEY}`
 
-const fetchCoinData = async () => {
+admin.initializeApp({
+  credential: admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    private_key: process.env.FIREBASE_PRIVATE_KEY,
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  }),
+})
+
+const isTokenValid = async (jwt) => {
   try {
-    const news = await axios.get(url)
+    const token = await getAuth().verifyIdToken(jwt)
+    if (token && token.uid) {
+      return true
+    }
+  } catch (error) {
+    return false
+  }
+}
+app.ws("/ws", async (ws, req) => {
+  const token = url.parse(req.url.toString(), true /* parse query string */).query.token
+  const isValid = await isTokenValid(token)
+  if (!isValid) {
+    ws.close()
+  }
+  client.ws.trades(["BTCUSDT", "ETHUSDT"], (event) => {
+    ws.send(JSON.stringify(event))
+  })
+  client.ws.futuresCustomSubStream(["!ticker@arr"], (event) => {
+    ws.send(JSON.stringify(event))
+  })
+  client.ws.futuresCustomSubStream(["!forceOrder@arr"], (event) => {
+    ws.send(JSON.stringify(event))
+  })
+})
+app.get("/events", async (req, res) => {
+  try {
+    const newsResponse = await axios.get(newsUrl)
     const coinsResponse = await CoinGeckoClient.coins.markets()
     const eventsResponse = await CoinGeckoClient.events.all()
     const data = coinsResponse.data
     const events = eventsResponse.data.data
-    return [data, events, news.data.articles]
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-//real time prices and trades
-socket.on("connection", async (clientSocket) => {
-  try {
-    client.ws.trades(["BTCUSDT", "ETHUSDT"], (event) => {
-      clientSocket.send(JSON.stringify(event))
-    })
-    client.ws.futuresCustomSubStream(["!ticker@arr"], (event) => {
-      clientSocket.send(JSON.stringify(event))
-    })
-    client.ws.futuresCustomSubStream(["!forceOrder@arr"], (event) => {
-      clientSocket.send(JSON.stringify(event))
-    })
-  } catch (err) {
-    console.log(err)
-    client.send(err)
-  }
-})
-
-app.get("/data", async (req, res) => {
-  try {
-    const data = await fetchCoinData()
-    res.send(data)
+    const news = newsResponse.data.articles
+    res.send([data, events, news])
   } catch (error) {
     res.sendStatus(500).send(error)
   }
 })
+
+//real time prices and trades
+app.listen(PORT)

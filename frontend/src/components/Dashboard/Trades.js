@@ -1,8 +1,5 @@
 import { Trade } from "./Trade"
-import { useStore } from "../../contexts/StoreContext"
-const Trades = () => {
-  const { trades } = useStore()
-
+const Trades = ({ trades }) => {
   return (
     <div className='trades-wrapper'>
       <div className='d-flex justify-content-between text-white'>
@@ -18,7 +15,7 @@ const Trades = () => {
           <p>Price</p>
           <p>Amount</p>
         </div>
-        {trades.map((item, i) => (
+        {trades?.map((item, i) => (
           <Trade
             key={i}
             eventTime={item.eventTime}

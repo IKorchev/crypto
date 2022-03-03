@@ -10,7 +10,6 @@
     display: flex;
     flex-direction: row;
     color: white !important;
-
     margin-right: 0.5rem;
     i {
       padding: 0 5px;
@@ -23,7 +22,7 @@
   }
 
   .navbar-nav {
-    width: 30rem;
+    width: max-content;
   }
 
   @media (max-width: 992px) {

@@ -18,7 +18,7 @@ export const AuthContextProvider = ({ children }) => {
   const auth = firebase.auth()
   const store = firebase.firestore()
   const [userFavourites, setUserFavourites] = useState(null)
-
+  const [jwtToken, setJwtToken] = useState(null)
   const handleSignout = () => {
     return auth.signOut()
   }
@@ -88,8 +88,16 @@ export const AuthContextProvider = ({ children }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       setUser(currentUser)
+      try {
+        const token = await currentUser.getIdToken()
+        if (token) {
+          setJwtToken(token)
+        }
+      } catch (error) {
+        setJwtToken(null)
+      }
     })
     return () => {
       unsubscribe()
@@ -121,6 +129,7 @@ export const AuthContextProvider = ({ children }) => {
     updateUserInfo,
     userFavourites,
     sendPasswordResetEmail,
+    jwtToken,
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

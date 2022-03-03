@@ -13,7 +13,7 @@ const AccountTradingViewCards = () => {
       })
   }, [userFavourites])
   return (
-    <div>
+    <div className='py-5'>
       <h1 className='text-center'>Your favourites</h1>
       <div ref={parentRef} className='account-tradingview-cards-container'>
         {userFavourites &&

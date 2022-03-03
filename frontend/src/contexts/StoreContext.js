@@ -8,7 +8,7 @@ const StoreContext = React.createContext()
 export const useStore = () => useContext(StoreContext)
 
 export const StoreContextProvider = ({ children }) => {
-  const { store, user } = useAuth()
+  const { store, user, jwtToken } = useAuth()
   const [socketIsOpen, setSocketIsOpen] = useState(false)
   const [news, setNews] = useState([])
   const [data, setData] = useState(null)
@@ -17,23 +17,14 @@ export const StoreContextProvider = ({ children }) => {
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-  const socketUrl = `${socketProtocol}//${API_URL}/`
-  
-  const fetchData = async () => {
-    const res = await fetch(`/data`)
-    const data = await res.json()
-    console.log(data)
-    setNews(data[2])
-    setEvents(data[1])
-    setData(data[0])
-  }
+  const socketUrl = `${socketProtocol}//${API_URL}`
 
   useEffect(() => {
-    const socket2 = new WebSocket(socketUrl)
-    socket2.onopen = (e) => {
+    const socket = new WebSocket(`${socketUrl}/ws?token=${jwtToken}`)
+    socket.onopen = (e) => {
       setSocketIsOpen(true)
     }
-    socket2.onmessage = (message) => {
+    socket.onmessage = (message) => {
       const data = JSON.parse(message.data)
       //if its price data
       if (data.eventType !== "trade" && data.e !== "forceOrder") {
@@ -66,9 +57,26 @@ export const StoreContextProvider = ({ children }) => {
         })
       }
     }
-    fetchData()
-  }, [socketUrl])
+  }, [socketProtocol])
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(`http://localhost:5500/events`, {
+          headers: {
+            Authorization: "Bearer " + jwtToken,
+          },
+        })
+        const data = await res.json()
+        setNews(data[2])
+        setEvents(data[1])
+        setData(data[0])
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData()
+  }, [jwtToken])
   // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const deleteCoin = (object) => {

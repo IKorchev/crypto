@@ -26,36 +26,26 @@ const Footer = () => {
       <div className='footer-content d-flex justify-content-between'>
         <div>
           {links.usefulLinks.map((object, i) => (
-            <FooterLinkList
-              key={i}
-              label={object.label}
-              link={object.link}
-              title={object.title}
-            />
+            <FooterLinkList key={i} label={object.label} link={object.link} title={object.title} />
           ))}
         </div>
         <div>
           {links.projectLinks.map((object, i) => (
-            <FooterLinkList
-              key={i}
-              label={object.label}
-              link={object.link}
-              title={object.title}
-            />
+            <FooterLinkList key={i} label={object.label} link={object.link} title={object.title} />
           ))}
         </div>
         <div>
           {links.contactLinks.map((object, i) => (
-            <FooterLinkList
-              key={i}
-              label={object.label}
-              link={object.link}
-              title={object.title}
-            />
+            <FooterLinkList key={i} label={object.label} link={object.link} title={object.title} />
           ))}
         </div>
       </div>
-      <p className=' text-center'>Copyright &copy; Ivaylo Korchev</p>
+      <p className=' text-center'>
+        Copyright &copy;
+        <a className='mx-2' href='https://ikorchev.com'>
+          ikorchev.com
+        </a>
+      </p>
     </div>
   )
 }

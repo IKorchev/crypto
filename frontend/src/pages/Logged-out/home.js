@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from "react"
 import CryptoInfo from "../../assets/CryptoInfo.svg"
 import LandingPageCards from "../../components/LandingPage/LandingPageCards"
-import { useModal } from "../../contexts/ModalContext"
 import gsap from "gsap"
 import { Power1 } from "gsap"
 import { ScrollToPlugin } from "gsap/all"
@@ -11,7 +10,6 @@ import Footer from "../../components/Footer/Footer"
 gsap.registerPlugin(ScrollToPlugin)
 const Home = () => {
   const headerRef = useRef(null)
-  const { setShowRegisterModal, setShowLoginModal } = useModal()
   const scrollDown = () => {
     gsap.to(window, { duration: 0.5, delay: 0, scrollTo: ".landing-page-cards-wrapper" })
   }
@@ -32,23 +30,17 @@ const Home = () => {
           </h1>
           <div>
             <h5>
-              News and updates on cryptocurrencies. Get real-time price data. Save
-              favorites and more.
+              News and updates on cryptocurrencies. Get real-time price data. Save favorites and
+              more.
             </h5>
           </div>
           <div>
-            <button
-              className='cto-button register-button'
-              onClick={() => setShowRegisterModal(true)}>
-              Register
-            </button>
+            <button className='cto-button register-button'>Register</button>
           </div>
           <div className='login-button-container'>
             <p>
               Already have an account?
-              <button onClick={() => setShowLoginModal(true)} className='login-button'>
-                Log in
-              </button>
+              <button className='login-button'>Log in</button>
             </p>
           </div>
         </div>
