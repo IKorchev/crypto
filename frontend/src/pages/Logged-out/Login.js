@@ -1,16 +1,14 @@
 import React, { useState } from "react"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../contexts/AuthContext"
-import { useUiConfig } from "../utils/uiConfig"
+import { useAuth } from "../../contexts/AuthContext"
+import { useUiConfig } from "../../utils/uiConfig"
 const Login = () => {
   const navigate = useNavigate()
-  const { register } = useAuth()
+  const { login } = useAuth()
   const [error, setError] = useState()
-  const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [passwordConfirm, setPasswordConfirm] = useState("")
   const { config } = useUiConfig()
   const { auth } = useAuth()
 
@@ -20,20 +18,10 @@ const Login = () => {
         className='form d-flex flex-column rounded'
         onSubmit={async (e) => {
           e.preventDefault()
-          const response = await register(name, email, password, passwordConfirm)
+          const response = await login(email, password)
           response.code ? setError(response.message) : navigate("/")
         }}>
-        <h2 className='mb-4 text-center'>Register</h2>
-        <label htmlFor='myaccount-name' className='text-white'>
-          Name
-        </label>
-        <input
-          id='myaccount-name'
-          autoComplete='given-name'
-          type='text'
-          className='p-1'
-          onChange={(e) => setName(e.target.value)}
-        />
+        <h2 className='mb-4 text-center'>Login</h2>
         <label htmlFor='myaccount-email' className='text-white'>
           Email
         </label>
@@ -54,22 +42,12 @@ const Login = () => {
           className='p-1'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <label htmlFor='myaccount-name' className='text-white'>
-          Confirm password
-        </label>
-        <input
-          id='myaccount-confirm-password'
-          autoComplete='new-password'
-          type='password'
-          className='p-1'
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-        />
-        <button type='submit' className='my-2 btn btn-light'>
-          Register
+        <button type='submit' className='my-4 btn btn-light'>
+          Login
         </button>
-        {error && <h6 className='text-danger my-2 text-center'>{error}</h6>}
         <h5 className='text-center'>or</h5>
         <StyledFirebaseAuth uiConfig={config} firebaseAuth={auth} />
+        {error && <h6 className='alert alert-danger my-2 text-center'>{error}</h6>}
       </form>
     </div>
   )

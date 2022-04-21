@@ -40,19 +40,19 @@ export const AuthContextProvider = ({ children }) => {
     }
   }
   const register = async (name, email, password, confirmPassword) => {
-    if (confirmPassword === password)
-      try {
-        const res = await auth.createUserWithEmailAndPassword(email, password)
-        if (res.user) {
-          store.collection("users").doc(res.user.uid).set({
-            cryptos: [],
-          })
-          console.log(res.user)
-        }
-        return res
-      } catch (error) {
-        return error
+    if (confirmPassword !== password) return { code: 1, message: "Passwords don't match" }
+    try {
+      const res = await auth.createUserWithEmailAndPassword(email, password)
+      if (res.user) {
+        store.collection("users").doc(res.user.uid).set({
+          cryptos: [],
+        })
+        console.log(res.user)
       }
+      return res
+    } catch (error) {
+      return error
+    }
   }
   //prettier-ignore
   const updateUserInfo = async (type, payload) => {

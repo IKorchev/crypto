@@ -10,10 +10,11 @@ export const useUiConfig = () => {
             cryptos: [],
           })
         }
-        return false
+        return true
       },
     },
     signInFlow: "popup",
+    signInSuccessUrl: "/",
     signInOptions: [
       {
         signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,

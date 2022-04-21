@@ -5,15 +5,14 @@ import { useAuth } from "../../contexts/AuthContext"
 import { config } from "./config"
 
 const Navbar = () => {
-  const { handleSignout } = useAuth()
-  const { user } = useAuth()
+  const { handleSignout, user } = useAuth()
 
   return (
     <>
       <nav className='navbar navbar-expand-lg navbar-dark fixed-top'>
         <div className='container-fluid'>
-          <NavLink id='navbar-title' exact='true' to='/'>
-            <img src={Logo} alt='Logo'></img>
+          <NavLink id='navbar-title' activeClassName='' to='/'>
+            <img src={Logo} alt='Logo' />
           </NavLink>
           <button
             className='navbar-toggler'

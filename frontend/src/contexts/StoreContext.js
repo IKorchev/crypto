@@ -2,14 +2,12 @@ import React, { useContext, useEffect, useState } from "react"
 import { useAuth } from "./AuthContext"
 import firebase from "firebase"
 // const API_URL = "polar-hamlet-55067.herokuapp.com"
-const API_URL = "localhost:5500"
 const StoreContext = React.createContext()
 
 export const useStore = () => useContext(StoreContext)
 
 export const StoreContextProvider = ({ children }) => {
   const { store, user, jwtToken } = useAuth()
-  const [socketIsOpen, setSocketIsOpen] = useState(false)
   const [news, setNews] = useState([])
   const [data, setData] = useState(null)
   const [trades, setTrades] = useState([])
@@ -17,13 +15,12 @@ export const StoreContextProvider = ({ children }) => {
   const [realtimePrices, setRealtimePrices] = useState(null)
   const [events, setEvents] = useState(null)
   const socketProtocol = window.location.protocol === "https:" ? "wss:" : "ws:"
-  const socketUrl = `${socketProtocol}//${API_URL}`
-
+  const socketUrl = `${socketProtocol}//${window.location.host}/ws?token=${jwtToken}`
+  
   useEffect(() => {
-    const socket = new WebSocket(`${socketUrl}/ws?token=${jwtToken}`)
-    socket.onopen = (e) => {
-      setSocketIsOpen(true)
-    }
+    console.log(socketUrl)
+    const socket = new WebSocket(`${socketUrl}`)
+
     socket.onmessage = (message) => {
       const data = JSON.parse(message.data)
       //if its price data
@@ -57,12 +54,12 @@ export const StoreContextProvider = ({ children }) => {
         })
       }
     }
-  }, [socketProtocol])
+  }, [socketUrl])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:5500/events`, {
+        const res = await fetch(`/events`, {
           headers: {
             Authorization: "Bearer " + jwtToken,
           },
@@ -109,7 +106,6 @@ export const StoreContextProvider = ({ children }) => {
   }, [realtimePrices, data])
 
   const value = {
-    socketIsOpen,
     data,
     deleteCoin,
     addCoin,

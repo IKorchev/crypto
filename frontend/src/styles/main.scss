@@ -52,7 +52,7 @@ body {
     flex-shrink: 1;
     background: rgb(30, 235, 242);
     background: linear-gradient(305deg, rgba(30, 235, 242, 0.1) -20%, rgba(164, 55, 252, 0.1) 120%);
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(3px);
     text-align: center;
     display: flex;
     width: 15rem;
@@ -61,7 +61,7 @@ body {
     justify-content: space-around;
     border-radius: 15px;
     padding: 1.2rem;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.453), -2px -2px 5px rgba(255, 255, 255, 0.453);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.453), -1px -1px 5px rgba(30, 235, 242, 0.352);
     @include hoverState();
   }
 }

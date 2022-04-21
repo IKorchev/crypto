@@ -7,7 +7,9 @@
     }
   }
 }
-
+.no-news {
+  height: 70vh;
+}
 .news-article-card {
   border-radius: 0.6rem;
   background: lighten($dark, 5);

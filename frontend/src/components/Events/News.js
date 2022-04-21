@@ -1,8 +1,5 @@
 import NewsCard from "./NewsCard"
-import { useStore } from "../../contexts/StoreContext"
-const News = () => {
-  const { news } = useStore()
-
+const News = ({ news }) => {
   return (
     <div className='news-page-wrapper'>
       <h1 className='text-start h4 py-2 border-bottom '>Cryptocurrency news</h1>
